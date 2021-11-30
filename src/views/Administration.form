@@ -157,7 +157,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="164" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="166" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -220,7 +220,7 @@
                               <Component id="labelPrecioProduct" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel9" max="32767" attributes="0"/>
+                              <Component id="jLabel9" pref="79" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="labelCatProduct" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
@@ -232,7 +232,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel13" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="spnCant" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="spnCant" min="-2" pref="118" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel5" max="32767" attributes="0"/>
@@ -1018,6 +1019,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBuscarCliente">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator4">
               <Properties>
@@ -1134,6 +1140,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNombreCliente">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
@@ -1149,6 +1160,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
@@ -1164,6 +1180,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtEmailCliente">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
@@ -1179,6 +1200,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDniCliente">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>
@@ -1194,6 +1220,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNumeroCliente">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
@@ -1328,9 +1359,9 @@
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel37" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelDNICliente" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jLabel37" min="-2" pref="37" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                           </Group>

@@ -214,7 +214,7 @@ public class Administration extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(labelPrecioProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(labelCatProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -224,7 +224,8 @@ public class Administration extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12)
-                        .addComponent(spnCant, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(spnCant, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -339,7 +340,7 @@ public class Administration extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -552,6 +553,8 @@ public class Administration extends javax.swing.JFrame {
         jLabel15.setText(" Buscar cliente por ....");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txtBuscarCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -597,21 +600,31 @@ public class Administration extends javax.swing.JFrame {
         jLabel23.setText(" Nombre:");
         jLabel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txtNombreCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setText(" Apellido:");
         jLabel24.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTextField4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel25.setText(" Email:");
         jLabel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txtEmailCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel26.setText(" DNI:");
         jLabel26.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txtDniCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel27.setText(" Número:");
         jLabel27.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txtNumeroCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setText("Registrar");
@@ -784,9 +797,9 @@ public class Administration extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelDNICliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDNICliente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(141, 141, 141))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
