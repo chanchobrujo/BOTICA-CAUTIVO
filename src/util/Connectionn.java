@@ -21,7 +21,6 @@ public class Connectionn {
         String jdbc = "jdbc:sqlite:"; 
         String url = jdbc.concat(src).concat("\\bd\\db.db"); 
         
-        Connection con = DriverManager.getConnection(url); 
-        return con;
+        return DriverManager.getConnection(url);
     }
 }
