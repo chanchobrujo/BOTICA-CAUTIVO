@@ -8,12 +8,15 @@ package views;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import views.maintenance.products;
 
 /**
  *
  * @author kpalmall
  */
 public class Administration extends javax.swing.JFrame {
+    
+    private products products;
 
     private void addImageLogo(String src) {
         ImageIcon img = new ImageIcon(getClass().getResource(src));
@@ -26,6 +29,7 @@ public class Administration extends javax.swing.JFrame {
      * Creates new form Administration
      */
     public Administration() {
+        products = new products();
         initComponents();
         addImageLogo("/Assets/logo.jpeg");
     }
@@ -844,9 +848,16 @@ public class Administration extends javax.swing.JFrame {
         jMenu1.setText("Mantenimientos");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem1.setText("Productos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem2.setText("Categorias");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -949,6 +960,11 @@ public class Administration extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        products.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

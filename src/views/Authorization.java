@@ -5,7 +5,9 @@
  */
 package views;
 
-import javax.swing.UIManager;
+import enums.Constant;
+import javax.swing.JOptionPane;
+import modules.moduleAuth;
 
 /**
  *
@@ -13,11 +15,14 @@ import javax.swing.UIManager;
  */
 public class Authorization extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Authorization
-     */
+    private moduleAuth moduleAuth;
+
+    private Administration administration;
+
     public Authorization() {
-        initComponents(); 
+        administration = new Administration();
+        moduleAuth = new moduleAuth();
+        initComponents();
     }
 
     /**
@@ -39,7 +44,7 @@ public class Authorization extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -107,6 +112,11 @@ public class Authorization extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Iniciar");
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Recuperar contraseña");
@@ -168,6 +178,15 @@ public class Authorization extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
+        administration.setVisible(true);
+        this.dispose();
+
+        //JOptionPane.showMessageDialog(rootPane, Constant.INCORRECT_VALUES.getValue());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

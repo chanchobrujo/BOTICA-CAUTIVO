@@ -10,7 +10,7 @@ package enums;
  * @author kpalmall
  */
 public enum Constant {
-    EXECUTE_SUCCESS("Datos guardados correctamente."), ERROR_CONECTION("No hay conexion.");
+    EXECUTE_SUCCESS("Datos guardados correctamente."), ERROR_CONECTION("No hay conexion."), INCORRECT_VALUES("Datos incorrectos.");
     private String value;
 
     private Constant(String value) {
