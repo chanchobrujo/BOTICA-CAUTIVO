@@ -5,12 +5,15 @@
  */
 package modules;
 
+import util.MyFuntions;
+
 /**
  *
  * @author kpalmall
  */
 public class moduleAuth {
     public String login(String user, String password){
+        String pass2 = MyFuntions.encryptInSHA1(password);
         return "";
     }
 }
