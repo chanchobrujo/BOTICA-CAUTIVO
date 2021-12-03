@@ -1,6 +1,3 @@
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,8 +13,7 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            
+        try { 
         } catch (Exception e) { 
             System.out.println(e.getMessage());
         }

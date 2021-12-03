@@ -36,9 +36,9 @@ public class GestorBd {
         return m;
     }
 
-    public static Object[] buscar(String sql) {
+    public static Object[] find(String sql) {
         Object[] fila = null;
-        List lista = listar(sql);
+        List lista = findAll(sql);
         if (lista != null) {
             if (lista.size() > 1) {
                 fila = (Object[]) lista.get(1);
@@ -47,7 +47,7 @@ public class GestorBd {
         return fila;
     }
 
-    public static List listar(String sql) {
+    public static List findAll(String sql) {
         List lista = new ArrayList<>();
         try {
             Connection cn = Connectionn.getConexion();
