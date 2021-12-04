@@ -3,35 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package entities;
 
 /**
  *
  * @author kpalmall
  */
-public class Category {
+public class Rol {
 
     private int id;
     private String name;
-    private Boolean state;
 
-    public Category() {
+    public Rol() {
     }
 
-    public Category(String name) {
+    public Rol(String name) {
         this.name = name;
-        this.state = true;
     }
 
-    public Category(String name, Boolean state) {
-        this.name = name;
-        this.state = state;
-    }
-
-    public Category(int id, String name, Boolean state) {
+    public Rol(int id, String name) {
         this.id = id;
         this.name = name;
-        this.state = state;
     }
 
     public int getId() {
@@ -48,14 +40,6 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Boolean getState() {
-        return state;
-    }
-
-    public void setState(Boolean state) {
-        this.state = state;
     }
 
 }
