@@ -122,13 +122,14 @@ public class Administration extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         labelDNICliente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuMantenimiento = new javax.swing.JMenu();
+        menuItemProduct = new javax.swing.JMenuItem();
+        menuItemCategory = new javax.swing.JMenuItem();
+        menuOperaciones = new javax.swing.JMenu();
+        menuUsuarios = new javax.swing.JMenu();
+        menuReportes = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -814,36 +815,40 @@ public class Administration extends javax.swing.JFrame {
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
-        jMenu1.setText("Mantenimientos");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        menuMantenimiento.setText("Mantenimientos");
+        menuMantenimiento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem1.setText("Productos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuItemProduct.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemProduct.setText("Productos");
+        menuItemProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuItemProductActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuMantenimiento.add(menuItemProduct);
 
-        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem2.setText("Categorias");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuItemCategory.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemCategory.setText("Categorias");
+        menuItemCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuItemCategoryActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuMantenimiento.add(menuItemCategory);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuMantenimiento);
 
-        jMenu3.setText("Operaciones");
-        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuBar1.add(jMenu3);
+        menuOperaciones.setText("Operaciones");
+        menuOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuBar1.add(menuOperaciones);
 
-        jMenu2.setText("Reportes");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuBar1.add(jMenu2);
+        menuUsuarios.setText("Usuarios");
+        menuUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuBar1.add(menuUsuarios);
+
+        menuReportes.setText("Reportes");
+        menuReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuBar1.add(menuReportes);
 
         setJMenuBar(jMenuBar1);
 
@@ -895,9 +900,9 @@ public class Administration extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuItemCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCategoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuItemCategoryActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -927,10 +932,10 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuItemProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProductActionPerformed
         // TODO add your handling code here:
         products.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuItemProductActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -980,9 +985,7 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1003,15 +1006,8 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -1020,7 +1016,6 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -1031,7 +1026,6 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel labelApellidoCliente;
@@ -1039,14 +1033,17 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JLabel labelEmailCliente;
     private javax.swing.JLabel labelImpuesto;
     private javax.swing.JLabel labelNameCliente;
-    private javax.swing.JLabel labelNameProduct;
     private javax.swing.JLabel labelNameProduct1;
     private javax.swing.JLabel labelNumberCliente;
-    private javax.swing.JLabel labelPrecioProduct;
     private javax.swing.JLabel labelPrecioProduct1;
     private javax.swing.JLabel labelSubTotal;
     private javax.swing.JLabel labelTotal;
-    private javax.swing.JSpinner spnCant;
+    public static javax.swing.JMenuItem menuItemCategory;
+    public static javax.swing.JMenuItem menuItemProduct;
+    public static javax.swing.JMenu menuMantenimiento;
+    public static javax.swing.JMenu menuOperaciones;
+    public static javax.swing.JMenu menuReportes;
+    public static javax.swing.JMenu menuUsuarios;
     private javax.swing.JSpinner spnCant1;
     private javax.swing.JTable tblCarrito;
     private javax.swing.JTable tblProduct;

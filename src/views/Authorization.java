@@ -195,11 +195,18 @@ public class Authorization extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here: 
-        //System.out.println(userService.findAll().stream().map(User::getRole).findFirst().get().getName());
+        // TODO add your handling code here:  
         Optional<User> user = moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
         
         if (user.isPresent()) {
+            
+            if (!user.get().getRole().getName().equals(enums.Constant.ROLE_ADMIN.getValue())) {
+                Administration.menuMantenimiento.setVisible(false);
+                Administration.menuOperaciones.setVisible(false);
+                Administration.menuReportes.setVisible(false);
+                Administration.menuUsuarios.setVisible(false);
+            } 
+            
             administration.setVisible(true);
             this.dispose();
         } else {
