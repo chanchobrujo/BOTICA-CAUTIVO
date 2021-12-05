@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import views.maintenance.category;
 import views.maintenance.products;
 
 /**
@@ -20,6 +21,7 @@ import views.maintenance.products;
 public class Administration extends javax.swing.JFrame {
     
     private products products;
+    private category category;
     
     private JScrollPane scrollPane;
 
@@ -38,6 +40,7 @@ public class Administration extends javax.swing.JFrame {
          
                 
         products = new products();
+        category = new category();
         initComponents();
         addImageLogo("/Assets/logo.jpeg");
     }
@@ -902,6 +905,7 @@ public class Administration extends javax.swing.JFrame {
 
     private void menuItemCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCategoryActionPerformed
         // TODO add your handling code here:
+        category.setVisible(true);
     }//GEN-LAST:event_menuItemCategoryActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -17,8 +17,8 @@ import util.GestorBd;
 public class categoryRepository {
 
     public String insert(Category category) {
-        return GestorBd.execute("INSERT INTO category (name) "
-                + "VALUES('"+category.getName()+"');");
+        return GestorBd.execute("INSERT INTO category (name, state) "
+                + "VALUES('"+category.getName()+"',"+Commons.toInteger(category.getState())+");");
     }
 
     public String update(Category category) {

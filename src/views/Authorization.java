@@ -5,13 +5,10 @@
  */
 package views;
 
-import entities.Rol;
 import entities.User;
 import java.util.Optional;
 import javax.swing.JOptionPane;
-import modules.moduleAuth;
-import services.rolService;
-import services.userService;
+import modules.moduleAuth; 
 
 /**
  *
