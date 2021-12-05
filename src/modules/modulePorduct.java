@@ -25,23 +25,23 @@ public class modulePorduct {
         return categoryService.save(name);
     }
     
-    public String update(int id, String name, int state){
+    public String updateCategory(int id, String name, int state){
         return categoryService.update(id, name, state);
     }
     
-    public List<Category> findAll(){
+    public List<Category> findAll_Categories(){
         return categoryService.findAll();
     }
     
-    public List<Category> findAll_States(Boolean state){
+    public List<Category> findAll_States_Categories(Boolean state){
         return categoryService.findAll_States(state);
     }
     
-    public Optional<Category> findByName(String name){
+    public Optional<Category> findByName_Categories(String name){
         return categoryService.findByName(name);
     }
     
-    public Optional<Category> findById(int id){
+    public Optional<Category> findById_Categories(int id){
         return categoryService.findById(id);
     }
     

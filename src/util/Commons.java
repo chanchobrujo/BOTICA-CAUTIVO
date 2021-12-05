@@ -16,4 +16,7 @@ public class Commons {
     public static Integer toInteger(Boolean value){
         return  value ? 1 : 0;
     }
+    public static String toString(Boolean value){
+        return  value ? "Activo" : "Inactivo";
+    }
 }
