@@ -7,6 +7,7 @@ package repository;
 import entities.Category; 
 import java.util.ArrayList;
 import java.util.List;
+import util.Commons;
 import util.GestorBd;
 
 /**
@@ -22,7 +23,8 @@ public class categoryRepository {
 
     public String update(Category category) {
         return GestorBd.execute("UPDATE category "
-                + "SET name = '"+category.getName()+"', state = "+category.getState()+" "
+                + "SET name = '"+category.getName()+"', "
+                        + "state = "+Commons.toInteger(category.getState())+" "
                         + "WHERE id = "+category.getId());
     }
 

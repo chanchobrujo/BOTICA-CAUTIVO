@@ -13,9 +13,11 @@ public enum Constant {
     EXECUTE_SUCCESS("Datos guardados correctamente."),
     ERROR_CONECTION("No hay conexion."),
     INCORRECT_VALUES("Datos incorrectos."),
+    REPETED_VALUES("Datos repetidos."),
     FORBIDENN(" Verifique su correo o su contraseña."),
     RECOVERY_PASSWORD("Escriba su correo, se le enviará una contraseña."),
     RESTORED_PASSWORD("Se reestableció su contraseña."),
+    NOTFOUND("Elemento no encontrado."),
     USER_NOTFOUND("Usuario no encontrado."),
     ROLE_ADMIN("ADMINISTRADOR");
 

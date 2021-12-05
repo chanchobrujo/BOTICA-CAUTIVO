@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import repository.categoryRepository;
+import util.Commons;
 
 /**
  *
@@ -24,6 +25,20 @@ public class categoryService {
     public String save(String name){
         return categoryRepository.insert(new Category(name));
     }
+    
+    public String update(int id, String name, int state){
+        String message = enums.Constant.NOTFOUND.getValue();
+        
+        if (this.findById(id).isPresent()) {
+            if (this.findByName(name).isPresent()) {
+                message = enums.Constant.REPETED_VALUES.getValue();
+            } else { 
+                message = categoryRepository.update(
+                        new Category(id, name, Commons.toBoolean(state))); 
+            }
+        } 
+        return message;
+    } 
     
     public List<Category> findAll(){
         return categoryRepository.findAll();

@@ -13,4 +13,7 @@ public class Commons {
     public static Boolean toBoolean(int value){
         return  value == 1;
     }
+    public static Integer toInteger(Boolean value){
+        return  value ? 1 : 0;
+    }
 }
