@@ -19,4 +19,10 @@ public class Commons {
     public static String toString(Boolean value){
         return  value ? "Activo" : "Inactivo";
     }
+    public static Boolean toBoolean_String(String value){
+        return  value.endsWith("Activo");
+    }
+    public static Boolean isEmpty(String value){
+        return  value.length() == 0 || Boolean.valueOf(value);
+    }
 }

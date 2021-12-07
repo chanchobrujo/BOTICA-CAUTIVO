@@ -28,6 +28,10 @@ public class categoryRepository {
                         + "WHERE id = "+category.getId());
     }
 
+    public String changeState(int id, Boolean state) {
+        return GestorBd.execute("UPDATE category SET state = "+Commons.toInteger(state) + " WHERE id = "+id);
+    }
+
     public List<Category> findAll() {
         List<Category> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM category;");

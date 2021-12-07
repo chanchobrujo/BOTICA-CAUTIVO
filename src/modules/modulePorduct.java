@@ -25,8 +25,12 @@ public class modulePorduct {
         return categoryService.save(name);
     }
     
-    public String updateCategory(int id, String name, int state){
+    public String updateCategory(int id, String name, Boolean state){
         return categoryService.update(id, name, state);
+    }
+    
+    public String changeStateCategory(int id){
+        return categoryService.changeState(id);
     }
     
     public List<Category> findAll_Categories(){

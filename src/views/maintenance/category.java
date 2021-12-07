@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JTable;
 import util.Commons;
 
 /**
@@ -18,6 +19,7 @@ import util.Commons;
  */
 public class category extends javax.swing.JFrame {
     private modulePorduct modulePorduct;
+    private Category category = new Category();
     
     public category() {
         modulePorduct = new modulePorduct();
@@ -49,6 +51,18 @@ public class category extends javax.swing.JFrame {
             
             ((DefaultTableModel) tblCategory.getModel()).addRow(row);
         }
+    }
+    
+    private void SetValueSelected(String category){
+        txtName.setText(category);
+    }
+    
+    private void clear(){
+        txtName.setText("");
+        
+        category.setId(0);
+        category.setName(null);
+        category.setState(null);
     }
 
     /**
@@ -167,6 +181,11 @@ public class category extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCategoryMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCategory);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,19 +223,46 @@ public class category extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        this.clear();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String message = modulePorduct.registerCategory(txtName.getText());
-        lblMessage.setText(message);
+        String message = "";
+        if (category.getId()==0) {
+            message = modulePorduct.registerCategory(txtName.getText());
+        } else {
+            message = modulePorduct.updateCategory(category.getId(), txtName.getText(), category.getState());
+        }
+        lblMessage.setText(message); 
         
+        this.clear();
         this.table_category();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        String message = "";
+        message = modulePorduct.changeStateCategory(category.getId());
+        lblMessage.setText(message); 
+        
+        this.clear();
+        this.table_category();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoryMouseClicked
+        // TODO add your handling code here:
+        int row = tblCategory.getSelectedRow();
+        int id = Integer.parseInt(tblCategory.getValueAt(row, 0).toString());
+        String name = tblCategory.getValueAt(row, 1).toString();
+        Boolean state = Commons.toBoolean_String(tblCategory.getValueAt(row, 2).toString());
+        
+        category.setId(id);
+        category.setName(name);
+        category.setState(state);
+        
+        this.SetValueSelected(name);
+    }//GEN-LAST:event_tblCategoryMouseClicked
 
     /**
      * @param args the command line arguments
