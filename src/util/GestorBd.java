@@ -5,7 +5,7 @@
  */
 package util;
 
-import enums.Constant;
+import enums.Messages;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -20,7 +20,7 @@ import java.util.List;
 public class GestorBd {
 
     public static String execute(String sql) {
-        String m = Constant.EXECUTE_SUCCESS.getValue();
+        String m = Messages.EXECUTE_SUCCESS.getValue();
         try {
             Connection cn = Connectionn.getConexion();
             if (cn != null) {
@@ -28,7 +28,7 @@ public class GestorBd {
                 st.executeUpdate(sql);
                 cn.close();
             } else {
-                m = Constant.ERROR_CONECTION.getValue();
+                m = Messages.ERROR_CONECTION.getValue();
             }
         } catch (Exception e) {
             m = e.getMessage();

@@ -6,6 +6,7 @@
 package views.maintenance;
 
 import entities.Category;
+import enums.Constants;
 import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import java.util.List;
@@ -58,7 +59,7 @@ public class category extends javax.swing.JFrame {
     }
     
     private void clear(){
-        txtName.setText("");
+        txtName.setText(Constants.EMPTY.getValue());
         
         category.setId(0);
         category.setName(null);
@@ -228,7 +229,7 @@ public class category extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String message = "";
+        String message ;
         if (category.getId()==0) {
             message = modulePorduct.registerCategory(txtName.getText());
         } else {
@@ -242,8 +243,7 @@ public class category extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String message = "";
-        message = modulePorduct.changeStateCategory(category.getId());
+        String message = modulePorduct.changeStateCategory(category.getId());
         lblMessage.setText(message); 
         
         this.clear();

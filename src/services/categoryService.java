@@ -26,16 +26,16 @@ public class categoryService {
         if ( !Commons.isEmpty(name) ) {
             return categoryRepository.insert(new Category(name));
         } else {
-            return enums.Constant.INCORRECT_VALUES.getValue();
+            return enums.Messages.INCORRECT_VALUES.getValue();
         }
     }
     
     public String update(int id, String name, Boolean state){
-        String message = enums.Constant.NOTFOUND.getValue();
+        String message = enums.Messages.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent() || !Commons.isEmpty(name)) {
             if (this.findByName(name).isPresent()) {
-                message = enums.Constant.REPETED_VALUES.getValue();
+                message = enums.Messages.REPETED_VALUES.getValue();
             } else { 
                 message = categoryRepository.update(
                         new Category(id, name, state)); 
@@ -45,7 +45,7 @@ public class categoryService {
     } 
     
     public String changeState(int id){
-        String message = enums.Constant.NOTFOUND.getValue();
+        String message = enums.Messages.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent()) {
             Boolean state = !this.findById(id).get().getState();
