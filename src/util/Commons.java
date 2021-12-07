@@ -17,10 +17,11 @@ public class Commons {
         return  value ? 1 : 0;
     }
     public static String toString(Boolean value){
-        return  value ? "Activo" : "Inactivo";
+        return  value ? enums.States.ACTIVO.getValue() 
+                : enums.States.INACTIVO.getValue();
     }
     public static Boolean toBoolean_String(String value){
-        return  value.endsWith("Activo");
+        return  value.endsWith(enums.States.ACTIVO.getValue());
     }
     public static Boolean isEmpty(String value){
         return  value.length() == 0 || Boolean.valueOf(value);
