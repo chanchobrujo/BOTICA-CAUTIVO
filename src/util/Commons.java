@@ -13,4 +13,16 @@ public class Commons {
     public static Boolean toBoolean(int value){
         return  value == 1;
     }
+    public static Integer toInteger(Boolean value){
+        return  value ? 1 : 0;
+    }
+    public static String toString(Boolean value){
+        return  value ? "Activo" : "Inactivo";
+    }
+    public static Boolean toBoolean_String(String value){
+        return  value.endsWith("Activo");
+    }
+    public static Boolean isEmpty(String value){
+        return  value.length() == 0 || Boolean.valueOf(value);
+    }
 }

@@ -30,10 +30,14 @@ public class rolService {
     }
     
     public Optional<Rol> findByName(String name){
-        return repository.findAll().stream().filter(rol->rol.getName().equals(name)).findFirst();
+        return repository.findAll().stream()
+                .filter(rol->rol.getName().equals(name))
+                .findFirst();
     }
     
     public Optional<Rol> findById(int id){
-        return repository.findAll().stream().filter(rol->rol.getId()==id ).findFirst();
+        return repository.findAll().stream()
+                .filter(rol->rol.getId()==id )
+                .findFirst();
     }
 }
