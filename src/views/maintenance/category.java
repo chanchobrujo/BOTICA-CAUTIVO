@@ -5,14 +5,13 @@
  */
 package views.maintenance;
 
-import entities.Category;
-import enums.Constants;
+import entities.Category; 
 import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JTable;
+import java.util.Vector; 
 import util.Commons;
+import util.Headers;
 
 /**
  *
@@ -30,20 +29,16 @@ public class category extends javax.swing.JFrame {
     } 
     
     private void table_category(){
-        List<Category> list = modulePorduct.findAll_Categories(); 
-        DefaultTableModel model = new DefaultTableModel(){
+        List<Category> array = modulePorduct.findAll_Categories();   
+        
+        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_category){
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;
             }
-        };         
-        model.addColumn("ID");
-        model.addColumn("NOMBRE");
-        model.addColumn("ESTADO");
+        };    
         
-        tblCategory.setModel(model);
-        
-        for (Category category : list) {
+        for (Category category : array) {
             Vector row = new Vector();
             
             row.add( category.getId() );
@@ -52,6 +47,8 @@ public class category extends javax.swing.JFrame {
             
             ((DefaultTableModel) tblCategory.getModel()).addRow(row);
         }
+        
+        tblCategory.setModel(model);
     }
     
     private void SetValueSelected(String category){
@@ -59,7 +56,7 @@ public class category extends javax.swing.JFrame {
     }
     
     private void clear(){
-        txtName.setText(Constants.EMPTY.getValue());
+        txtName.setText("");
         
         category.setId(0);
         category.setName(null);
