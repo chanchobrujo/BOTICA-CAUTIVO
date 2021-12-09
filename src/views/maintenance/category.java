@@ -20,7 +20,7 @@ import util.Headers;
  */
 public class category extends javax.swing.JFrame {
     private modulePorduct modulePorduct;
-    private Category category = new Category();
+    private Category modelcategory = new Category();
     
     public category() {
         modulePorduct = new modulePorduct();
@@ -60,9 +60,9 @@ public class category extends javax.swing.JFrame {
     private void clear(){
         txtName.setText("");
         
-        category.setId(0);
-        category.setName(null);
-        category.setState(null);
+        modelcategory.setId(0);
+        modelcategory.setName(null);
+        modelcategory.setState(null);
     }
 
     /**
@@ -229,10 +229,10 @@ public class category extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String message ;
-        if (category.getId()==0) {
+        if (modelcategory.getId()==0) {
             message = modulePorduct.registerCategory(txtName.getText());
         } else {
-            message = modulePorduct.updateCategory(category.getId(), txtName.getText(), category.getState());
+            message = modulePorduct.updateCategory(modelcategory.getId(), txtName.getText(), modelcategory.getState());
         }
         lblMessage.setText(message); 
         
@@ -242,7 +242,7 @@ public class category extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String message = modulePorduct.changeStateCategory(category.getId());
+        String message = modulePorduct.changeStateCategory(modelcategory.getId());
         lblMessage.setText(message); 
         
         this.clear();
@@ -256,9 +256,9 @@ public class category extends javax.swing.JFrame {
         String name = tblCategory.getValueAt(row, 1).toString();
         Boolean state = Commons.StringToBoolean(tblCategory.getValueAt(row, 2).toString());
         
-        category.setId(id);
-        category.setName(name);
-        category.setState(state);
+        modelcategory.setId(id);
+        modelcategory.setName(name);
+        modelcategory.setState(state);
         
         this.SetValueSelected(name);
     }//GEN-LAST:event_tblCategoryMouseClicked
