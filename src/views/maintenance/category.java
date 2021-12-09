@@ -43,7 +43,7 @@ public class category extends javax.swing.JFrame {
             
             row.add( category.getId() );
             row.add( category.getName() );
-            row.add( Commons.toString(category.getState()) );
+            row.add( Commons.BooleanToString(category.getState()) );
             
             ((DefaultTableModel) tblCategory.getModel()).addRow(row);
         }
@@ -252,7 +252,7 @@ public class category extends javax.swing.JFrame {
         int row = tblCategory.getSelectedRow();
         int id = Integer.parseInt(tblCategory.getValueAt(row, 0).toString());
         String name = tblCategory.getValueAt(row, 1).toString();
-        Boolean state = Commons.toBoolean_String(tblCategory.getValueAt(row, 2).toString());
+        Boolean state = Commons.StringToBoolean(tblCategory.getValueAt(row, 2).toString());
         
         category.setId(id);
         category.setName(name);
