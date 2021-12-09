@@ -22,6 +22,12 @@ public class productRepository {
     public productRepository(){
         categoryRepository = new categoryRepository();
     }
+
+    public String insert(Product product) {
+        return GestorBd.execute("INSERT INTO product (name, brand, price, stock, image, id_category, state) "
+                + "VALUES('"+product.getName()+"','"+product.getBrand()+"',"+product.getPrice()+","+product.getStock()
+                + ",'"+product.getImage()+"',"+product.getCategory().getId()+","+Commons.BooleanToInteger(product.getState()) +");");
+    }
     
     public List<Product> findAll() {
         List<Product> findAll = new ArrayList<>();

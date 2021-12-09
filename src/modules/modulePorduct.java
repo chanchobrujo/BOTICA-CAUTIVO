@@ -6,10 +6,11 @@ package modules;
 
 import entities.Category;
 import entities.Product;
+import java.sql.Blob;
 import java.util.List;
-import java.util.Optional;
-import repository.productRepository;
+import java.util.Optional; 
 import services.categoryService;
+import services.productService;
 
 /**
  *
@@ -18,11 +19,11 @@ import services.categoryService;
 public class modulePorduct {
     
     private categoryService categoryService; 
-    private productRepository productRepository; 
+    private productService productService; 
 
     public modulePorduct() { 
         categoryService = new categoryService(); 
-        productRepository = new productRepository(); 
+        productService = new productService(); 
     }
     
     public String registerCategory(String name){
@@ -54,6 +55,10 @@ public class modulePorduct {
     }
     
     public List<Product> findAll_Products(){
-        return productRepository.findAll();
+        return productService.findAll();
+    }
+    
+    public String registerProducts(String name, String brand, Double price, Integer Stock, Blob image, String category){
+        return productService.save(name, brand, price, Stock, image, category);
     }
 }
