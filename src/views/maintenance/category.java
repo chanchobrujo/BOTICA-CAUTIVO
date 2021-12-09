@@ -29,6 +29,7 @@ public class category extends javax.swing.JFrame {
     } 
     
     private void table_category(){
+        Vector row = new Vector();
         List<Category> array = modulePorduct.findAll_Categories();   
         
         DefaultTableModel model = new DefaultTableModel(null, Headers.headres_category){
@@ -37,9 +38,9 @@ public class category extends javax.swing.JFrame {
                 return false;
             }
         };    
+        tblCategory.setModel(model);
         
         for (Category category : array) {
-            Vector row = new Vector();
             
             row.add( category.getId() );
             row.add( category.getName() );
@@ -48,7 +49,6 @@ public class category extends javax.swing.JFrame {
             ((DefaultTableModel) tblCategory.getModel()).addRow(row);
         }
         
-        tblCategory.setModel(model);
     }
     
     private void SetValueSelected(String category){

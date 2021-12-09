@@ -5,17 +5,33 @@
  */
 package views.maintenance;
 
+import entities.Product;
+import java.util.List;
+import java.util.Vector;
+import modules.modulePorduct;
+
 /**
  *
  * @author kpalmall
  */
 public class products extends javax.swing.JFrame {
+    private modulePorduct modulePorduct;
 
     /**
      * Creates new form products
      */
     public products() {
+        modulePorduct = new modulePorduct();
         initComponents();
+        
+        this.table_products();
+    }
+    
+    private void table_products(){
+        Vector row = new Vector();
+        List<Product> array = modulePorduct.findAll_Products();
+        
+        
     }
 
     /**

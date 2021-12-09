@@ -5,8 +5,10 @@
 package modules;
 
 import entities.Category;
+import entities.Product;
 import java.util.List;
 import java.util.Optional;
+import repository.productRepository;
 import services.categoryService;
 
 /**
@@ -16,9 +18,11 @@ import services.categoryService;
 public class modulePorduct {
     
     private categoryService categoryService; 
+    private productRepository productRepository; 
 
     public modulePorduct() { 
         categoryService = new categoryService(); 
+        productRepository = new productRepository(); 
     }
     
     public String registerCategory(String name){
@@ -37,7 +41,7 @@ public class modulePorduct {
         return categoryService.findAll();
     }
     
-    public List<Category> findAll_States_Categories(Boolean state){
+    public List<Category> findByStates_Categories(Boolean state){
         return categoryService.findAll_States(state);
     }
     
@@ -49,4 +53,7 @@ public class modulePorduct {
         return categoryService.findById(id);
     }
     
+    public List<Product> findAll_Products(){
+        return productRepository.findAll();
+    }
 }
