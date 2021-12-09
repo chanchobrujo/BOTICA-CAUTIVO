@@ -18,18 +18,18 @@ public class categoryRepository {
 
     public String insert(Category category) {
         return GestorBd.execute("INSERT INTO category (name, state) "
-                + "VALUES('"+category.getName()+"',"+Commons.toInteger(category.getState())+");");
+                + "VALUES('"+category.getName()+"',"+Commons.BooleanToInteger(category.getState())+");");
     }
 
     public String update(Category category) {
         return GestorBd.execute("UPDATE category "
                 + "SET name = '"+category.getName()+"', "
-                        + "state = "+Commons.toInteger(category.getState())+" "
+                        + "state = "+Commons.BooleanToInteger(category.getState())+" "
                         + "WHERE id = "+category.getId());
     }
 
     public String changeState(int id, Boolean state) {
-        return GestorBd.execute("UPDATE category SET state = "+Commons.toInteger(state) + " WHERE id = "+id);
+        return GestorBd.execute("UPDATE category SET state = "+Commons.BooleanToInteger(state) + " WHERE id = "+id);
     }
 
     public List<Category> findAll() {
@@ -42,7 +42,7 @@ public class categoryRepository {
                 Object[] row = (Object[]) object;
                 findAll.add(new Category(Integer.parseInt(row[0].toString()), 
                         row[1].toString(), 
-                        util.Commons.toBoolean(Integer.parseInt(row[2].toString()))));
+                        util.Commons.IntegerToBoolean(Integer.parseInt(row[2].toString()))));
             }
         }
         return findAll;

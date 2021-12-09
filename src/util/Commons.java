@@ -10,20 +10,20 @@ package util;
  * @author kpalmall
  */
 public class Commons {
-    public static Boolean toBoolean(int value){
+    public static Boolean IntegerToBoolean(int value){
         return  value == 1;
     }
-    public static Integer toInteger(Boolean value){
-        return  value ? 1 : 0;
-    }
-    public static String toString(Boolean value){
-        return  value ? enums.States.ACTIVO.getValue() 
-                : enums.States.INACTIVO.getValue();
-    }
-    public static Boolean toBoolean_String(String value){
+    public static Boolean StringToBoolean(String value){
         return  value.endsWith(enums.States.ACTIVO.getValue());
     }
-    public static Boolean isEmpty(String value){
+    public static Boolean StringIsEmpty(String value){
         return  value.length() == 0 || Boolean.valueOf(value);
+    }
+    public static Integer BooleanToInteger(Boolean value){
+        return  value ? 1 : 0;
+    }
+    public static String BooleanToString(Boolean value){
+        return  value ? enums.States.ACTIVO.getValue() 
+                : enums.States.INACTIVO.getValue();
     }
 }

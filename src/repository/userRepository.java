@@ -39,7 +39,7 @@ public class userRepository {
                                 .filter(rol -> rol.getId() == Integer.parseInt(row[5].toString()))
                                 .findFirst()
                                 .get(),
-                        Commons.toBoolean(Integer.parseInt(row[6].toString()))));
+                        Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()))));
             }
 
         }
