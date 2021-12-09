@@ -9,6 +9,7 @@ import entities.Category;
 import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector; 
 import util.Commons;
 import util.Headers;
@@ -38,16 +39,17 @@ public class category extends javax.swing.JFrame {
                 return false;
             }
         };    
-        tblCategory.setModel(model);
+        tblCategory.setModel(model); 
         
-        for (Category category : array) {
-            
-            row.add( category.getId() );
-            row.add( category.getName() );
-            row.add( Commons.BooleanToString(category.getState()) );
-            
-            ((DefaultTableModel) tblCategory.getModel()).addRow(row);
-        }
+        if (Objects.nonNull(array)) 
+            for (Category category : array) {
+
+                row.add( category.getId() );
+                row.add( category.getName() );
+                row.add( Commons.BooleanToString(category.getState()) );
+
+                ((DefaultTableModel) tblCategory.getModel()).addRow(row);
+            }
         
     }
     

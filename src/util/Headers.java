@@ -11,4 +11,7 @@ package util;
  */
 public class Headers { 
     public static final String headres_category[] = new String[] {"ID", "NOMBRE", "ESTADO"};
+    
+    public static final String headres_product[] = 
+            new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA", "ESTADO"};
 }

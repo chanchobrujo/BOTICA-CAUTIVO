@@ -38,12 +38,12 @@ public class productRepository {
                 Double price = Double.parseDouble(row[3].toString());
                 Integer stock = Integer.parseInt(row[4].toString());
                 
-                Integer id_category = Integer.parseInt(row[5].toString());
+                Integer id_category = Integer.parseInt(row[6].toString());
                 Category category = categoryRepository.findAll().stream()
                         .filter(cat -> cat.getId() == id_category)
                         .findFirst()
                         .get();
-                Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
+                Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[7].toString()));
                 
                 Product product = new Product(id, name, brand, price, stock, null, category, state);
                 findAll.add(product);

@@ -7,8 +7,13 @@ package views.maintenance;
 
 import entities.Product;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
+import util.Commons;
+import util.Headers;
 
 /**
  *
@@ -31,7 +36,27 @@ public class products extends javax.swing.JFrame {
         Vector row = new Vector();
         List<Product> array = modulePorduct.findAll_Products();
         
+        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };    
+        tblProduct.setModel(model); 
         
+        if (Objects.nonNull(array))  
+            for (Product product : array) { 
+                
+                row.add( product.getId() );
+                row.add( product.getName() );
+                row.add( product.getBrand() );
+                row.add( product.getPrice() );
+                row.add( product.getStock() );
+                row.add( product.getCategory().getName() );
+                row.add( Commons.BooleanToString(product.getState()) );
+                
+                ((DefaultTableModel) tblProduct.getModel()).addRow(row);
+            } 
     }
 
     /**
@@ -136,6 +161,11 @@ public class products extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduct);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -359,6 +389,12 @@ public class products extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
+        // TODO add your handling code here:
+        int row = tblProduct.getSelectedRow();
+        int id = Integer.parseInt(tblProduct.getValueAt(row, 0).toString()); 
+    }//GEN-LAST:event_tblProductMouseClicked
 
     /**
      * @param args the command line arguments
