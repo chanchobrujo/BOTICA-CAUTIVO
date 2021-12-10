@@ -17,31 +17,28 @@ public class Product {
     private String name;
     private String brand;
     private Double price;
-    private int stock;
-    private Blob image;
+    private int stock; 
     private Category category;
     private Boolean state;
 
     public Product() { 
     }
     
-    public Product(String name, String brand, Double price, int stock, Blob image, Category category) { 
+    public Product(String name, String brand, Double price, int stock, Category category) { 
         this.name = name;
         this.brand = brand;
         this.price = price;
-        this.stock = stock;
-        this.image = image;
+        this.stock = stock; 
         this.category = category;
         this.state = true;
     }
 
-    public Product(int id, String name, String brand, Double price, int stock, Blob image, Category category, Boolean state) {
+    public Product(int id, String name, String brand, Double price, int stock, Category category, Boolean state) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.price = price;
-        this.stock = stock;
-        this.image = image;
+        this.stock = stock; 
         this.category = category;
         this.state = state;
     }
@@ -84,15 +81,7 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public Blob getImage() {
-        return image;
-    }
-
-    public void setImage(Blob image) {
-        this.image = image;
-    }
+    } 
 
     public Category getCategory() {
         return category;

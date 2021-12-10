@@ -39,7 +39,7 @@ public class productService {
         Optional<Category> cat = this.findByName_Categories(category);
         if ( !Commons.StringIsEmpty(name) 
                 && cat.isPresent() ) {
-            return productRepository.insert( new Product(name, brand, price, stock, image, cat.get()) );
+            return productRepository.insert( new Product(name, brand, price, stock, cat.get()) );
         } else {
             return enums.Messages.INCORRECT_VALUES.getValue();
         }

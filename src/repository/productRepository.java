@@ -24,9 +24,9 @@ public class productRepository {
     }
 
     public String insert(Product product) {
-        return GestorBd.execute("INSERT INTO product (name, brand, price, stock, image, id_category, state) "
+        return GestorBd.execute("INSERT INTO product (name, brand, price, stock, id_category, state) "
                 + "VALUES('"+product.getName()+"','"+product.getBrand()+"',"+product.getPrice()+","+product.getStock()
-                + ",'"+product.getImage()+"',"+product.getCategory().getId()+","+Commons.BooleanToInteger(product.getState()) +");");
+                + "',"+product.getCategory().getId()+","+Commons.BooleanToInteger(product.getState()) +");");
     }
     
     public List<Product> findAll() {
@@ -51,7 +51,7 @@ public class productRepository {
                         .get();
                 Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[7].toString()));
                 
-                Product product = new Product(id, name, brand, price, stock, null, category, state);
+                Product product = new Product(id, name, brand, price, stock, category, state);
                 findAll.add(product);
             }
         }
