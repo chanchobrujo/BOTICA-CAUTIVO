@@ -6,8 +6,7 @@
 package services;
 
 import entities.Category;
-import entities.Product;
-import java.sql.Blob;
+import entities.Product; 
 import java.util.List; 
 import java.util.Optional;
 import repository.categoryRepository;
@@ -42,8 +41,20 @@ public class productService {
                 || !cat.isPresent() ) {
             return enums.Messages.INCORRECT_VALUES.getValue();
         } else {
-            return productRepository.insert(new Product(name, brand, price, stock, cat.get()));
+            if (this.verifyByNameOrBrand(name, brand)) {
+                return productRepository
+                        .insert(new Product(name, brand, price, stock, cat.get()));
+            } else {
+                return enums.Messages.REPETED_VALUES.getValue();
+            } 
         }
+    }
+    
+    public Boolean verifyByNameOrBrand(String name, String brand){
+        return this.findAll().stream()
+                .filter(p->p.getBrand().equals(brand) 
+                        && p.getName().equals(name))
+                .count() == 0;
     }
     
     public List<Product> findAll(){

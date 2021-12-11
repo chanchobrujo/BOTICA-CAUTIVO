@@ -43,9 +43,7 @@ public class products extends javax.swing.JFrame {
     }
 
     private void table_products() {
-        List<Product> array = modulePorduct.findAll_Products();
-
-        array.stream().map(Product::getName).forEach(System.out::println);
+        List<Product> array = modulePorduct.findAll_Products(); 
 
         DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
             @Override
