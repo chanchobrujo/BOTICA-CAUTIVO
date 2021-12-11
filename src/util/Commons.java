@@ -30,7 +30,7 @@ public class Commons {
         return false;
     }
     public static Boolean DoublesIsEmpty(Double ...value){
-        for (Double val : value) return val == 0;
+        for (Double val : value) return val <= 0;
         return false;
     }
 }

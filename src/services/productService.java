@@ -37,10 +37,12 @@ public class productService {
     public String save(String name, String brand, Double price, Integer stock, String category){
         Optional<Category> cat = this.findByName_Categories(category);
         
-        if ( !Commons.StringsIsEmpty(name, brand) && cat.isPresent() ) {
-            return productRepository.insert(new Product(name, brand, price, stock, cat.get()));
-        } else {
+        if ( (Commons.DoublesIsEmpty(price, Double.parseDouble(stock.toString())) 
+                || Commons.StringsIsEmpty(name, brand)) 
+                || !cat.isPresent() ) {
             return enums.Messages.INCORRECT_VALUES.getValue();
+        } else {
+            return productRepository.insert(new Product(name, brand, price, stock, cat.get()));
         }
     }
     
