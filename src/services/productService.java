@@ -8,8 +8,7 @@ package services;
 import entities.Category;
 import entities.Product;
 import java.sql.Blob;
-import java.util.List;
-import java.util.Objects;
+import java.util.List; 
 import java.util.Optional;
 import repository.categoryRepository;
 import repository.productRepository;
@@ -31,15 +30,15 @@ public class productService {
     
     private Optional<Category> findByName_Categories(String name){
         return categoryRepository.findAll().stream()
-                .filter(cat -> cat.getName().equals(name))  //.map(Category::getName)
+                .filter(cat -> cat.getName().equals(name))
                 .findFirst();
     }
     
     public String save(String name, String brand, Double price, Integer stock, Blob image, String category){
         Optional<Category> cat = this.findByName_Categories(category);
-        if ( !Commons.StringIsEmpty(name) 
-                && cat.isPresent() ) {
-            return productRepository.insert( new Product(name, brand, price, stock, cat.get()) );
+        
+        if ( !Commons.StringsIsEmpty(name, brand) && cat.isPresent() ) {
+            return productRepository.insert(new Product(name, brand, price, stock, cat.get()));
         } else {
             return enums.Messages.INCORRECT_VALUES.getValue();
         }
