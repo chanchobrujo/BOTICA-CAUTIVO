@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.ModelProduct;
@@ -36,7 +37,9 @@ public class products extends javax.swing.JFrame {
         initComponents();
 
         this.table_products();
-        this.combo_categories();
+        this.combo_categories(); 
+        
+        this.SetModelSpinner(this.spnPrecio);
     }
 
     private void table_products() {
@@ -83,11 +86,18 @@ public class products extends javax.swing.JFrame {
     private void SetValueSelected(ModelProduct model) {
         txtName.setText(model.getName());
         txtBrand.setText(model.getBrand());
-        txtPrice.setText(model.getPrice().toString());
+        spnPrecio.setValue(model.getPrice());
         cmbCategories.setSelectedItem(model.getCategory());
-        spnCant.setValue(model.getStock());
+        spnStock.setValue(model.getStock());
     }
-
+    
+    private void SetModelSpinner(JSpinner spinner){
+        JSpinner.NumberEditor numberEditor = new JSpinner.
+                NumberEditor(spinner,"0.00");
+        
+        spinner.setEditor(numberEditor);
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,13 +124,13 @@ public class products extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtBrand = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
-        spnCant = new javax.swing.JSpinner();
+        spnStock = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
+        spnPrecio = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -223,8 +233,6 @@ public class products extends javax.swing.JFrame {
         jLabel7.setText(" Precio:");
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        txtPrice.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText(" Stock:");
         jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -292,14 +300,13 @@ public class products extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName)
                             .addComponent(txtBrand)
-                            .addComponent(txtPrice)
                             .addComponent(cmbCategories, 0, 165, Short.MAX_VALUE)
-                            .addComponent(spnCant))
+                            .addComponent(spnStock)
+                            .addComponent(spnPrecio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -319,14 +326,14 @@ public class products extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spnPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnCant, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnStock, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2))
@@ -386,8 +393,9 @@ public class products extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String msg = modulePorduct.registerProducts(txtName.getText(), txtBrand.getText(),
-                Double.parseDouble(txtPrice.getText()), Integer.parseInt(spnCant.getValue().toString()),
-                null, cmbCategories.getSelectedItem().toString());
+                Double.parseDouble(spnPrecio.getValue().toString()),
+                Integer.parseInt(spnStock.getValue().toString()),
+                cmbCategories.getSelectedItem().toString());
         lblMessage.setText(msg);
 
         this.table_products();
@@ -468,11 +476,11 @@ public class products extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblMessage;
-    private javax.swing.JSpinner spnCant;
+    private javax.swing.JSpinner spnPrecio;
+    private javax.swing.JSpinner spnStock;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtBuscarProducto;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }

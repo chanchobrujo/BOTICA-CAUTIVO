@@ -211,15 +211,14 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtName" max="32767" attributes="0"/>
                               <Component id="txtBrand" max="32767" attributes="0"/>
-                              <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
                               <Component id="cmbCategories" alignment="0" pref="165" max="32767" attributes="0"/>
-                              <Component id="spnCant" alignment="0" max="32767" attributes="0"/>
+                              <Component id="spnStock" alignment="0" max="32767" attributes="0"/>
+                              <Component id="spnPrecio" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="7" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="lblMessage" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -245,7 +244,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                              <Component id="txtPrice" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="spnPrecio" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -254,7 +253,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="spnCant" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="spnStock" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -358,14 +357,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPrice">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="14" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="spnCant">
+        <Component class="javax.swing.JSpinner" name="spnStock">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -463,6 +455,8 @@
               </Border>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spnPrecio">
         </Component>
       </SubComponents>
     </Container>

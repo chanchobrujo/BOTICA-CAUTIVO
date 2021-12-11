@@ -34,7 +34,7 @@ public class productService {
                 .findFirst();
     }
     
-    public String save(String name, String brand, Double price, Integer stock, Blob image, String category){
+    public String save(String name, String brand, Double price, Integer stock, String category){
         Optional<Category> cat = this.findByName_Categories(category);
         
         if ( !Commons.StringsIsEmpty(name, brand) && cat.isPresent() ) {

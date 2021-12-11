@@ -5,8 +5,7 @@
 package modules;
 
 import entities.Category;
-import entities.Product;
-import java.sql.Blob;
+import entities.Product; 
 import java.util.List;
 import java.util.Optional; 
 import services.categoryService;
@@ -58,7 +57,7 @@ public class modulePorduct {
         return productService.findAll();
     }
     
-    public String registerProducts(String name, String brand, Double price, Integer Stock, Blob image, String category){
-        return productService.save(name, brand, price, Stock, image, category);
+    public String registerProducts(String name, String brand, Double price, Integer Stock, String category){
+        return productService.save(name, brand, price, Stock, category);
     }
 }
