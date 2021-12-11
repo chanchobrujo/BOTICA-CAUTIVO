@@ -58,7 +58,7 @@ public class category extends javax.swing.JFrame {
     }
     
     private void clear(){
-        txtName.setText("");
+        txtName.setText(""); 
         
         modelcategory.setId(0);
         modelcategory.setName(null);
@@ -125,7 +125,7 @@ public class category extends javax.swing.JFrame {
         lblMessage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setText("Cambiar de estado");
+        jButton5.setText("Cambiar estado");
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +151,7 @@ public class category extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtName)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
