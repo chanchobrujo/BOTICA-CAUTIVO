@@ -5,9 +5,11 @@
 package modules;
 
 import entities.Category;
+import entities.Product; 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional; 
 import services.categoryService;
+import services.productService;
 
 /**
  *
@@ -16,9 +18,11 @@ import services.categoryService;
 public class modulePorduct {
     
     private categoryService categoryService; 
+    private productService productService; 
 
     public modulePorduct() { 
         categoryService = new categoryService(); 
+        productService = new productService(); 
     }
     
     public String registerCategory(String name){
@@ -37,7 +41,7 @@ public class modulePorduct {
         return categoryService.findAll();
     }
     
-    public List<Category> findAll_States_Categories(Boolean state){
+    public List<Category> findByStates_Categories(Boolean state){
         return categoryService.findAll_States(state);
     }
     
@@ -49,4 +53,21 @@ public class modulePorduct {
         return categoryService.findById(id);
     }
     
+    public List<Product> findAll_Products(){
+        return productService.findAll();
+    }
+    
+    public String registerProduct(String name, String brand, Double price, 
+            Integer Stock, String category){
+        return productService.save(name, brand, price, Stock, category);
+    }
+    
+    public String updateProduct(int id, String name, String brand, Double price, 
+            Integer Stock, String category, Boolean state){
+        return productService.update(id, name, brand, price, Stock, category, state);
+    }
+    
+    public String changeStateProduct(int id){
+        return productService.changeState(id);
+    }
 }

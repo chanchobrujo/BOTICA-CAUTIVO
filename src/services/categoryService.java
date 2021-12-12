@@ -23,7 +23,7 @@ public class categoryService {
     }
     
     public String save(String name){
-        if ( !Commons.StringIsEmpty(name) ) {
+        if ( !Commons.StringsIsEmpty(name) ) {
             return categoryRepository.insert(new Category(name));
         } else {
             return enums.Messages.INCORRECT_VALUES.getValue();
@@ -33,7 +33,8 @@ public class categoryService {
     public String update(int id, String name, Boolean state){
         String message = enums.Messages.NOTFOUND.getValue();
         
-        if (this.findById(id).isPresent() || !Commons.StringIsEmpty(name)) {
+        if (this.findById(id).isPresent() 
+                || !Commons.StringsIsEmpty(name)) {
             if (this.findByName(name).isPresent()) {
                 message = enums.Messages.REPETED_VALUES.getValue();
             } else { 

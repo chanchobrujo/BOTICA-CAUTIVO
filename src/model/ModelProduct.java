@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package model;
 
 import java.sql.Blob;
 
@@ -11,29 +11,21 @@ import java.sql.Blob;
  *
  * @author kpalmall
  */
-public class Product {
+public class ModelProduct {
 
     private int id;
     private String name;
     private String brand;
     private Double price;
     private int stock; 
-    private Category category;
+    private String category;
     private Boolean state;
 
-    public Product() { 
+    public ModelProduct() {
     }
     
-    public Product(String name, String brand, Double price, int stock, Category category) { 
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.stock = stock; 
-        this.category = category;
-        this.state = true;
-    }
 
-    public Product(int id, String name, String brand, Double price, int stock, Category category, Boolean state) {
+    public ModelProduct(int id, String name, String brand, Double price, int stock, String category, Boolean state) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -83,11 +75,11 @@ public class Product {
         this.stock = stock;
     } 
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -98,5 +90,6 @@ public class Product {
     public void setState(Boolean state) {
         this.state = state;
     }
+    
     
 }

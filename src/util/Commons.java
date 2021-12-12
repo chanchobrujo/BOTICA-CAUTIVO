@@ -16,14 +16,21 @@ public class Commons {
     public static Boolean StringToBoolean(String value){
         return  value.endsWith(enums.States.ACTIVO.getValue());
     }
-    public static Boolean StringIsEmpty(String value){
-        return  value.length() == 0 || Boolean.valueOf(value);
-    }
     public static Integer BooleanToInteger(Boolean value){
         return  value ? 1 : 0;
     }
     public static String BooleanToString(Boolean value){
         return  value ? enums.States.ACTIVO.getValue() 
                 : enums.States.INACTIVO.getValue();
+    } 
+     
+    public static Boolean StringsIsEmpty(String ...value){
+        for (String string : value) return string.length() == 0 
+                || Boolean.valueOf(string);
+        return false;
+    }
+    public static Boolean DoublesIsEmpty(Double ...value){
+        for (Double val : value) return val <= 0;
+        return false;
     }
 }

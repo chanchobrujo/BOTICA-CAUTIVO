@@ -9,6 +9,7 @@ import entities.Category;
 import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector; 
 import util.Commons;
 import util.Headers;
@@ -19,7 +20,7 @@ import util.Headers;
  */
 public class category extends javax.swing.JFrame {
     private modulePorduct modulePorduct;
-    private Category category = new Category();
+    private Category modelcategory = new Category();
     
     public category() {
         modulePorduct = new modulePorduct();
@@ -37,18 +38,19 @@ public class category extends javax.swing.JFrame {
                 return false;
             }
         };    
+        tblCategory.setModel(model); 
         
-        for (Category category : array) {
-            Vector row = new Vector();
-            
-            row.add( category.getId() );
-            row.add( category.getName() );
-            row.add( Commons.BooleanToString(category.getState()) );
-            
-            ((DefaultTableModel) tblCategory.getModel()).addRow(row);
-        }
+        if (Objects.nonNull(array)) 
+            for (Category category : array) {
+                Vector row = new Vector();
+
+                row.add( category.getId() );
+                row.add( category.getName() );
+                row.add( Commons.BooleanToString(category.getState()) );
+
+                ((DefaultTableModel) tblCategory.getModel()).addRow(row);
+            }
         
-        tblCategory.setModel(model);
     }
     
     private void SetValueSelected(String category){
@@ -56,11 +58,11 @@ public class category extends javax.swing.JFrame {
     }
     
     private void clear(){
-        txtName.setText("");
+        txtName.setText(""); 
         
-        category.setId(0);
-        category.setName(null);
-        category.setState(null);
+        modelcategory.setId(0);
+        modelcategory.setName(null);
+        modelcategory.setState(null);
     }
 
     /**
@@ -123,7 +125,7 @@ public class category extends javax.swing.JFrame {
         lblMessage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setText("Cambiar de estado");
+        jButton5.setText("Cambiar estado");
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +151,7 @@ public class category extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtName)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,10 +229,12 @@ public class category extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String message ;
-        if (category.getId()==0) {
+        double id = (double) modelcategory.getId();
+        
+        if (!Commons.DoublesIsEmpty(id)) {
             message = modulePorduct.registerCategory(txtName.getText());
         } else {
-            message = modulePorduct.updateCategory(category.getId(), txtName.getText(), category.getState());
+            message = modulePorduct.updateCategory(modelcategory.getId(), txtName.getText(), modelcategory.getState());
         }
         lblMessage.setText(message); 
         
@@ -240,7 +244,7 @@ public class category extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String message = modulePorduct.changeStateCategory(category.getId());
+        String message = modulePorduct.changeStateCategory(modelcategory.getId());
         lblMessage.setText(message); 
         
         this.clear();
@@ -254,9 +258,9 @@ public class category extends javax.swing.JFrame {
         String name = tblCategory.getValueAt(row, 1).toString();
         Boolean state = Commons.StringToBoolean(tblCategory.getValueAt(row, 2).toString());
         
-        category.setId(id);
-        category.setName(name);
-        category.setState(state);
+        modelcategory.setId(id);
+        modelcategory.setName(name);
+        modelcategory.setState(state);
         
         this.SetValueSelected(name);
     }//GEN-LAST:event_tblCategoryMouseClicked
