@@ -23,9 +23,8 @@ public class categoryRepository {
 
     public String update(Category category) {
         return GestorBd.execute("UPDATE category "
-                + "SET name = '"+category.getName()+"', "
-                        + "state = "+Commons.BooleanToInteger(category.getState())+" "
-                        + "WHERE id = "+category.getId());
+                + "SET name = '"+category.getName()+"' "
+                + "WHERE id = "+category.getId());
     }
 
     public String changeState(int id, Boolean state) {

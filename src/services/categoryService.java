@@ -22,15 +22,15 @@ public class categoryService {
         categoryRepository = new categoryRepository();
     }
     
-    public String save(String name){
-        if ( !Commons.StringsIsEmpty(name) ) {
+    private String register(String name){
+        if (!Commons.StringsIsEmpty(name)) {
             return categoryRepository.insert(new Category(name));
         } else {
             return enums.Messages.INCORRECT_VALUES.getValue();
         }
     }
     
-    public String update(int id, String name, Boolean state){
+    private String update(int id, String name, Boolean state){
         String message = enums.Messages.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent() 
@@ -45,6 +45,23 @@ public class categoryService {
         return message;
     } 
     
+    public String save(int id, String name){
+        String message = enums.Messages.REPETED_VALUES.getValue();
+        Boolean verify = this.verifyByName(name);
+        
+        if (!verify) return message;
+        
+        switch(id){
+            case 0: 
+                message = this.categoryRepository.insert(new Category(name));
+                break;
+            default: 
+                message = this.categoryRepository.update(new Category(id, name));
+                break;
+        }
+        return message;
+    }
+    
     public String changeState(int id){
         String message = enums.Messages.NOTFOUND.getValue();
         
@@ -54,6 +71,14 @@ public class categoryService {
         } 
         return message;
     } 
+    
+    public Boolean verifyByName(String name){ 
+        double count = (double) categoryRepository.findAll().stream()
+                .filter(cat->cat.getName().equals(name))
+                .count();
+        
+        return Commons.DoublesIsEmpty(count);
+    }
     
     public List<Category> findAll(){
         return categoryRepository.findAll();

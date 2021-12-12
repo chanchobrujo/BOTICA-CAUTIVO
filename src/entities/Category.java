@@ -23,6 +23,10 @@ public class Category {
         this.state = true;
     }
 
+    public Category(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     public Category(String name, Boolean state) {
         this.name = name;
         this.state = state;
