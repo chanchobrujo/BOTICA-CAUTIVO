@@ -24,9 +24,25 @@ public class productRepository {
     }
 
     public String insert(Product product) {
-        return GestorBd.execute("INSERT INTO product (name, brand, price, stock, id_category, state) "
-                + "VALUES('"+product.getName()+"','"+product.getBrand()+"',"+product.getPrice()+","+product.getStock()
-                + "',"+product.getCategory().getId()+","+Commons.BooleanToInteger(product.getState()) +");");
+        String sql = "INSERT INTO product (name, brand, price, stock, id_category, state) VALUES('"
+                +product.getName()+"','"+product.getBrand()+"',"
+                +product.getPrice()+","+product.getStock()+","
+                +product.getCategory().getId()+","
+                +Commons.BooleanToInteger(product.getState()) +");";
+        
+        return GestorBd.execute(sql);
+    }
+
+    public String update(Product product) {
+        String sql = "UPDATE product SET name = '"+product.getName()+"', "
+                + "brand = '"+product.getBrand()+"', "
+                + "price = "+product.getPrice()+", "
+                + "stock = "+product.getStock()+", "
+                + "id_category = "+product.getCategory().getId()+", "
+                + "state = "+Commons.BooleanToInteger(product.getState())+" "
+                + "WHERE id = "+product.getId();
+        
+        return GestorBd.execute(sql);
     }
     
     public List<Product> findAll() {

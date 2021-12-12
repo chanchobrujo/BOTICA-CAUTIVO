@@ -33,7 +33,8 @@ public class productService {
                 .findFirst();
     }
     
-    public String save(String name, String brand, Double price, Integer stock, String category){
+    public String save(String name, String brand, Double price, Integer stock, 
+            String category){
         Optional<Category> cat = this.findByName_Categories(category);
         
         if ( (Commons.DoublesIsEmpty(price, Double.parseDouble(stock.toString())) 
@@ -50,11 +51,35 @@ public class productService {
         }
     }
     
+    public String update(int id, String name, String brand, Double price, 
+            Integer Stock, String category, Boolean state){
+        
+        Optional<Category> cat = this.findByName_Categories(category);
+        String message = enums.Messages.NOTFOUND.getValue();
+        
+        if (this.findById(id).isPresent() 
+                || !Commons.StringsIsEmpty(name, brand, category)) {
+            if (!this.verifyByNameOrBrand(name, brand)) {
+                message = enums.Messages.REPETED_VALUES.getValue();
+            } else { 
+                message = productRepository.update(new Product(id, name, brand, 
+                        price, Stock, cat.get(), state));
+            }
+        }
+        return message;
+    } 
+    
     public Boolean verifyByNameOrBrand(String name, String brand){
         return this.findAll().stream()
                 .filter(p->p.getBrand().equals(brand) 
                         && p.getName().equals(name))
                 .count() == 0;
+    }
+    
+    public Optional<Product> findById(int id){
+        return this.findAll().stream()
+                .filter(pro->pro.getId() == id)
+                .findFirst();
     }
     
     public List<Product> findAll(){

@@ -426,14 +426,18 @@ public class products extends javax.swing.JFrame {
         String message;
         double id = (double) modelproduct.getId();
         
-        if (!Commons.DoublesIsEmpty(id)) {
+        if (Commons.DoublesIsEmpty(id)) {
             message = modulePorduct.registerProducts(txtName.getText(), txtBrand.getText(),
                 Double.parseDouble(spnPrecio.getValue().toString()),
                 Integer.parseInt(spnStock.getValue().toString()),
                 cmbCategories.getSelectedItem().toString());
         } else {
-            message = "fffff";
+            message = modulePorduct.updateProducts(modelproduct.getId(), txtName.getText(), 
+                    txtBrand.getText(), Double.parseDouble(spnPrecio.getValue().toString()),
+                    Integer.parseInt(spnStock.getValue().toString()), 
+                    cmbCategories.getSelectedItem().toString(), modelproduct.getState());
         } 
+        System.err.println(txtName.getText());
         lblMessage.setText(message);
 
         this.clear();
