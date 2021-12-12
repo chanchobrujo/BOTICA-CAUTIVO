@@ -423,12 +423,18 @@ public class products extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        String msg = modulePorduct.registerProducts(txtName.getText(), txtBrand.getText(),
+        String message;
+        double id = (double) modelproduct.getId();
+        
+        if (!Commons.DoublesIsEmpty(id)) {
+            message = modulePorduct.registerProducts(txtName.getText(), txtBrand.getText(),
                 Double.parseDouble(spnPrecio.getValue().toString()),
                 Integer.parseInt(spnStock.getValue().toString()),
                 cmbCategories.getSelectedItem().toString());
-        lblMessage.setText(msg);
+        } else {
+            message = "fffff";
+        } 
+        lblMessage.setText(message);
 
         this.clear();
         this.table_products();
@@ -456,6 +462,11 @@ public class products extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        String message = "";
+        lblMessage.setText(message); 
+        
+        this.clear();
+        this.table_products();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
