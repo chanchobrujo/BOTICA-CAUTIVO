@@ -45,6 +45,13 @@ public class productRepository {
         return GestorBd.execute(sql);
     }
     
+    public String changeState(int id, Boolean state) {
+        String sql = "UPDATE product SET "
+                + "state = "+Commons.BooleanToInteger(state) 
+                + " WHERE id = "+id;
+        return GestorBd.execute(sql);
+    }
+    
     public List<Product> findAll() {
         List<Product> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM product;");

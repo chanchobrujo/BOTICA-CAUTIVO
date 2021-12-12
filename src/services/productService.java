@@ -69,6 +69,16 @@ public class productService {
         return message;
     } 
     
+    public String changeState(int id){
+        String message = enums.Messages.NOTFOUND.getValue();
+        
+        if (this.findById(id).isPresent()) {
+            Boolean state = !this.findById(id).get().getState();
+            message = productRepository.changeState(id, state);
+        } 
+        return message;
+    } 
+    
     public Boolean verifyByNameOrBrand(String name, String brand){
         return this.findAll().stream()
                 .filter(p->p.getBrand().equals(brand) 

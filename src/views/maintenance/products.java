@@ -427,12 +427,12 @@ public class products extends javax.swing.JFrame {
         double id = (double) modelproduct.getId();
         
         if (Commons.DoublesIsEmpty(id)) {
-            message = modulePorduct.registerProducts(txtName.getText(), txtBrand.getText(),
+            message = modulePorduct.registerProduct(txtName.getText(), txtBrand.getText(),
                 Double.parseDouble(spnPrecio.getValue().toString()),
                 Integer.parseInt(spnStock.getValue().toString()),
                 cmbCategories.getSelectedItem().toString());
         } else {
-            message = modulePorduct.updateProducts(modelproduct.getId(), txtName.getText(), 
+            message = modulePorduct.updateProduct(modelproduct.getId(), txtName.getText(), 
                     txtBrand.getText(), Double.parseDouble(spnPrecio.getValue().toString()),
                     Integer.parseInt(spnStock.getValue().toString()), 
                     cmbCategories.getSelectedItem().toString(), modelproduct.getState());
@@ -466,7 +466,7 @@ public class products extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String message = "";
+        String message = modulePorduct.changeStateProduct(modelproduct.getId());
         lblMessage.setText(message); 
         
         this.clear();

@@ -57,13 +57,17 @@ public class modulePorduct {
         return productService.findAll();
     }
     
-    public String registerProducts(String name, String brand, Double price, 
+    public String registerProduct(String name, String brand, Double price, 
             Integer Stock, String category){
         return productService.save(name, brand, price, Stock, category);
     }
     
-    public String updateProducts(int id, String name, String brand, Double price, 
+    public String updateProduct(int id, String name, String brand, Double price, 
             Integer Stock, String category, Boolean state){
         return productService.update(id, name, brand, price, Stock, category, state);
+    }
+    
+    public String changeStateProduct(int id){
+        return productService.changeState(id);
     }
 }
