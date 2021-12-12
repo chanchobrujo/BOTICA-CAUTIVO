@@ -52,16 +52,11 @@ public class modulePorduct {
     
     public List<Product> findAll_Products(){
         return productService.findAll();
-    }
+    } 
     
-    public String registerProduct(String name, String brand, Double price, 
+    public String saveProduct(int id, String name, String brand, Double price, 
             Integer Stock, String category){
-        return productService.save(name, brand, price, Stock, category);
-    }
-    
-    public String updateProduct(int id, String name, String brand, Double price, 
-            Integer Stock, String category, Boolean state){
-        return productService.update(id, name, brand, price, Stock, category, state);
+        return productService.save(id, name, brand, price, Stock, category);
     }
     
     public String changeStateProduct(int id){

@@ -38,9 +38,8 @@ public class productRepository {
                 + "brand = '"+product.getBrand()+"', "
                 + "price = "+product.getPrice()+", "
                 + "stock = "+product.getStock()+", "
-                + "id_category = "+product.getCategory().getId()+", "
-                + "state = "+Commons.BooleanToInteger(product.getState())+" "
-                + "WHERE id = "+product.getId();
+                + "id_category = "+product.getCategory().getId() 
+                + " WHERE id = "+product.getId();
         
         return GestorBd.execute(sql);
     }

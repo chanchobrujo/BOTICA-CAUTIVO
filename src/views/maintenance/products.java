@@ -423,21 +423,11 @@ public class products extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String message;
-        double id = (double) modelproduct.getId();
-        
-        if (Commons.DoublesIsEmpty(id)) {
-            message = modulePorduct.registerProduct(txtName.getText(), txtBrand.getText(),
-                Double.parseDouble(spnPrecio.getValue().toString()),
-                Integer.parseInt(spnStock.getValue().toString()),
-                cmbCategories.getSelectedItem().toString());
-        } else {
-            message = modulePorduct.updateProduct(modelproduct.getId(), txtName.getText(), 
+        String message = modulePorduct.saveProduct(modelproduct.getId(), txtName.getText(), 
                     txtBrand.getText(), Double.parseDouble(spnPrecio.getValue().toString()),
                     Integer.parseInt(spnStock.getValue().toString()), 
-                    cmbCategories.getSelectedItem().toString(), modelproduct.getState());
-        } 
-        System.err.println(txtName.getText());
+                    cmbCategories.getSelectedItem().toString());
+        
         lblMessage.setText(message);
 
         this.clear();

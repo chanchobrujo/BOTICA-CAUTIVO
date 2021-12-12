@@ -20,29 +20,6 @@ public class categoryService {
     
     public categoryService(){
         categoryRepository = new categoryRepository();
-    }
-    
-    private String register(String name){
-        if (!Commons.StringsIsEmpty(name)) {
-            return categoryRepository.insert(new Category(name));
-        } else {
-            return enums.Messages.INCORRECT_VALUES.getValue();
-        }
-    }
-    
-    private String update(int id, String name, Boolean state){
-        String message = enums.Messages.NOTFOUND.getValue();
-        
-        if (this.findById(id).isPresent() 
-                || !Commons.StringsIsEmpty(name)) {
-            if (this.findByName(name).isPresent()) {
-                message = enums.Messages.REPETED_VALUES.getValue();
-            } else { 
-                message = categoryRepository.update(
-                        new Category(id, name, state)); 
-            }
-        } 
-        return message;
     } 
     
     public String save(int id, String name){
