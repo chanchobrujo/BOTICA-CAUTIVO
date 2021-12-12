@@ -33,6 +33,15 @@ public class Product {
         this.state = true;
     }
 
+    public Product(int id, String name, String brand, Double price, int stock, Category category) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.stock = stock; 
+        this.category = category; 
+    }
+
     public Product(int id, String name, String brand, Double price, int stock, Category category, Boolean state) {
         this.id = id;
         this.name = name;

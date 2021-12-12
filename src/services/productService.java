@@ -33,7 +33,7 @@ public class productService {
                 .findFirst();
     }
     
-    public String save(String name, String brand, Double price, Integer stock, 
+    public String register(String name, String brand, Double price, Integer stock, 
             String category){
         Optional<Category> cat = this.findByName_Categories(category);
         
@@ -68,6 +68,28 @@ public class productService {
         }
         return message;
     } 
+    
+    public String save(int id, String name, String brand, Double price, 
+            Integer Stock, String category){
+        
+        Optional<Category> _category = this.findByName_Categories(category);
+        String message = enums.Messages.REPETED_VALUES.getValue();
+        Boolean verify = this.verifyByNameOrBrand(name, brand);
+        
+        if (!verify) return message;
+        
+        switch(id){
+            case 0: 
+                message = this.productRepository.insert(new 
+                        Product(name, brand, price, Stock, _category.get()) );
+                break;
+            default: 
+                message = this.productRepository.update(new 
+                        Product(id, name, brand, price, Stock, _category.get()));
+                break;
+        }
+        return message;
+    }
     
     public String changeState(int id){
         String message = enums.Messages.NOTFOUND.getValue();

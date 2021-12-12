@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional; 
 import services.categoryService;
 import services.productService;
+import util.Commons;
 
 /**
  *
@@ -25,13 +26,9 @@ public class modulePorduct {
         productService = new productService(); 
     }
     
-    public String registerCategory(String name){
-        return categoryService.save(name);
-    }
-    
-    public String updateCategory(int id, String name, Boolean state){
-        return categoryService.update(id, name, state);
-    }
+    public String saveCategory(int id, String name, Boolean state){  
+        return categoryService.save(id, name);
+    } 
     
     public String changeStateCategory(int id){
         return categoryService.changeState(id);
@@ -55,16 +52,11 @@ public class modulePorduct {
     
     public List<Product> findAll_Products(){
         return productService.findAll();
-    }
+    } 
     
-    public String registerProduct(String name, String brand, Double price, 
+    public String saveProduct(int id, String name, String brand, Double price, 
             Integer Stock, String category){
-        return productService.save(name, brand, price, Stock, category);
-    }
-    
-    public String updateProduct(int id, String name, String brand, Double price, 
-            Integer Stock, String category, Boolean state){
-        return productService.update(id, name, brand, price, Stock, category, state);
+        return productService.save(id, name, brand, price, Stock, category);
     }
     
     public String changeStateProduct(int id){
