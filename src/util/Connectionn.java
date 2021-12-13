@@ -5,7 +5,6 @@
  */
 package util;
 
-import enums.OSname;
 import java.sql.DriverManager;
 import java.sql.Connection;
 
@@ -22,8 +21,12 @@ public class Connectionn {
         String jdbc = "jdbc:sqlite:";
         
         String osname = System.getProperty("os.name").toUpperCase();
-        String url = OSname.valueOf(osname).getSrc();
-        url = jdbc.concat(src).concat(url);
+        String url;
+        
+        if (osname.equals(enums.OSname.LINUX.getName())) url = enums.OSname.LINUX.getSrc();
+        else url = enums.OSname.WINDOWS.getSrc();
+        
+        url = jdbc.concat(src).concat(url); 
         return DriverManager.getConnection(url);
     }
 }

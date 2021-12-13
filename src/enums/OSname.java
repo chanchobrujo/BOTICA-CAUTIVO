@@ -11,12 +11,26 @@ package enums;
  */
 public enum OSname {
     WINDOWS("\\bd\\db.db"),
-    LINUX("/bd/db.db");
+    LINUX("LINUX","/bd/db.db");
     
+    private String name;
     private String src;
 
-    private OSname(String src) {
+    private OSname(String name, String src) {
+        this.name = name;
         this.src = src;
+    }
+
+    private OSname(String src) { 
+        this.src = src;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSrc() {
@@ -25,5 +39,6 @@ public enum OSname {
 
     public void setSrc(String src) {
         this.src = src;
-    } 
+    }
+    
 }

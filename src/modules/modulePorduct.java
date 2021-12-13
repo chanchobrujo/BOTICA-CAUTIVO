@@ -9,8 +9,7 @@ import entities.Product;
 import java.util.List;
 import java.util.Optional; 
 import services.categoryService;
-import services.productService;
-import util.Commons;
+import services.productService; 
 
 /**
  *
@@ -62,4 +61,8 @@ public class modulePorduct {
     public String changeStateProduct(int id){
         return productService.changeState(id);
     }
+    
+    public List<Product> searchProduct(String value){
+        return productService.searchProduct(value);
+    } 
 }
