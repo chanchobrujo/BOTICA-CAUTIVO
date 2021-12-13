@@ -39,7 +39,7 @@ public class productService {
             Integer Stock, String category){
         
         Optional<Category> _category = this.findByName_Categories(category);
-        String message = enums.Messages.REPETED_VALUES.getValue();
+        String message = enums.ErrorMessage.REPETED_VALUES.getValue();
         Boolean verify = this.verifyByNameOrBrand(name, brand);
         
         if (!verify) return message;
@@ -58,7 +58,7 @@ public class productService {
     }
     
     public String changeState(int id){
-        String message = enums.Messages.NOTFOUND.getValue();
+        String message = enums.ErrorMessage.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent()) {
             Boolean state = !this.findById(id).get().getState();

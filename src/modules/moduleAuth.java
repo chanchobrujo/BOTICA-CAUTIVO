@@ -34,10 +34,10 @@ public class moduleAuth {
     }
     
     public String restoredPassword(String email){
-        String msg = enums.Messages.USER_NOTFOUND.getValue();
+        String msg = enums.ErrorMessage.USER_NOTFOUND.getValue();
         if (this.findByEmail(email).isPresent()) {
             //logic
-            msg = enums.Messages.RESTORED_PASSWORD.getValue();
+            msg = enums.AlertMessage.RESTORED_PASSWORD.getValue();
         }
         return msg;
     }
