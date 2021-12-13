@@ -31,42 +31,6 @@ public class productService {
         return categoryRepository.findAll().stream()
                 .filter(cat -> cat.getName().equals(name))
                 .findFirst();
-    }
-    
-    public String register(String name, String brand, Double price, Integer stock, 
-            String category){
-        Optional<Category> cat = this.findByName_Categories(category);
-        
-        if ( (Commons.DoublesIsEmpty(price, Double.parseDouble(stock.toString())) 
-                || Commons.StringsIsEmpty(name, brand)) 
-                || !cat.isPresent() ) {
-            return enums.Messages.INCORRECT_VALUES.getValue();
-        } else {
-            if (this.verifyByNameOrBrand(name, brand)) {
-                return productRepository
-                        .insert(new Product(name, brand, price, stock, cat.get()));
-            } else {
-                return enums.Messages.REPETED_VALUES.getValue();
-            } 
-        }
-    }
-    
-    public String update(int id, String name, String brand, Double price, 
-            Integer Stock, String category, Boolean state){
-        
-        Optional<Category> cat = this.findByName_Categories(category);
-        String message = enums.Messages.NOTFOUND.getValue();
-        
-        if (this.findById(id).isPresent() 
-                || !Commons.StringsIsEmpty(name, brand, category)) {
-            if (!this.verifyByNameOrBrand(name, brand)) {
-                message = enums.Messages.REPETED_VALUES.getValue();
-            } else { 
-                message = productRepository.update(new Product(id, name, brand, 
-                        price, Stock, cat.get(), state));
-            }
-        }
-        return message;
     } 
     
     public String save(int id, String name, String brand, Double price, 
