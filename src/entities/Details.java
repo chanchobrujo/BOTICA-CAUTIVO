@@ -21,6 +21,10 @@ public class Details {
         this.product = product;
         this.quantity = quantity;
     }
+    
+    public double getImport(){
+        return product.getPrice() * this.quantity;
+    } 
 
     public Integer getId() {
         return id;
