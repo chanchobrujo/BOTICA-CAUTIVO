@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
-
-import java.sql.Blob;
+package entities; 
 
 /**
  *
@@ -24,7 +22,8 @@ public class Product {
     public Product() { 
     }
     
-    public Product(String name, String brand, Double price, int stock, Category category) { 
+    public Product(String name, String brand, Double price, int stock, 
+            Category category) { 
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -33,7 +32,8 @@ public class Product {
         this.state = true;
     }
 
-    public Product(int id, String name, String brand, Double price, int stock, Category category) {
+    public Product(int id, String name, String brand, Double price, int stock, 
+            Category category) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -42,7 +42,8 @@ public class Product {
         this.category = category; 
     }
 
-    public Product(int id, String name, String brand, Double price, int stock, Category category, Boolean state) {
+    public Product(int id, String name, String brand, Double price, int stock,
+            Category category, Boolean state) {
         this.id = id;
         this.name = name;
         this.brand = brand;

@@ -133,6 +133,7 @@ public class Administration extends javax.swing.JFrame {
         menuReportes = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -531,8 +532,6 @@ public class Administration extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText(" Buscar cliente por ....");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        txtBuscarCliente.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 

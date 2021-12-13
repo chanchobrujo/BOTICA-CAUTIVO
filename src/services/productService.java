@@ -8,7 +8,9 @@ package services;
 import entities.Category;
 import entities.Product; 
 import java.util.List; 
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import repository.categoryRepository;
 import repository.productRepository;
 import util.Commons;
@@ -80,5 +82,23 @@ public class productService {
     
     public List<Product> findAll(){
         return productRepository.findAll();
+    }
+    
+    public List<Product> searchProduct(String value){
+        String name = value;
+        String brand = value;
+        String category = value;
+        //Double price = Double.parseDouble(value);
+        //Integer stock = Integer.parseInt(value);
+        
+        return productRepository.findAll().stream()
+                .filter((Product pr)-> {
+                    return pr.getBrand().equals(name) 
+                            || pr.getName().equals(brand)
+                            || pr.getCategory().getName().equals(category);
+                            //|| Objects.equals(pr.getPrice(), price)
+                            //|| pr.getStock() == stock;
+                })
+                .collect(Collectors.toList());
     }
 }
