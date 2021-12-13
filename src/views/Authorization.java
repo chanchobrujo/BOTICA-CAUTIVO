@@ -5,9 +5,17 @@
  */
 package views;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme; 
+import com.formdev.flatlaf.intellijthemes.FlatDraculaIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterContrastIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import entities.User;
 import java.util.Optional;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import modules.moduleAuth; 
 
 /**
@@ -243,7 +251,12 @@ public class Authorization extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Authorization.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel( new FlatMaterialDarkerIJTheme() );
+        } catch( UnsupportedLookAndFeelException ex ) {
+            System.err.println( "Failed to initialize LaF " + ex.getMessage() );
+        }    
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
