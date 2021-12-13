@@ -15,6 +15,12 @@ public class Details {
     private Product product;
     private Integer quantity;
 
+    public Details(String id_sale, Product product, Integer quantity) { 
+        this.id_sale = id_sale;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public Details(Integer id, String id_sale, Product product, Integer quantity) {
         this.id = id;
         this.id_sale = id_sale;
@@ -22,7 +28,7 @@ public class Details {
         this.quantity = quantity;
     }
     
-    public double getImport(){
+    public Double getImport(){
         return product.getPrice() * this.quantity;
     } 
 
@@ -42,11 +48,11 @@ public class Details {
         this.id_sale = id_sale;
     }
 
-    public Product getId_product() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setId_product(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
