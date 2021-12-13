@@ -88,6 +88,7 @@ public class productService {
         String name = value;
         String brand = value;
         String category = value;
+        
         Double price = Commons.StringToDouble(value); 
         Integer stock = Commons.StringToInteger(value);
         

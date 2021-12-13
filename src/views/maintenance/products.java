@@ -7,8 +7,7 @@ package views.maintenance;
 
 import entities.Category;
 import entities.Product;
-import java.util.List;
-import java.util.Objects;
+import java.util.List; 
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
@@ -35,14 +34,16 @@ public class products extends javax.swing.JFrame {
         modulePorduct = new modulePorduct();
         initComponents();
 
-        this.table_products();
-        this.combo_categories();
-
+        this.recharge_data();
         this.SetModelSpinner(this.spnPrecio);
     }
+    
+    private void recharge_data(){ 
+        this.table_products(modulePorduct.findAll_Products());
+        this.combo_categories();
+    }
 
-    private void table_products() {
-        List<Product> array = modulePorduct.findAll_Products();
+    private void table_products(List<Product> array) { 
 
         DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
             @Override
@@ -52,20 +53,18 @@ public class products extends javax.swing.JFrame {
         };
         tblProduct.setModel(model);
 
-        if (Objects.nonNull(array)) {
-            for (Product product : array) {
-                Vector row = new Vector();
+        for (Product product : array) {
+            Vector row = new Vector();
 
-                row.add(product.getId());
-                row.add(product.getName());
-                row.add(product.getBrand());
-                row.add(product.getPrice());
-                row.add(product.getStock());
-                row.add(product.getCategory().getName());
-                row.add(Commons.BooleanToString(product.getState()));
+            row.add(product.getId());
+            row.add(product.getName());
+            row.add(product.getBrand());
+            row.add(product.getPrice());
+            row.add(product.getStock());
+            row.add(product.getCategory().getName());
+            row.add(Commons.BooleanToString(product.getState()));
 
-                ((DefaultTableModel) tblProduct.getModel()).addRow(row);
-            }
+            ((DefaultTableModel) tblProduct.getModel()).addRow(row);
         }
         tblProduct.getColumnModel().getColumn(0).setMaxWidth(0);
         tblProduct.getColumnModel().getColumn(3).setMaxWidth(50);
@@ -114,6 +113,8 @@ public class products extends javax.swing.JFrame {
         modelproduct.setPrice(null);
         modelproduct.setCategory(null);
         modelproduct.setState(null);
+        
+        this.recharge_data();
     }
 
     /**
@@ -419,9 +420,7 @@ public class products extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        modulePorduct.searchProduct(txtBuscarProducto.getText()).stream()
-                .map(Product::getName)
-                .forEach(System.out::println);
+        this.table_products(modulePorduct.searchProduct(txtBuscarProducto.getText()));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -434,7 +433,7 @@ public class products extends javax.swing.JFrame {
         lblMessage.setText(message);
 
         this.clear();
-        this.table_products();
+        this.recharge_data();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -463,7 +462,7 @@ public class products extends javax.swing.JFrame {
         lblMessage.setText(message); 
         
         this.clear();
-        this.table_products();
+        this.recharge_data();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
