@@ -23,7 +23,7 @@ public class categoryService {
     } 
     
     public String save(int id, String name){
-        String message = enums.Messages.REPETED_VALUES.getValue();
+        String message = enums.ErrorMessage.REPETED_VALUES.getValue();
         Boolean verify = this.verifyByName(name);
         
         if (!verify) return message;
@@ -40,7 +40,7 @@ public class categoryService {
     }
     
     public String changeState(int id){
-        String message = enums.Messages.NOTFOUND.getValue();
+        String message = enums.ErrorMessage.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent()) {
             Boolean state = !this.findById(id).get().getState();

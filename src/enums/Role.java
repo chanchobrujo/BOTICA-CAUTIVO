@@ -9,12 +9,12 @@ package enums;
  *
  * @author kpalmall
  */
-public enum Roles { 
+public enum Role { 
     ROLE_ADMIN("ADMINISTRADOR");
 
     private String value;
 
-    private Roles(String value) {
+    private Role(String value) {
         this.value = value;
     }
 

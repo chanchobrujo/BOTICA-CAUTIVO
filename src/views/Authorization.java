@@ -197,7 +197,7 @@ public class Authorization extends javax.swing.JFrame {
         
         if (user.isPresent()) {
             
-            if (!user.get().getRole().getName().equals(enums.Roles.ROLE_ADMIN.getValue())) {
+            if (!user.get().getRole().getName().equals(enums.Role.ROLE_ADMIN.getValue())) {
                 Administration.menuMantenimiento.setVisible(false);
                 Administration.menuOperaciones.setVisible(false);
                 Administration.menuReportes.setVisible(false);
@@ -207,13 +207,13 @@ public class Authorization extends javax.swing.JFrame {
             administration.setVisible(true);
             this.dispose();
         } else {
-            lblMessage.setText(enums.Messages.FORBIDENN.getValue());
+            lblMessage.setText(enums.AlertMessage.FORBIDENN.getValue());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:   
-        String email = JOptionPane.showInputDialog(enums.Messages.RECOVERY_PASSWORD.getValue());
+        String email = JOptionPane.showInputDialog(enums.AlertMessage.RECOVERY_PASSWORD.getValue());
         lblMessage.setText(moduleAuth.restoredPassword(email));
     }//GEN-LAST:event_jButton2ActionPerformed
 

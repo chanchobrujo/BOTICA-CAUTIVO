@@ -9,13 +9,13 @@ package enums;
  *
  * @author kpalmall
  */
-public enum States {
+public enum State {
     ACTIVO("Activo"),
     INACTIVO("Inactivo");
 
     private String value;
 
-    private States(String value) {
+    private State(String value) {
         this.value = value;
     }
 

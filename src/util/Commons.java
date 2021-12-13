@@ -14,14 +14,14 @@ public class Commons {
         return  value == 1;
     }
     public static Boolean StringToBoolean(String value){
-        return  value.endsWith(enums.States.ACTIVO.getValue());
+        return  value.endsWith(enums.State.ACTIVO.getValue());
     }
     public static Integer BooleanToInteger(Boolean value){
         return  value ? 1 : 0;
     }
     public static String BooleanToString(Boolean value){
-        return  value ? enums.States.ACTIVO.getValue() 
-                : enums.States.INACTIVO.getValue();
+        return  value ? enums.State.ACTIVO.getValue() 
+                : enums.State.INACTIVO.getValue();
     } 
     public static Double StringToDouble(String value){
         try {
