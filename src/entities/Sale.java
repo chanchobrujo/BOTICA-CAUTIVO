@@ -5,17 +5,16 @@
  */
 package entities;
 
-import java.sql.Time;
-import java.util.Date;
+import util.Commons;
 
 /**
  *
  * @author kpalmall
  */
 public class Sale {
-    private String id;
-    private Date date;
-    private Time time;
+    private String id = Commons.generatedIdNumber();
+    private String date = Commons.generatedDateNow();
+    private String time = Commons.generatedTimeNow();
     private Double subtotal;
     private Double desc;
     private Double total;
@@ -36,7 +35,7 @@ public class Sale {
         this.Customer = Customer;
     }
 
-    public Sale(String id, Date date, Time time, Double subtotal, Double desc, Double total, Boolean state, User user, Customer Customer) {
+    public Sale(String id, String date, String time, Double subtotal, Double desc, Double total, Boolean state, User user, Customer Customer) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -56,19 +55,19 @@ public class Sale {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
