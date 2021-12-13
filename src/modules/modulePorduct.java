@@ -8,6 +8,7 @@ import entities.Category;
 import entities.Product; 
 import java.util.List;
 import java.util.Optional; 
+import java.util.stream.Collectors;
 import services.categoryService;
 import services.productService; 
 
@@ -51,6 +52,12 @@ public class modulePorduct {
     
     public List<Product> findAll_Products(){
         return productService.findAll();
+    } 
+    
+    public List<Product> findAll_Products_Active(){
+        return productService.findAll().stream()
+                .filter(p->p.getState())
+                .collect(Collectors.toList());
     } 
     
     public String saveProduct(int id, String name, String brand, Double price, 
