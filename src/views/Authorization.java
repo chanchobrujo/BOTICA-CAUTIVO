@@ -5,18 +5,16 @@
  */
 package views;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme; 
-import com.formdev.flatlaf.intellijthemes.FlatDraculaIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterContrastIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlContrastIJTheme;
 import entities.User;
+import modules.moduleAuth; 
 import java.util.Optional;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import modules.moduleAuth; 
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
+import java.util.Date;
 
 /**
  *
@@ -251,10 +249,16 @@ public class Authorization extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Authorization.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        try {
-            UIManager.setLookAndFeel( new FlatMaterialDarkerIJTheme() );
+        try {  
+            if ((new Date()).getHours()>=18) {
+                UIManager.setLookAndFeel(
+                        new FlatMaterialDarkerIJTheme());
+            } else {
+                UIManager.setLookAndFeel(
+                        new FlatLightOwlContrastIJTheme());
+            }
         } catch( UnsupportedLookAndFeelException ex ) {
-            System.err.println( "Failed to initialize LaF " + ex.getMessage() );
+            System.err.println( "Failed to initialize: " + ex.getMessage() );
         }    
         
         /* Create and display the form */
