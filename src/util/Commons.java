@@ -23,6 +23,22 @@ public class Commons {
         return  value ? enums.States.ACTIVO.getValue() 
                 : enums.States.INACTIVO.getValue();
     } 
+    public static Double StringToDouble(String value){
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            System.err.println(e);
+            return -1.0;
+        }
+    }
+    public static Integer StringToInteger(String value){
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            System.err.println(e);
+            return -1;
+        }
+    }
      
     public static Boolean StringsIsEmpty(String ...value){
         for (String string : value) return string.length() == 0 
@@ -33,4 +49,11 @@ public class Commons {
         for (Double val : value) return val <= 0;
         return false;
     }
+    
+    public static Boolean StringEqualString(String valueA, String valueB){
+        valueA = valueA.toUpperCase();
+        valueB = valueB.toUpperCase();
+        
+        return valueA.equals(valueB) || valueA.contains(valueB);
+    } 
 }
