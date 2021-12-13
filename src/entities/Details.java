@@ -12,15 +12,25 @@ package entities;
 public class Details { 
     private Integer id;
     private String id_sale;
-    private Integer id_product;
+    private Product product;
     private Integer quantity;
 
-    public Details(Integer id, String id_sale, Integer id_product, Integer quantity) {
-        this.id = id;
+    public Details(String id_sale, Product product, Integer quantity) { 
         this.id_sale = id_sale;
-        this.id_product = id_product;
+        this.product = product;
         this.quantity = quantity;
     }
+
+    public Details(Integer id, String id_sale, Product product, Integer quantity) {
+        this.id = id;
+        this.id_sale = id_sale;
+        this.product = product;
+        this.quantity = quantity;
+    }
+    
+    public Double getImport(){
+        return product.getPrice() * this.quantity;
+    } 
 
     public Integer getId() {
         return id;
@@ -38,12 +48,12 @@ public class Details {
         this.id_sale = id_sale;
     }
 
-    public Integer getId_product() {
-        return id_product;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setId_product(Integer id_product) {
-        this.id_product = id_product;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {

@@ -5,6 +5,9 @@
  */
 package util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author kpalmall
@@ -55,5 +58,30 @@ public class Commons {
         valueB = valueB.toUpperCase();
         
         return valueA.equals(valueB) || valueA.contains(valueB);
+    } 
+    public static String generatedIdNumber(){
+        Date date = new Date();  
+        
+        String year = date.getYear() + "";
+        String month = (date.getMonth()+1) + "";
+        String day = date.getDate() + "";
+        
+        String hour = date.getHours() + "";
+        String minute = date.getMinutes() + "";
+        String second = date.getSeconds() + ""; 
+        
+        return year.concat(month)
+                .concat(day)
+                .concat(hour)
+                .concat(minute)
+                .concat(second);
+    }
+    public static String generatedDateNow(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        return format.format(new Date()); 
+    } 
+    public static String generatedTimeNow(){
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss"); 
+        return format.format(new Date()); 
     } 
 }

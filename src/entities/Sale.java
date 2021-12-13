@@ -5,24 +5,30 @@
  */
 package entities;
 
-import java.sql.Time;
-import java.util.Date;
+import java.util.ArrayList; 
+import java.util.List; 
+import java.util.stream.Collectors;
+import util.Commons;
 
 /**
  *
  * @author kpalmall
  */
 public class Sale {
-    private String id;
-    private Date date;
-    private Time time;
+    private String id = Commons.generatedIdNumber();
+    private String date = Commons.generatedDateNow();
+    private String time = Commons.generatedTimeNow();
     private Double subtotal;
     private Double desc;
     private Double total;
     private Boolean state;
     
+    private Double pordes;
+    
     private User user;
     private Customer Customer;
+    
+    private List<Details> cart = new ArrayList<>(); 
 
     public Sale() {
     } 
@@ -36,7 +42,7 @@ public class Sale {
         this.Customer = Customer;
     }
 
-    public Sale(String id, Date date, Time time, Double subtotal, Double desc, Double total, Boolean state, User user, Customer Customer) {
+    public Sale(String id, String date, String time, Double subtotal, Double desc, Double total, Boolean state, User user, Customer Customer) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -47,6 +53,60 @@ public class Sale {
         this.user = user;
         this.Customer = Customer;
     }
+    
+    public void addProduct(Product Product, Integer quantity){    
+        if (this.cart.stream().collect(Collectors.toList()).isEmpty())
+            this.cart.add(new Details(this.getId(), Product, quantity));
+        
+        this.cart.forEach((Details details) -> {
+            if (details.getProduct().getId() != Product.getId()) { 
+                this.cart.add(new Details(this.getId(), Product, quantity));
+            }
+            else { 
+                Integer quantityO = details.getQuantity() + quantity;
+                details.setQuantity(quantityO);
+            }
+        });
+    }
+    public void clearCart(){
+        this.cart.clear();
+    }
+    public void removeProduct(int id_product){   
+        this.cart.forEach((Details details) -> {
+            if (details.getProduct().getId() == id_product) 
+                this.cart.remove(details);
+        });
+    } 
+    public Double getSubtotal() {
+        Double subb = 0.0;
+        subb = this.cart.stream()
+                .map(details -> details.getImport())
+                .reduce(subb, (accumulator, _item) -> accumulator + _item);
+        
+        return subb;
+    } 
+    public Double getDesc() {
+        return this.getSubtotal() * this.getPordes();
+    } 
+    public Double getTotal() {
+        return this.getSubtotal() - this.getDesc();
+    }
+
+    public List<Details> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Details> cart) {
+        this.cart = cart;
+    } 
+
+    public Double getPordes() {
+        return pordes;
+    }
+
+    public void setPordes(Double pordes) {
+        this.pordes =  pordes/100;
+    } 
 
     public String getId() {
         return id;
@@ -56,40 +116,28 @@ public class Sale {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
-    }
-
-    public Double getSubtotal() {
-        return subtotal;
     }
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
 
-    public Double getDesc() {
-        return desc;
-    }
-
     public void setDesc(Double desc) {
         this.desc = desc;
-    }
-
-    public Double getTotal() {
-        return total;
     }
 
     public void setTotal(Double total) {
