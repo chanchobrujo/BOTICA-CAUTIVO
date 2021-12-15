@@ -37,7 +37,7 @@ public class saleService {
     }
     
     public void addLine(int id, int cantidad) {
-        this.sale.addProduct(productService.findById(id).get(), cantidad);
+        this.sale.addProduct(productService.findById(id).get(), cantidad);  
     }
     
     public List<Product> findAllProducts() {
@@ -48,6 +48,10 @@ public class saleService {
     
     public void clearCart() {
         this.sale.clearCart();
+    }
+    
+    public Sale viewDetails() {
+        return this.sale;
     }
 
 }
