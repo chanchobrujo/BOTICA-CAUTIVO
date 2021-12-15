@@ -5,12 +5,20 @@
  */
 package views;
 
+import entities.Product;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import model.ModelProduct;
+import modules.modulePorduct;
+import util.Commons;
+import util.Headers;
 import views.maintenance.category;
 import views.maintenance.products;
 
@@ -18,15 +26,17 @@ import views.maintenance.products;
  *
  * @author kpalmall
  */
-public class Administration extends javax.swing.JFrame {
+public class Administration extends javax.swing.JFrame {  
+    private modulePorduct modulePorduct;
+    
+    private ModelProduct modelproduct = new ModelProduct();
     
     private products products;
     private category category;
     
     private JScrollPane scrollPane;
 
-    private void addImageLogo(String src) {
-        
+    private void addImageLogo(String src) { 
         ImageIcon img = new ImageIcon(getClass().getResource(src));
         Icon fond1 = new ImageIcon(img.getImage().getScaledInstance(txtApllidoCliente.getWidth(), txtApllidoCliente.getHeight(), Image.SCALE_DEFAULT));
         txtApllidoCliente.setIcon(fond1);
@@ -37,12 +47,54 @@ public class Administration extends javax.swing.JFrame {
      * Creates new form Administration
      */
     public Administration() { 
-         
+        modulePorduct = new modulePorduct(); 
                 
         products = new products();
         category = new category();
         initComponents();
         addImageLogo("/Assets/logo.jpeg");
+        
+        this.recharge_data();
+    }
+    
+    
+    private void recharge_data(){ 
+        this.table_products(modulePorduct.findAll_Products()); 
+    }
+
+    private void SetValueSelected(ModelProduct model) {
+        labelNameProduct1.setText(model.getName()+ " "+ model.getBrand());
+        labelPrecioProduct1.setText(model.getPrice()+" Soles.");  
+    }
+    
+    private void table_products(List<Product> array) {
+
+        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblProduct.setModel(model);
+
+        for (Product product : array) {
+            Vector row = new Vector();
+
+            row.add(product.getId());
+            row.add(product.getName());
+            row.add(product.getBrand());
+            row.add(product.getPrice());
+            row.add(product.getStock());
+            row.add(product.getCategory().getName());
+            row.add(Commons.BooleanToString(product.getState()));
+
+            ((DefaultTableModel) tblProduct.getModel()).addRow(row);
+        }
+        tblProduct.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblProduct.getColumnModel().getColumn(3).setMaxWidth(50);
+        tblProduct.getColumnModel().getColumn(4).setMaxWidth(50);
+        tblProduct.getColumnModel().getColumn(6).setMaxWidth(70);
+        
     }
 
     /**
@@ -72,7 +124,6 @@ public class Administration extends javax.swing.JFrame {
         labelPrecioProduct1 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        jPanel15 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -153,6 +204,11 @@ public class Administration extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduct);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -235,19 +291,6 @@ public class Administration extends javax.swing.JFrame {
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -257,7 +300,7 @@ public class Administration extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -270,16 +313,13 @@ public class Administration extends javax.swing.JFrame {
                             .addComponent(labelNameProduct1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(178, 178, 178))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -909,6 +949,7 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.table_products(modulePorduct.searchProduct(txtBuscarProducto.getText()));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -943,6 +984,21 @@ public class Administration extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
+        // TODO add your handling code here:
+        int row = tblProduct.getSelectedRow();
+        int id = Integer.parseInt(tblProduct.getValueAt(row, 0).toString());
+        String name = tblProduct.getValueAt(row, 1).toString();
+        String brand = tblProduct.getValueAt(row, 2).toString();
+        Double price = Double.parseDouble(tblProduct.getValueAt(row, 3).toString());
+        int stock = Integer.parseInt(tblProduct.getValueAt(row, 4).toString());
+        String category = tblProduct.getValueAt(row, 5).toString();
+        Boolean state = Commons.StringToBoolean(tblProduct.getValueAt(row, 6).toString());
+
+        modelproduct = new ModelProduct(id, name, brand, price, stock, category, state);
+        this.SetValueSelected(modelproduct);
+    }//GEN-LAST:event_tblProductMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1016,7 +1072,6 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
