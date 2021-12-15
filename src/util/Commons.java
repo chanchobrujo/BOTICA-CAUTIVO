@@ -52,6 +52,10 @@ public class Commons {
         for (Double val : value) return val <= 0;
         return false;
     }
+    public static Boolean IntegerIsEmpty(Integer ...value){
+        for (Integer val : value) return val <= 0;
+        return false;
+    }
     
     public static Boolean StringEqualString(String valueA, String valueB){
         valueA = valueA.toUpperCase();

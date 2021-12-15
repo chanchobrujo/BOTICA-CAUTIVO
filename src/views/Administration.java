@@ -9,6 +9,7 @@ import entities.Product;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.List;
+import java.util.Optional;
 import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import model.ModelProduct;
 import modules.modulePorduct;
+import modules.moduleSale;
 import util.Commons;
 import util.Headers;
 import views.maintenance.category;
@@ -28,6 +30,7 @@ import views.maintenance.products;
  */
 public class Administration extends javax.swing.JFrame {  
     private modulePorduct modulePorduct;
+    private moduleSale moduleSale;
     
     private ModelProduct modelproduct = new ModelProduct();
     
@@ -48,6 +51,7 @@ public class Administration extends javax.swing.JFrame {
      */
     public Administration() { 
         modulePorduct = new modulePorduct(); 
+        moduleSale = new moduleSale();
                 
         products = new products();
         category = new category();
@@ -983,6 +987,13 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        Integer id = modelproduct.getId();
+        Optional<Product> productFind = modulePorduct.findById_Products(id);
+                
+        if (productFind.isPresent()) {  
+            moduleSale.AddProductToCart(id, Commons
+                    .StringToInteger(spnCant1.getValue().toString()) );
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
