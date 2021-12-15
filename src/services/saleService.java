@@ -25,11 +25,9 @@ public class saleService {
         productService = new productService();
     } 
     
-    public Sale newSale(int idUser, Double porDes){
+    public void newSale(int idUser, Double porDes){
         this.sale.setUser(userService.findById(idUser));
-        this.sale.setPordes(porDes);
-        
-        return this.sale;
+        this.sale.setPordes(porDes); 
     }
     
     public void removeProduct(int id){
