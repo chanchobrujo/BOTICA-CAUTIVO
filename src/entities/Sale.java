@@ -54,19 +54,24 @@ public class Sale {
         this.Customer = Customer;
     }
     
-    public void addProduct(Product Product, Integer quantity){    
-        if (this.cart.stream().collect(Collectors.toList()).isEmpty())
-            this.cart.add(new Details(this.getId(), Product, quantity));
+    public void addProduct(Product Product, Integer quantity){     
+        Boolean verifyProd = this.cart.stream()
+                .filter(d->d.getProduct().getId() == Product.getId())
+                .collect(Collectors.toList())
+                .isEmpty();   
         
-        this.cart.forEach((Details details) -> {
-            if (details.getProduct().getId() != Product.getId()) { 
-                this.cart.add(new Details(this.getId(), Product, quantity));
-            }
-            else { 
+        Boolean verifyEmpty = this.cart.stream() 
+                .collect(Collectors.toList())
+                .isEmpty();
+            
+        if (verifyEmpty || verifyProd) {
+            this.cart.add(new Details(this.getId(), Product, quantity));
+        } else if(!verifyProd){
+            this.cart.forEach(details -> {
                 Integer quantityO = details.getQuantity() + quantity;
                 details.setQuantity(quantityO);
-            }
-        });
+            }); 
+        }
     }
     public void clearCart(){
         this.cart.clear();
