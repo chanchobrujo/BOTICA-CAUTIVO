@@ -72,4 +72,8 @@ public class modulePorduct {
     public List<Product> searchProduct(String value){
         return productService.searchProduct(value);
     } 
+    
+    public Optional<Product> findById_Products(int id){
+        return productService.findById(id);
+    }
 }
