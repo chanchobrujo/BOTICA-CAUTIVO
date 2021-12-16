@@ -5,6 +5,7 @@
  */
 package modules;
 
+import entities.Sale;
 import services.saleService;
 
 /**
@@ -12,13 +13,18 @@ import services.saleService;
  * @author kpalmall
  */
 public class moduleSale {
-    private final saleService saleService = new saleService();
+    private final saleService saleService;
     
-    public moduleSale(){ 
-        this.saleService.newSale(1, 0.5);
+    public moduleSale(int iduser, Double pordesc){ 
+        saleService = new saleService();
+        this.saleService.newSale(iduser, pordesc); 
     }
     
     public void AddProductToCart(int id, int cantidad){
-        this.saleService.addLine(id, cantidad);
+        this.saleService.addLine(id, cantidad); 
+    }
+    
+    public Sale viewDetails(){
+        return this.saleService.viewDetails();
     }
 }

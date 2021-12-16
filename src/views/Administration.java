@@ -5,8 +5,7 @@
  */
 package views;
 
-import entities.Product;
-import java.awt.Dimension;
+import entities.Product; 
 import java.awt.Image;
 import java.util.List;
 import java.util.Optional;
@@ -29,13 +28,13 @@ import views.maintenance.products;
  * @author kpalmall
  */
 public class Administration extends javax.swing.JFrame {  
-    private modulePorduct modulePorduct;
-    private moduleSale moduleSale;
+    private final modulePorduct modulePorduct;
+    private final moduleSale moduleSale;
     
     private ModelProduct modelproduct = new ModelProduct();
     
-    private products products;
-    private category category;
+    private final products products;
+    private final category category;
     
     private JScrollPane scrollPane;
 
@@ -51,7 +50,7 @@ public class Administration extends javax.swing.JFrame {
      */
     public Administration() { 
         modulePorduct = new modulePorduct(); 
-        moduleSale = new moduleSale();
+        moduleSale = new moduleSale(1, 0.0);
                 
         products = new products();
         category = new category();
@@ -401,7 +400,7 @@ public class Administration extends javax.swing.JFrame {
         labelTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel20.setText("Impuesto");
+        jLabel20.setText("Descuento");
         jLabel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         labelImpuesto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -989,10 +988,16 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
         Integer id = modelproduct.getId();
         Optional<Product> productFind = modulePorduct.findById_Products(id);
+        
+        Integer q = Commons.StringToInteger(spnCant1.getValue().toString());
+        Boolean verifyQuantity = Commons.IntegerIsEmpty(q); 
                 
-        if (productFind.isPresent()) {  
-            moduleSale.AddProductToCart(id, Commons
-                    .StringToInteger(spnCant1.getValue().toString()) );
+        if (productFind.isPresent() && !verifyQuantity) {  
+            this.moduleSale.AddProductToCart(id, q );
+        
+            labelSubTotal.setText(moduleSale.viewDetails().getSubtotal()+"");
+            labelTotal.setText(moduleSale.viewDetails().getTotal()+"");
+            labelImpuesto.setText(moduleSale.viewDetails().getDesc()+"");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 

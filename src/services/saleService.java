@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
  * @author chanchobrujo
  */
 public class saleService {
-    private userService userService;
-    private productService productService;
+    private final userService userService;
+    private final productService productService;
     
-    private Sale sale = new Sale();
+    private final Sale sale = new Sale();
 
     public saleService() {
         userService = new userService();
         productService = new productService();
     } 
     
-    public void newSale(int idUser, Double porDes){
+    public void newSale(int idUser, Double porDes){ 
         this.sale.setUser(userService.findById(idUser));
         this.sale.setPordes(porDes); 
     }
@@ -35,7 +35,7 @@ public class saleService {
     }
     
     public void addLine(int id, int cantidad) {
-        this.sale.addProduct(productService.findById(id).get(), cantidad);  
+        this.sale.addProduct(productService.findById(id).get(), cantidad);   
     }
     
     public List<Product> findAllProducts() {
