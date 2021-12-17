@@ -5,52 +5,31 @@
  */
 package views.maintenance;
 
-import entities.Category; 
-import javax.swing.table.DefaultTableModel;
-import modules.modulePorduct;
-import java.util.List;
-import java.util.Objects;
-import java.util.Vector; 
-import util.Commons;
-import util.Headers;
+import entities.Category;  
+import modules.modulePorduct; 
+import render.table.TableModelCategory;
+import util.Commons; 
 
 /**
  *
  * @author kpalmall
  */
-public class category extends javax.swing.JFrame {
+public class category_views extends javax.swing.JFrame {
     private modulePorduct modulePorduct;
     private Category modelcategory = new Category();
     
-    public category() {
+    private TableModelCategory tableModelCategory;
+    
+    public category_views() {
         modulePorduct = new modulePorduct();
+        tableModelCategory = new TableModelCategory();
         initComponents();
         
         this.table_category();
     } 
     
     private void table_category(){
-        List<Category> array = modulePorduct.findAll_Categories();   
-        
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_category){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };    
-        tblCategory.setModel(model); 
-        
-        if (Objects.nonNull(array)) 
-            for (Category category : array) {
-                Vector row = new Vector();
-
-                row.add( category.getId() );
-                row.add( category.getName() );
-                row.add( Commons.BooleanToString(category.getState()) );
-
-                ((DefaultTableModel) tblCategory.getModel()).addRow(row);
-            }
-        
+        this.tableModelCategory.tableCategroiyData(tblCategory);
     }
     
     private void SetValueSelected(String category){
@@ -276,20 +255,21 @@ public class category extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(category_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(category_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(category_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(category_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new category().setVisible(true);
+                new category_views().setVisible(true);
             }
         });
     }

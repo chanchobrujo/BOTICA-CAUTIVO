@@ -5,25 +5,20 @@
  */
 package views;
 
-import entities.Details;
 import entities.Product; 
-import java.awt.Image;
-import java.util.List;
-import java.util.Optional;
-import java.util.Vector;
+import java.awt.Image; 
+import java.util.Optional; 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import javax.xml.soap.Detail;
+import javax.swing.ImageIcon; 
+import javax.swing.JScrollPane; 
 import model.ModelProduct;
 import modules.modulePorduct;
 import modules.moduleSale;
-import util.Commons;
-import util.Headers;
-import views.maintenance.category;
-import views.maintenance.products;
+import render.table.TableModelCart;
+import render.table.TableModelProduct;
+import util.Commons; 
+import views.maintenance.category_views;
+import views.maintenance.products_views;
 
 /**
  *
@@ -35,17 +30,13 @@ public class Administration extends javax.swing.JFrame {
     
     private ModelProduct modelproduct = new ModelProduct();
     
-    private final products products;
-    private final category category;
+    private TableModelProduct tableModelProduct;
+    private TableModelCart tableModelCart;
+    
+    private final products_views products;
+    private final category_views category;
     
     private JScrollPane scrollPane;
-
-    private void addImageLogo(String src) { 
-        ImageIcon img = new ImageIcon(getClass().getResource(src));
-        Icon fond1 = new ImageIcon(img.getImage().getScaledInstance(txtApllidoCliente.getWidth(), txtApllidoCliente.getHeight(), Image.SCALE_DEFAULT));
-        txtApllidoCliente.setIcon(fond1);
-        this.repaint();
-    }
 
     /**
      * Creates new form Administration
@@ -53,18 +44,29 @@ public class Administration extends javax.swing.JFrame {
     public Administration() { 
         modulePorduct = new modulePorduct(); 
         moduleSale = new moduleSale(1, 0.0);
+        
+        tableModelProduct = new TableModelProduct();
+        tableModelCart = new TableModelCart();
                 
-        products = new products();
-        category = new category();
+        products = new products_views();
+        category = new category_views();
         initComponents();
-        addImageLogo("/Assets/logo.jpeg");
+        this.addImageLogo("/Assets/logo.jpeg");
         
         this.recharge_data();
+    }
+
+    private void addImageLogo(String src) { 
+        ImageIcon img = new ImageIcon(getClass().getResource(src));
+        Icon fond1 = new ImageIcon(img.getImage()
+                .getScaledInstance(txtApllidoCliente.getWidth(), txtApllidoCliente.getHeight(), Image.SCALE_DEFAULT));
+        txtApllidoCliente.setIcon(fond1);
+        this.repaint();
     }
     
     
     private void recharge_data(){ 
-        this.table_products(modulePorduct.findAll_Products());  
+        this.tableModelProduct.tableProductData(tblProduct); 
     }
 
     private void SetValueSelected(ModelProduct model) {
@@ -76,70 +78,12 @@ public class Administration extends javax.swing.JFrame {
         labelSubTotal.setText(moduleSale.viewDetails().getSubtotal()+"");
         labelTotal.setText(moduleSale.viewDetails().getTotal()+"");
         labelImpuesto.setText(moduleSale.viewDetails().getDesc()+"");
-    }
+    } 
     
-    private void table_products(List<Product> array) {
-
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tblProduct.setModel(model);
-
-        for (Product product : array) {
-            Vector row = new Vector();
-
-            row.add(product.getId());
-            row.add(product.getName());
-            row.add(product.getBrand());
-            row.add(product.getPrice());
-            row.add(product.getStock());
-            row.add(product.getCategory().getName());
-            row.add(Commons.BooleanToString(product.getState()));
-
-            ((DefaultTableModel) tblProduct.getModel()).addRow(row);
-        }
-        tblProduct.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblProduct.getColumnModel().getColumn(3).setMaxWidth(50);
-        tblProduct.getColumnModel().getColumn(4).setMaxWidth(50);
-        tblProduct.getColumnModel().getColumn(6).setMaxWidth(70);
-        
-    }
-    
-    private void table_cart(){
+    private void recharge_dataCart(){
         this.detail_sale();
-        tblCarrito.removeAll();
-        List<Details> array = this.moduleSale.viewDetails().getCart();
-
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_cart) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tblCarrito.setModel(model);
-
-        array.stream().map(details -> {
-            Vector row = new Vector();
-            Integer ifprod = details.getProduct().getId();
-            String product = details.getProduct().getName() + " " +details.getProduct().getBrand();
-            Double price = details.getProduct().getPrice();
-            Double impor = details.getImport();
-            Integer quantity = details.getQuantity();
-            
-            row.add( ifprod );
-            row.add( product ); 
-            row.add( price );
-            row.add( quantity );
-            row.add( impor );
-            
-            return row;
-        }).forEachOrdered(row -> {
-            ((DefaultTableModel) tblCarrito.getModel()).addRow(row);
-        });
-        
+        this.tableModelCart.tableCartData(tblCarrito, 
+                this.moduleSale.viewDetails().getCart());
     }
 
     /**
@@ -977,7 +921,7 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.table_products(modulePorduct.searchProduct(txtBuscarProducto.getText()));
+        this.tableModelProduct.tableProductDataSearch(tblProduct, txtBuscarProducto.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menuItemProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProductActionPerformed
@@ -995,7 +939,7 @@ public class Administration extends javax.swing.JFrame {
                 
         if (productFind.isPresent() && !verifyQuantity) {  
             this.moduleSale.AddProductToCart(id, q); 
-            this.table_cart();
+            this.recharge_dataCart();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1030,7 +974,7 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
         Integer id = modelproduct.getId();
         this.moduleSale.viewDetails().removeProduct(id);
-        this.table_cart(); 
+        this.recharge_dataCart(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1040,7 +984,7 @@ public class Administration extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         this.moduleSale.viewDetails().clearCart();
-        this.table_cart();  
+        this.recharge_dataCart();  
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tblCarritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCarritoMouseClicked
