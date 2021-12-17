@@ -5,13 +5,11 @@
  */
 package render.table;
 
-import entities.Details;
-import entities.Product;
+import entities.Details; 
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import modules.modulePorduct;
+import javax.swing.table.DefaultTableModel; 
 import util.Headers;
 
 /**

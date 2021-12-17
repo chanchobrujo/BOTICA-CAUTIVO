@@ -5,14 +5,10 @@
  */
 package views.maintenance;
 
-import entities.Category; 
-import javax.swing.table.DefaultTableModel;
-import modules.modulePorduct;
-import java.util.List;
-import java.util.Objects;
-import java.util.Vector; 
-import util.Commons;
-import util.Headers;
+import entities.Category;  
+import modules.modulePorduct; 
+import render.table.TableModelCategory;
+import util.Commons; 
 
 /**
  *
@@ -22,35 +18,18 @@ public class category_views extends javax.swing.JFrame {
     private modulePorduct modulePorduct;
     private Category modelcategory = new Category();
     
+    private TableModelCategory tableModelCategory;
+    
     public category_views() {
         modulePorduct = new modulePorduct();
+        tableModelCategory = new TableModelCategory();
         initComponents();
         
         this.table_category();
     } 
     
     private void table_category(){
-        List<Category> array = modulePorduct.findAll_Categories();   
-        
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_category){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };    
-        tblCategory.setModel(model); 
-        
-        if (Objects.nonNull(array)) 
-            for (Category category : array) {
-                Vector row = new Vector();
-
-                row.add( category.getId() );
-                row.add( category.getName() );
-                row.add( Commons.BooleanToString(category.getState()) );
-
-                ((DefaultTableModel) tblCategory.getModel()).addRow(row);
-            }
-        
+        this.tableModelCategory.tableCategroiyData(tblCategory);
     }
     
     private void SetValueSelected(String category){
