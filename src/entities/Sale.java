@@ -7,6 +7,7 @@ package entities;
 
 import java.util.ArrayList; 
 import java.util.List; 
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import util.Commons;
 
@@ -54,28 +55,35 @@ public class Sale {
         this.Customer = Customer;
     }
     
-    public void addProduct(Product Product, Integer quantity){    
-        if (this.cart.stream().collect(Collectors.toList()).isEmpty())
-            this.cart.add(new Details(this.getId(), Product, quantity));
+    public void addProduct(Product Product, Integer quantity){     
+        Boolean verifyProd = this.cart.stream()
+                .filter(d->d.getProduct().getId() == Product.getId())
+                .collect(Collectors.toList())
+                .isEmpty();   
         
-        this.cart.forEach((Details details) -> {
-            if (details.getProduct().getId() != Product.getId()) { 
-                this.cart.add(new Details(this.getId(), Product, quantity));
-            }
-            else { 
-                Integer quantityO = details.getQuantity() + quantity;
-                details.setQuantity(quantityO);
-            }
-        });
+        Boolean verifyEmpty = this.cart.stream() 
+                .collect(Collectors.toList())
+                .isEmpty();
+            
+        if (verifyEmpty || verifyProd) {
+            this.cart.add(new Details(this.getId(), Product, quantity));
+        } else if(!verifyProd){
+            
+            Details detail = this.cart.stream().filter(d->d.getProduct().getId() == Product.getId()).findFirst().get();
+            Integer quantityO = detail.getQuantity() + quantity; 
+            detail.setQuantity(quantityO);
+            
+        }
     }
     public void clearCart(){
         this.cart.clear();
     }
     public void removeProduct(int id_product){   
-        this.cart.forEach((Details details) -> {
-            if (details.getProduct().getId() == id_product) 
-                this.cart.remove(details);
-        });
+        for (int i = 0; i < this.cart.size(); i++) {
+            if (this.cart.get(i).getProduct().getId() == id_product) {
+                this.cart.remove(i);
+            }
+        }
     } 
     public Double getSubtotal() {
         Double subb = 0.0;
