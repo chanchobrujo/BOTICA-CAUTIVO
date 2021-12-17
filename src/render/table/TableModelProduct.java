@@ -19,14 +19,17 @@ import util.Headers;
  * @author kpalmall
  */
 public class TableModelProduct {
+    private TableModel tableModel;
     private modulePorduct modulePorduct;
 
     public TableModelProduct() {
+        tableModel = new TableModel();
         modulePorduct = new modulePorduct();
     } 
     
     private void renderTable(JTable table, List<Product> array){
-        this.tableNoEditable(table);
+        this.tableModel.tableNoEditable(table, Headers.headres_product);
+        
         for (Product product : array) {
             Vector row = new Vector();
 
@@ -44,16 +47,6 @@ public class TableModelProduct {
         table.getColumnModel().getColumn(3).setMaxWidth(50);
         table.getColumnModel().getColumn(4).setMaxWidth(50);
         table.getColumnModel().getColumn(6).setMaxWidth(70);
-    }
-    
-    private void tableNoEditable(JTable table){
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };  
-        table.setModel(model);
     }
     
     public void tableProductData(JTable table){ 
