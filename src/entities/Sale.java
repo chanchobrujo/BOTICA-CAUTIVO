@@ -67,10 +67,11 @@ public class Sale {
         if (verifyEmpty || verifyProd) {
             this.cart.add(new Details(this.getId(), Product, quantity));
         } else if(!verifyProd){
-            this.cart.forEach(details -> {
-                Integer quantityO = details.getQuantity() + quantity;
-                details.setQuantity(quantityO);
-            }); 
+            
+            Details detail = this.cart.stream().filter(d->d.getProduct().getId() == Product.getId()).findFirst().get();
+            Integer quantityO = detail.getQuantity() + quantity; 
+            detail.setQuantity(quantityO);
+            
         }
     }
     public void clearCart(){

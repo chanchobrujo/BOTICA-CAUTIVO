@@ -16,5 +16,5 @@ public class Headers {
             new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA", "ESTADO"};
     
     public static final String headres_cart[] = 
-            new String[] {"PRODUCTO", "PRECIO", "IMPORTE", "CANTIDAD"};
+            new String[] {"PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
 }

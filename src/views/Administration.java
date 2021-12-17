@@ -114,21 +114,20 @@ public class Administration extends javax.swing.JFrame {
         };
         tblCarrito.setModel(model);
 
-        for (Details details : array) {
+        array.stream().map(details -> {
             Vector row = new Vector();
-            
             String product = details.getProduct().getName() + " " +details.getProduct().getBrand();
             Double price = details.getProduct().getPrice();
             Double impor = details.getImport();
             Integer quantity = details.getQuantity();
-            
-            row.add( product ); 
-            row.add( price ); 
-            row.add( impor ); 
-            row.add( quantity );  
-
+            row.add( product );
+            row.add( price );
+            row.add( quantity );
+            row.add( impor );
+            return row;
+        }).forEachOrdered(row -> {
             ((DefaultTableModel) tblCarrito.getModel()).addRow(row);
-        }
+        });
         
     }
 
