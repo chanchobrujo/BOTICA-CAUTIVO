@@ -64,12 +64,18 @@ public class Administration extends javax.swing.JFrame {
     
     
     private void recharge_data(){ 
-        this.table_products(modulePorduct.findAll_Products()); 
+        this.table_products(modulePorduct.findAll_Products());  
     }
 
     private void SetValueSelected(ModelProduct model) {
         labelNameProduct1.setText(model.getName()+ " "+ model.getBrand());
         labelPrecioProduct1.setText(model.getPrice()+" Soles.");  
+    }
+    
+    private void detail_sale(){
+        labelSubTotal.setText(moduleSale.viewDetails().getSubtotal()+"");
+        labelTotal.setText(moduleSale.viewDetails().getTotal()+"");
+        labelImpuesto.setText(moduleSale.viewDetails().getDesc()+"");
     }
     
     private void table_products(List<Product> array) {
@@ -103,6 +109,7 @@ public class Administration extends javax.swing.JFrame {
     }
     
     private void table_cart(){
+        this.detail_sale();
         tblCarrito.removeAll();
         List<Details> array = this.moduleSale.viewDetails().getCart();
 
@@ -116,14 +123,18 @@ public class Administration extends javax.swing.JFrame {
 
         array.stream().map(details -> {
             Vector row = new Vector();
+            Integer ifprod = details.getProduct().getId();
             String product = details.getProduct().getName() + " " +details.getProduct().getBrand();
             Double price = details.getProduct().getPrice();
             Double impor = details.getImport();
             Integer quantity = details.getQuantity();
-            row.add( product );
+            
+            row.add( ifprod );
+            row.add( product ); 
             row.add( price );
             row.add( quantity );
             row.add( impor );
+            
             return row;
         }).forEachOrdered(row -> {
             ((DefaultTableModel) tblCarrito.getModel()).addRow(row);
@@ -723,6 +734,11 @@ public class Administration extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCarrito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCarritoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblCarrito);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -978,12 +994,7 @@ public class Administration extends javax.swing.JFrame {
         Boolean verifyQuantity = Commons.IntegerIsEmpty(q); 
                 
         if (productFind.isPresent() && !verifyQuantity) {  
-            this.moduleSale.AddProductToCart(id, q );
-        
-            labelSubTotal.setText(moduleSale.viewDetails().getSubtotal()+"");
-            labelTotal.setText(moduleSale.viewDetails().getTotal()+"");
-            labelImpuesto.setText(moduleSale.viewDetails().getDesc()+"");
-            
+            this.moduleSale.AddProductToCart(id, q); 
             this.table_cart();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1017,6 +1028,9 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Integer id = modelproduct.getId();
+        this.moduleSale.viewDetails().removeProduct(id);
+        this.table_cart(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1026,6 +1040,14 @@ public class Administration extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tblCarritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCarritoMouseClicked
+        // TODO add your handling code here: 
+        int row = tblCarrito.getSelectedRow();
+        int id = Integer.parseInt(tblCarrito.getValueAt(row, 0).toString());
+        modelproduct = new ModelProduct();
+        modelproduct.setId(id); 
+    }//GEN-LAST:event_tblCarritoMouseClicked
 
     /**
      * @param args the command line arguments

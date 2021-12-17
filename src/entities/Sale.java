@@ -7,6 +7,7 @@ package entities;
 
 import java.util.ArrayList; 
 import java.util.List; 
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import util.Commons;
 
@@ -78,10 +79,11 @@ public class Sale {
         this.cart.clear();
     }
     public void removeProduct(int id_product){   
-        this.cart.forEach((Details details) -> {
-            if (details.getProduct().getId() == id_product) 
-                this.cart.remove(details);
-        });
+        for (int i = 0; i < this.cart.size(); i++) {
+            if (this.cart.get(i).getProduct().getId() == id_product) {
+                this.cart.remove(i);
+            }
+        }
     } 
     public Double getSubtotal() {
         Double subb = 0.0;
