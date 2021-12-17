@@ -22,8 +22,8 @@ import modules.modulePorduct;
 import modules.moduleSale;
 import util.Commons;
 import util.Headers;
-import views.maintenance.category;
-import views.maintenance.products;
+import views.maintenance.category_views;
+import views.maintenance.products_views;
 
 /**
  *
@@ -35,8 +35,8 @@ public class Administration extends javax.swing.JFrame {
     
     private ModelProduct modelproduct = new ModelProduct();
     
-    private final products products;
-    private final category category;
+    private final products_views products;
+    private final category_views category;
     
     private JScrollPane scrollPane;
 
@@ -54,8 +54,8 @@ public class Administration extends javax.swing.JFrame {
         modulePorduct = new modulePorduct(); 
         moduleSale = new moduleSale(1, 0.0);
                 
-        products = new products();
-        category = new category();
+        products = new products_views();
+        category = new category_views();
         initComponents();
         addImageLogo("/Assets/logo.jpeg");
         

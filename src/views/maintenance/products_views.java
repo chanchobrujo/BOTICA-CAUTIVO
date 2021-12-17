@@ -5,33 +5,32 @@
  */
 package views.maintenance;
 
-import entities.Category;
-import entities.Product;
-import java.util.List; 
-import java.util.Vector;
+import entities.Category; 
+import java.util.List;  
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JSpinner;  
 import model.ModelProduct;
 import modules.modulePorduct;
-import util.Commons;
-import util.Headers;
+import render.table.TableModelProduct;
+import util.Commons; 
 
 /**
  *
  * @author kpalmall
  */
-public class products extends javax.swing.JFrame {
+public class products_views extends javax.swing.JFrame {
 
     private modulePorduct modulePorduct;
     private ModelProduct modelproduct = new ModelProduct();
+    
+    private TableModelProduct tableModelProduct;
 
     /**
      * Creates new form products
      */
-    public products() {
+    public products_views() {
         modulePorduct = new modulePorduct();
+        tableModelProduct = new TableModelProduct();
         initComponents();
 
         this.recharge_data();
@@ -39,38 +38,9 @@ public class products extends javax.swing.JFrame {
     }
     
     private void recharge_data(){ 
-        this.table_products(modulePorduct.findAll_Products());
+        this.tableModelProduct.tableProductData(tblProduct);
         this.combo_categories();
-    }
-
-    private void table_products(List<Product> array) { 
-
-        DefaultTableModel model = new DefaultTableModel(null, Headers.headres_product) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tblProduct.setModel(model);
-
-        for (Product product : array) {
-            Vector row = new Vector();
-
-            row.add(product.getId());
-            row.add(product.getName());
-            row.add(product.getBrand());
-            row.add(product.getPrice());
-            row.add(product.getStock());
-            row.add(product.getCategory().getName());
-            row.add(Commons.BooleanToString(product.getState()));
-
-            ((DefaultTableModel) tblProduct.getModel()).addRow(row);
-        }
-        tblProduct.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblProduct.getColumnModel().getColumn(3).setMaxWidth(50);
-        tblProduct.getColumnModel().getColumn(4).setMaxWidth(50);
-        tblProduct.getColumnModel().getColumn(6).setMaxWidth(70);
-    }
+    } 
 
     private void combo_categories() {
         cmbCategories.removeAllItems();
@@ -419,8 +389,8 @@ public class products extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.table_products(modulePorduct.searchProduct(txtBuscarProducto.getText()));
+        // TODO add your handling code here: 
+        this.tableModelProduct.tableProductDataSearch(tblProduct, txtBuscarProducto.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -432,14 +402,12 @@ public class products extends javax.swing.JFrame {
         
         lblMessage.setText(message);
 
-        this.clear();
-        this.recharge_data();
+        this.clear(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.clear();
-        this.recharge_data();
+        this.clear(); 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
@@ -462,8 +430,7 @@ public class products extends javax.swing.JFrame {
         String message = modulePorduct.changeStateProduct(modelproduct.getId());
         lblMessage.setText(message); 
         
-        this.clear();
-        this.recharge_data();
+        this.clear(); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -483,20 +450,21 @@ public class products extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(products_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(products_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(products_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(products.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(products_views.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new products().setVisible(true);
+                new products_views().setVisible(true);
             }
         });
     }
