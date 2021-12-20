@@ -10,14 +10,22 @@ package entities;
  * @author kpalmall
  */
 public class Customer {
-    private int id;
+    private Integer id;
     private String firtsname;
     private String lastname;
-    private String dni;
+    private Integer dni;
     private String email;
     private String phone;
 
-    public Customer(int id, String firtsname, String lastname, String dni, String email, String phone) {
+    public Customer(String firtsname, String lastname, Integer dni, String email, String phone) { 
+        this.firtsname = firtsname;
+        this.lastname = lastname;
+        this.dni = dni;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public Customer(Integer id, String firtsname, String lastname, Integer dni, String email, String phone) {
         this.id = id;
         this.firtsname = firtsname;
         this.lastname = lastname;
@@ -50,11 +58,11 @@ public class Customer {
         this.lastname = lastname;
     }
 
-    public String getDni() {
+    public Integer getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 
