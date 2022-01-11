@@ -5,12 +5,14 @@
  */
 package enums;
 
+import util.Commons;
+
 /**
  *
  * @author chanchobrujo
  */
 public enum OSname {
-    WINDOWS("\\bd\\db.db"),
+    WINDOWS("WINDOWS 10","\\bd\\db.db"),
     LINUX("LINUX","/bd/db.db");
     
     private String name;
@@ -19,11 +21,7 @@ public enum OSname {
     private OSname(String name, String src) {
         this.name = name;
         this.src = src;
-    }
-
-    private OSname(String src) { 
-        this.src = src;
-    }
+    } 
 
     public String getName() {
         return name;
@@ -39,6 +37,14 @@ public enum OSname {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+    
+    public static String findUrlByOsName(String osname){ 
+        for (OSname oSname : values()) { 
+            boolean verify = Commons.StringEqualString(osname, oSname.getName()); 
+            if (verify) return oSname.getSrc(); 
+        }
+        return null;
     }
     
 }
