@@ -5,10 +5,15 @@
  */
 package enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter 
+@AllArgsConstructor
 public enum ErrorMessage {
     EXECUTE_SUCCESS("Datos guardados correctamente."),
     ERROR_CONECTION("No hay conexion."),
@@ -17,18 +22,5 @@ public enum ErrorMessage {
     NOTFOUND("Elemento no encontrado."), 
     USER_NOTFOUND("Usuario no encontrado.");
 
-    private String value;
-
-    private ErrorMessage(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
+    private String value; 
 }

@@ -5,40 +5,29 @@
  */
 package enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import util.Commons;
+
 /**
  *
  * @author chanchobrujo
  */
+@Getter 
+@AllArgsConstructor
 public enum OSname {
-    WINDOWS("\\bd\\db.db"),
+    WINDOWS("WINDOWS 10","\\bd\\db.db"),
     LINUX("LINUX","/bd/db.db");
     
     private String name;
-    private String src;
-
-    private OSname(String name, String src) {
-        this.name = name;
-        this.src = src;
-    }
-
-    private OSname(String src) { 
-        this.src = src;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSrc() {
-        return src;
-    }
-
-    public void setSrc(String src) {
-        this.src = src;
-    }
+    private String src;  
     
+    public static String findUrlByOsName(String osname){ 
+        boolean verify = false;
+        for (OSname oSname : values()) { 
+            verify = Commons.StringEqualString(osname, oSname.getName()); 
+            if (verify) return oSname.getSrc(); 
+        }
+        return null;
+    }
 }

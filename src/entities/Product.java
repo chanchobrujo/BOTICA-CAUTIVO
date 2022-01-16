@@ -5,10 +5,21 @@
  */
 package entities; 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     private int id;
@@ -17,10 +28,7 @@ public class Product {
     private Double price;
     private int stock; 
     private Category category;
-    private Boolean state;
-
-    public Product() { 
-    }
+    private Boolean state; 
     
     public Product(String name, String brand, Double price, int stock, 
             Category category) { 
@@ -40,73 +48,6 @@ public class Product {
         this.price = price;
         this.stock = stock; 
         this.category = category; 
-    }
-
-    public Product(int id, String name, String brand, Double price, int stock,
-            Category category, Boolean state) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.stock = stock; 
-        this.category = category;
-        this.state = state;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     } 
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Boolean getState() {
-        return state;
-    }
-
-    public void setState(Boolean state) {
-        this.state = state;
-    }
     
 }
