@@ -36,16 +36,20 @@ public class categoryRepository {
     public List<Category> findAll() {
         List<Category> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM category;");
-        if (list.isEmpty()) {
-            findAll = null;
-        } else {
+        
+        if (!list.isEmpty()) { 
             for (Object object : list) {
                 Object[] row = (Object[]) object;
-                findAll.add(new Category(Integer.parseInt(row[0].toString()), 
-                        row[1].toString(), 
-                        util.Commons.IntegerToBoolean(Integer.parseInt(row[2].toString()))));
+                boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[2].toString()));
+                
+                Category category = Category.builder()
+                        .id(Integer.parseInt(row[0].toString()))
+                        .name(row[1].toString())
+                        .state(state)
+                        .build();
+                findAll.add(category);
             }
-        }
+        }  
         return findAll;
     }
 }

@@ -19,23 +19,33 @@ public class customerRepository {
 
     public String insert(Customer customer) {
         String sql = "INSERT INTO customer (firtsname, lastname, dni, email, phone) VALUES"
-                + "('"+customer.getFirtsname()+"','"+customer.getLastname()+"',"+customer.getDni()+",'"+customer.getEmail()+"','"+customer.getPhone()+"')";
+                + "('"+customer.getFirtsname()+"','"+customer.getLastname()+"',"
+                +customer.getDni()+",'"+customer.getEmail()+"','"+customer.getPhone()+"')";
         return GestorBd.execute(sql);
     }
 
     public List<Customer> findAll() {
         List<Customer> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM customer;");
-        if (list.isEmpty()) {
-            findAll = null;
-        } else {
+        
+        if (!list.isEmpty()) { 
             for (Object object : list) {
                 Object[] row = (Object[]) object;
-                findAll.add(new Customer( Commons.StringToInteger(row[0].toString()) , 
-                        row[1].toString(), row[2].toString(), Commons.StringToInteger(row[3].toString()),
-                        row[4].toString(), row[5].toString()));
+                Integer id = Commons.StringToInteger(row[0].toString());
+                Integer dni = Commons.StringToInteger(row[3].toString());
+                
+                Customer customer = Customer.builder()
+                        .id(id)
+                        .firtsname(row[1].toString())
+                        .lastname(row[2].toString())
+                        .dni(dni)
+                        .email(row[4].toString())
+                        .phone(row[5].toString())
+                        .build();
+                
+                findAll.add(customer);
             }
-        }
+        }  
         return findAll;
     }
 }
