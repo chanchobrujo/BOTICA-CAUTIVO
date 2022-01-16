@@ -3,85 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities; 
+package entities;  
 
-import https.Consumer;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author kpalmall
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     private Integer id;
     private String firtsname;
     private String lastname;
     private Integer dni;
     private String email;
-    private String phone;
-
-    public Customer() {
-    }  
-
-    public Customer(Integer id, String firtsname, String lastname, Integer dni, String email, String phone) {
-        this.id = id;
-        this.firtsname = firtsname;
-        this.lastname = lastname;
-        this.dni = dni;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirtsname() {
-        return firtsname;
-    }
-
-    public void setFirtsname(String firtsname) {
-        this.firtsname = firtsname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Integer getDni() {
-        return dni;
-    }
-
-    public void setDni(Integer dni) {
-        this.dni = dni;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    
-    
-    
+    private String phone; 
 }

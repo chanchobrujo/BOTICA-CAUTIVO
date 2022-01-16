@@ -5,18 +5,26 @@
  */
 package entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
 
     private int id;
     private String name;
-    private Boolean state;
-
-    public Category() {
-    }
+    private Boolean state; 
 
     public Category(String name) {
         this.name = name;
@@ -27,39 +35,9 @@ public class Category {
         this.id = id;
         this.name = name;
     }
+    
     public Category(String name, Boolean state) {
         this.name = name;
         this.state = state;
-    }
-
-    public Category(int id, String name, Boolean state) {
-        this.id = id;
-        this.name = name;
-        this.state = state;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getState() {
-        return state;
-    }
-
-    public void setState(Boolean state) {
-        this.state = state;
-    }
-
+    } 
 }

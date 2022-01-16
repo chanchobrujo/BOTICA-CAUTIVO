@@ -5,10 +5,21 @@
  */
 package entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Details { 
     private Integer id;
     private String id_sale;
@@ -19,49 +30,10 @@ public class Details {
         this.id_sale = id_sale;
         this.product = product;
         this.quantity = quantity;
-    }
-
-    public Details(Integer id, String id_sale, Product product, Integer quantity) {
-        this.id = id;
-        this.id_sale = id_sale;
-        this.product = product;
-        this.quantity = quantity;
-    }
+    } 
     
     public Double getImport(){
         return product.getPrice() * this.quantity;
-    } 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getId_sale() {
-        return id_sale;
-    }
-
-    public void setId_sale(String id_sale) {
-        this.id_sale = id_sale;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+    }  
     
 }
