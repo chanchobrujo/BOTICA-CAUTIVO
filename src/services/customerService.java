@@ -7,7 +7,10 @@ package services;
 
 import entities.Customer;
 import java.util.List;
+import java.util.Objects; 
+import java.util.Optional; 
 import repository.customerRepository;
+import util.Commons;
 
 /**
  *
@@ -38,6 +41,26 @@ public class customerService {
     }
     
     public List<Customer> findAll(){
-        return customerRepository.findAll();
+        return this.customerRepository.findAll();
+    } 
+    
+    public Optional<Customer> FindByParam(String value){ 
+        String firtsname = value;
+        String lastname = value;
+        
+        String email = value;
+        String phone = value;
+        
+        Integer dni = Commons.StringToInteger(value);
+        return customerRepository.findAll()
+                .stream() 
+                .filter((Customer cus)-> {
+                    return Commons.StringEqualString(cus.getFirtsname(), firtsname)
+                            || Commons.StringEqualString(cus.getLastname(), lastname)
+                            || Commons.StringEqualString(cus.getEmail(), email)
+                            || Commons.StringEqualString(cus.getPhone(), phone)
+                            || Objects.equals(dni, cus.getDni());
+                })
+                .findFirst();
     }
 }

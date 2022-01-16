@@ -17,4 +17,7 @@ public class Headers {
     
     public static final String headres_cart[] = 
             new String[] {"ID", "PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
+    
+    public static final String headres_customer[] = 
+            new String[] {"ID", "CLIENTE", "DNI", "EMAIL", "PHONE"};
 }

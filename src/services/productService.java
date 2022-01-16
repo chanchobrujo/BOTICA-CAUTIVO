@@ -7,8 +7,7 @@ package services;
 
 import entities.Category;
 import entities.Product; 
-import java.util.List;  
-import java.util.Objects;
+import java.util.List;   
 import java.util.Optional;
 import java.util.stream.Collectors;
 import repository.categoryRepository;

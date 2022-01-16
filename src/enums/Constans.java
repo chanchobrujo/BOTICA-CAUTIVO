@@ -11,4 +11,7 @@ package enums;
  */
 public class Constans {
     public static final String apiReniec = "https://api.reniec.online/dni/";
+    public static final String empty = ""; 
+    public static final String space = " ";
+    public static final String money = " Soles.";
 }

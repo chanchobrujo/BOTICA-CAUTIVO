@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities; 
-
-import https.Consumer;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+package model;
 
 /**
  *
- * @author kpalmall
+ * @author chanchobrujo
  */
-public class Customer {
+public class ModelCustomer {
     private Integer id;
     private String firtsname;
     private String lastname;
@@ -22,23 +17,23 @@ public class Customer {
     private String email;
     private String phone;
 
-    public Customer() {
-    }  
-
-    public Customer(Integer id, String firtsname, String lastname, Integer dni, String email, String phone) {
+    public ModelCustomer() {
+    }
+     
+    public ModelCustomer(Integer id, String firtsname, String lastname, Integer dni, String email, String phone) {
         this.id = id;
         this.firtsname = firtsname;
         this.lastname = lastname;
         this.dni = dni;
         this.email = email;
         this.phone = phone;
-    }
+    } 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,7 +76,5 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-    
     
 }

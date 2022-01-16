@@ -37,8 +37,7 @@ public class Commons {
     public static Integer StringToInteger(String value){
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            System.err.println(e);
+        } catch (NumberFormatException e) { 
             return -1;
         }
     }
@@ -87,5 +86,5 @@ public class Commons {
     public static String generatedTimeNow(){
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss"); 
         return format.format(new Date()); 
-    } 
+    }   
 }
