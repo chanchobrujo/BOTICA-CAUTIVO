@@ -6,6 +6,7 @@
 package repository;
 
 import entities.Customer; 
+import enums.Constans;
 import java.util.ArrayList;
 import java.util.List;
 import util.Commons;
@@ -21,6 +22,17 @@ public class customerRepository {
         String sql = "INSERT INTO customer (firtsname, lastname, dni, email, phone) VALUES"
                 + "('"+customer.getFirtsname()+"','"+customer.getLastname()+"',"
                 +customer.getDni()+",'"+customer.getEmail()+"','"+customer.getPhone()+"')";
+        return GestorBd.execute(sql);
+    }
+
+    public String update(Customer customer) { 
+        String sql =  "UPDATE customer SET "
+                .concat("firtsname='").concat(customer.getFirtsname()).concat("', ")
+                .concat("lastname='").concat(customer.getLastname()).concat("', ")
+                .concat("dni=").concat(customer.getDni()+Constans.empty).concat(", ")
+                .concat("email='").concat(customer.getEmail()).concat("', ")
+                .concat("phone='").concat(customer.getPhone()).concat("' ")
+                .concat("' WHERE id=").concat(customer.getId()+"");
         return GestorBd.execute(sql);
     }
 
