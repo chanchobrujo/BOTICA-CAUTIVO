@@ -969,7 +969,15 @@ public class Administration extends javax.swing.JFrame {
         String category = tblProduct.getValueAt(row, 5).toString();
         Boolean state = Commons.StringToBoolean(tblProduct.getValueAt(row, 6).toString());
 
-        modelproduct = new ModelProduct(id, name, brand, price, stock, category, state);
+        modelproduct =  ModelProduct.builder()
+                .id(id)
+                .name(name)
+                .brand(brand)
+                .price(price)
+                .stock(stock)
+                .category(category)
+                .state(state)
+                .build();
         this.SetValueProductSelected(modelproduct);
     }//GEN-LAST:event_tblProductMouseClicked
 
@@ -978,10 +986,15 @@ public class Administration extends javax.swing.JFrame {
         Customer findCustomer = moduleCustomer.searchCustomer(txtBuscarCliente.getText());
         boolean verifyCUstomer = Objects.nonNull(findCustomer);
         if (verifyCUstomer) {
-            modelcustomer = new ModelCustomer(findCustomer.getId(), 
-                    findCustomer.getFirtsname(), findCustomer.getLastname(), 
-                    findCustomer.getDni(), findCustomer.getEmail(), 
-                    findCustomer.getPhone());
+            
+            modelcustomer = ModelCustomer.builder()
+                    .id(findCustomer.getId())
+                    .firtsname(findCustomer.getFirtsname())
+                    .lastname(findCustomer.getLastname())
+                    .dni(findCustomer.getDni())
+                    .email(findCustomer.getEmail())
+                    .phone(findCustomer.getPhone())
+                    .build();
             this.SetValueCustomerSelected(modelcustomer); 
         }
     }//GEN-LAST:event_jButton4ActionPerformed

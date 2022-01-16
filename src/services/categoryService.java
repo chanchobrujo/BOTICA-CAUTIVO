@@ -28,12 +28,17 @@ public class categoryService {
         
         if (!verify) return message;
         
+        Category category = Category.builder()
+                .name(name)
+                .build();
+        
         switch(id){
             case 0: 
-                message = this.categoryRepository.insert(new Category(name));
+                message = this.categoryRepository.insert(category);
                 break;
             default: 
-                message = this.categoryRepository.update(new Category(id, name));
+                category.setId(id);
+                message = this.categoryRepository.update(category);
                 break;
         }
         return message;
@@ -51,7 +56,7 @@ public class categoryService {
     
     public Boolean verifyByName(String name){ 
         double count = (double) categoryRepository.findAll().stream()
-                .filter(cat->cat.getName().equals(name))
+                .filter(cat -> cat.getName().equals(name))
                 .count();
         
         return Commons.DoublesIsEmpty(count);
@@ -63,13 +68,13 @@ public class categoryService {
     
     public Optional<Category> findByName(String name){
         return categoryRepository.findAll().stream()
-                .filter(cat->cat.getName().equals(name))
+                .filter(cat -> cat.getName().equals(name))
                 .findFirst();
     }
     
     public Optional<Category> findById(int id){
         return categoryRepository.findAll().stream()
-                .filter(rol->rol.getId()==id )
+                .filter(rol -> rol.getId()==id )
                 .findFirst();
     }
     

@@ -5,7 +5,7 @@
  */
 package services;
 
-import entities.Category;
+import entities.Category; 
 import entities.Product; 
 import java.util.List;   
 import java.util.Optional;
@@ -43,14 +43,21 @@ public class productService {
         
         if (!verify) return message;
         
+        Product product = Product.builder()
+                .name(name)
+                .brand(brand)
+                .price(price)
+                .stock(Stock)
+                .category(_category.get())
+                .build();
+        
         switch(id){
             case 0: 
-                message = this.productRepository.insert(new 
-                        Product(name, brand, price, Stock, _category.get()) );
+                message = this.productRepository.insert(product);
                 break;
             default: 
-                message = this.productRepository.update(new 
-                        Product(id, name, brand, price, Stock, _category.get()));
+                product.setId(id);
+                message = this.productRepository.update(product);
                 break;
         }
         return message;
@@ -68,14 +75,14 @@ public class productService {
     
     public Boolean verifyByNameOrBrand(String name, String brand){
         return this.findAll().stream()
-                .filter(p->p.getBrand().equals(brand) 
-                        && p.getName().equals(name))
+                .filter(pp -> pp.getBrand().equals(brand))
+                .filter(pp -> pp.getName().equals(name))
                 .count() == 0;
     }
     
     public Optional<Product> findById(int id){
         return this.findAll().stream()
-                .filter(pro->pro.getId() == id)
+                .filter(pro -> pro.getId() == id)
                 .findFirst();
     }
     

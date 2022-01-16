@@ -6,6 +6,7 @@
 package views.maintenance;
 
 import entities.Category;  
+import enums.Constans;
 import modules.modulePorduct; 
 import render.table.TableModelCategory;
 import util.Commons; 
@@ -37,7 +38,7 @@ public class category_views extends javax.swing.JFrame {
     }
     
     private void clear(){
-        txtName.setText(""); 
+        txtName.setText(Constans.empty); 
         
         modelcategory.setId(0);
         modelcategory.setName(null);
