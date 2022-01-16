@@ -22,6 +22,11 @@ public class moduleCustomer {
         customerService = new customerService(); 
     }
     
+    public String saveCustomer(Integer id, String firtsname, String lastname, 
+            Integer dni, String email, String phone){  
+        return customerService.save(id, firtsname, lastname, dni, email, phone);
+    } 
+    
     public Customer searchCustomer(String value){
         Optional<Customer> findCustomer = this.customerService.FindByParam(value); 
         return findCustomer.isPresent() ? findCustomer.get() : null;

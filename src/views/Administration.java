@@ -7,12 +7,12 @@ package views;
 
 import entities.Customer;
 import entities.Product; 
-import enums.Constans;
+import enums.Constans; 
 import java.awt.Image; 
 import java.util.Objects;
 import java.util.Optional; 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;  
+import javax.swing.ImageIcon;   
 import model.ModelCustomer;
 import model.ModelProduct;
 import modules.moduleCustomer;
@@ -21,8 +21,10 @@ import modules.moduleSale;
 import render.table.TableModelCart;
 import render.table.TableModelProduct;
 import util.Commons; 
+import views.alerts.AlertErrors;
+import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
-import views.maintenance.products_views;
+import views.maintenance.products_views; 
 
 /**
  *
@@ -100,6 +102,35 @@ public class Administration extends javax.swing.JFrame {
         this.tableModelCart.tableCartData(tblCarrito, 
                 this.moduleSale.viewDetails().getCart());
     }
+    
+    private boolean verifyEmptyInput(){
+        String fname = txtNombreCliente.getText();
+        String lname = txtApllidoCliente.getText();
+        String dni = txtDniCliente.getText();
+        String email = txtEmailCliente.getText();
+        String phone = txtNumeroCliente.getText();
+        
+        boolean verify = Commons.StringsIsEmpty(fname, lname, dni, email, phone);
+        
+        if (verify) AlertErrors.errorMessageVoidData();   
+        return verify; 
+    }
+    
+    private void clearInputCustomer() {
+        txtDniCliente.setText(Constans.empty);
+        txtEmailCliente.setText(Constans.empty);
+        txtNumeroCliente.setText(Constans.empty);
+        txtNombreCliente.setText(Constans.empty);
+        txtApllidoCliente.setText(Constans.empty);
+    }  
+    
+    private void SetLabelValueCustomer() { 
+        labelNameCliente.setText(txtNombreCliente.getText());  
+        labelApellidoCliente.setText(txtApllidoCliente.getText());  
+        labelDNICliente.setText(txtDniCliente.getText());  
+        labelEmailCliente.setText(txtEmailCliente.getText());  
+        labelNumberCliente.setText(txtNumeroCliente.getText()); 
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -379,7 +410,7 @@ public class Administration extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel28.setText(" DATOS DEL CLIENTE");
+        jLabel28.setText("  DATOS DEL CLIENTE");
         jLabel28.setToolTipText("");
         jLabel28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -984,6 +1015,7 @@ public class Administration extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         Customer findCustomer = moduleCustomer.searchCustomer(txtBuscarCliente.getText());
+        
         boolean verifyCUstomer = Objects.nonNull(findCustomer);
         if (verifyCUstomer) {
             
@@ -1001,10 +1033,22 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        boolean verify = !this.verifyEmptyInput();
+        String mssg = Constans.empty;
+        if (verify)  
+            mssg = this.moduleCustomer.saveCustomer(0, txtNombreCliente.getText()
+                    , txtApllidoCliente.getText(), Commons.StringToInteger(txtDniCliente.getText())
+                    , txtEmailCliente.getText(), txtNumeroCliente.getText());  
+        
+        AlertSuccessMessage.alertSetMessage(mssg);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        if (!this.verifyEmptyInput()) { 
+            this.SetLabelValueCustomer();
+            this.clearInputCustomer();
+        }
         
     }//GEN-LAST:event_jButton8ActionPerformed
 

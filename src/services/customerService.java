@@ -24,17 +24,39 @@ public class customerService {
         customerRepository = new customerRepository();
     } 
     
-    public String save(int id, String name){
+    private boolean VerifyRpetedData(Integer dni, String email, String phone){
+        return this.customerRepository.findAll()
+                .stream()
+                .filter(customer -> customer.getDni().equals(dni)
+                    || Commons.StringEqualString(customer.getEmail(), email)
+                    || Commons.StringEqualString(customer.getPhone(), phone))
+                .findFirst()
+                .isPresent();
+    } 
+    
+    public String save(Integer id, String firtsname, String lastname, 
+            Integer dni, String email, String phone){
+        
+        boolean verifyRepetedData = this.VerifyRpetedData(dni, email, phone);
         String message = enums.ErrorMessage.REPETED_VALUES.getValue(); 
         
-        if (true) return message;
+        if (verifyRepetedData) return message;
+        
+        Customer customer = Customer.builder()
+                .firtsname(firtsname)
+                .lastname(lastname)
+                .dni(dni)
+                .email(email)
+                .phone(phone)
+                .build();
         
         switch(id){
-            case 0: 
-                //message = this.customerRepository.insert();
+            case 0:  
+                message = this.customerRepository.insert(customer);
                 break;
             default:  
-                //
+                customer.setId(id);
+                message = this.customerRepository.update(customer);
                 break;
         }
         return message;

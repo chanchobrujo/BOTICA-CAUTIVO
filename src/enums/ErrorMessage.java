@@ -20,7 +20,9 @@ public enum ErrorMessage {
     INCORRECT_VALUES("Datos incorrectos."),
     REPETED_VALUES("Datos repetidos."),
     NOTFOUND("Elemento no encontrado."), 
-    USER_NOTFOUND("Usuario no encontrado.");
+    USER_NOTFOUND("Usuario no encontrado."),
+    ERROR_TITLE("Error detectado."),
+    DATA_VOID("Datos vacios.");
 
     private String value; 
 }

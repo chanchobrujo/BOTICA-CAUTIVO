@@ -5,8 +5,10 @@
  */
 package util;
 
+import enums.Constans;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -43,7 +45,9 @@ public class Commons {
      
     public static Boolean StringsIsEmpty(String ...value){
         for (String string : value) return string.length() == 0 
-                || Boolean.valueOf(string);
+                || Objects.isNull(string) 
+                || string.equals(Constans.empty)
+                || string.equals(Constans.space);
         return false;
     }
     public static Boolean DoublesIsEmpty(Double ...value){

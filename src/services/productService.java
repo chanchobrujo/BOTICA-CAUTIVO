@@ -37,8 +37,8 @@ public class productService {
     public String save(int id, String name, String brand, Double price, 
             Integer Stock, String category){
         
-        Optional<Category> _category = this.findByName_Categories(category);
         String message = enums.ErrorMessage.REPETED_VALUES.getValue();
+        Optional<Category> _category = this.findByName_Categories(category);
         Boolean verify = this.verifyByNameOrBrand(name, brand);
         
         if (!verify) return message;
