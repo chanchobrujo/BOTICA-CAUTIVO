@@ -22,6 +22,13 @@ public class productRepository {
     public productRepository(){
         categoryRepository = new categoryRepository();
     }
+    
+    private Category findCategory(Integer id_category){ 
+        return this.categoryRepository.findAll().stream()
+                .filter(cat -> cat.getId() == id_category)
+                .findFirst()
+                 .get();
+    }
 
     public String insert(Product product) {
         String sql = "INSERT INTO product (name, brand, price, stock, id_category, state) VALUES('"
@@ -54,9 +61,8 @@ public class productRepository {
     public List<Product> findAll() {
         List<Product> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM product;");
-        if (list.isEmpty()) {
-            findAll = null;
-        } else {
+        
+        if (!list.isEmpty()) { 
             for (Object object : list) {
                 Object[] row = (Object[]) object;
                 
@@ -67,16 +73,23 @@ public class productRepository {
                 Integer stock = Integer.parseInt(row[4].toString());
                 
                 Integer id_category = Integer.parseInt(row[5].toString());
-                Category category = categoryRepository.findAll().stream()
-                        .filter(cat -> cat.getId() == id_category)
-                        .findFirst()
-                        .get();
+                Category category = this.findCategory(id_category);
+                
                 Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
                 
-                Product product = new Product(id, name, brand, price, stock, category, state);
+                Product product = Product.builder()
+                        .id(id)
+                        .name(name)
+                        .brand(brand)
+                        .price(price)
+                        .stock(stock)
+                        .category(category)
+                        .state(state)
+                        .build();
+                
                 findAll.add(product);
             }
-        }
+        } 
         return findAll;
     }
 }

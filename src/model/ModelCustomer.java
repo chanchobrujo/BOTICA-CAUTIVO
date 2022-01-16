@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,19 +13,18 @@ import lombok.Setter;
 
 /**
  *
- * @author kpalmall
+ * @author chanchobrujo
  */
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rol {
-    private int id;
-    private String name;
-
-    public Rol(String name) {
-        this.name = name;
-    } 
-
+public class ModelCustomer {
+    private Integer id;
+    private String firtsname;
+    private String lastname;
+    private Integer dni;
+    private String email;
+    private String phone;
 }

@@ -22,14 +22,20 @@ public class rolRepository {
     public List<Rol> findAll(){ 
         List<Rol> findAll = new ArrayList<>();
         List list = GestorBd.findAll("SELECT * FROM rol;");
-        if (list.isEmpty()) {
-            findAll = null;
-        } else {
+        
+        if (!list.isEmpty()) { 
             for (Object object : list) {
                 Object[] row = (Object[]) object; 
-                findAll.add(new Rol( Integer.parseInt(row[0].toString()) , row[1].toString()));
+                Integer id = Integer.parseInt(row[0].toString());
+                
+                Rol role = Rol.builder()
+                        .id(id)
+                        .name(row[1].toString())
+                        .build();
+                
+                findAll.add(role);
             }
-        }
+        } 
         return findAll; 
     }
 }

@@ -40,7 +40,7 @@ public class TableModelCategory {
         }); 
     }
     
-    public void tableCategroiyData(JTable table){ 
+    public void tableCategroyData(JTable table){ 
         this.renderTable(table);
     }
     

@@ -5,8 +5,10 @@
  */
 package util;
 
+import enums.Constans;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -29,23 +31,23 @@ public class Commons {
     public static Double StringToDouble(String value){
         try {
             return Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            System.err.println(e);
+        } catch (NumberFormatException e) { 
             return -1.0;
         }
     }
     public static Integer StringToInteger(String value){
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            System.err.println(e);
+        } catch (NumberFormatException e) { 
             return -1;
         }
     }
      
     public static Boolean StringsIsEmpty(String ...value){
         for (String string : value) return string.length() == 0 
-                || Boolean.valueOf(string);
+                || Objects.isNull(string) 
+                || string.equals(Constans.empty)
+                || string.equals(Constans.space);
         return false;
     }
     public static Boolean DoublesIsEmpty(Double ...value){
@@ -87,5 +89,5 @@ public class Commons {
     public static String generatedTimeNow(){
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss"); 
         return format.format(new Date()); 
-    } 
+    }   
 }

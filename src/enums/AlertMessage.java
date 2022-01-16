@@ -5,26 +5,20 @@
  */
 package enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter; 
+
 /**
  *
  * @author kpalmall
  */
+@Getter 
+@AllArgsConstructor
 public enum AlertMessage {
     FORBIDENN(" Verifique su correo o su contraseña."),
+    MESSAGE("Mensaje"),
     RECOVERY_PASSWORD("Escriba su correo, se le enviará una contraseña."),
     RESTORED_PASSWORD("Se reestableció su contraseña.");
 
-    private String value;
-
-    private AlertMessage(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+    private String value; 
 }

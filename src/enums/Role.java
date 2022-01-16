@@ -5,24 +5,17 @@
  */
 package enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter 
+@AllArgsConstructor
 public enum Role { 
     ROLE_ADMIN("ADMINISTRADOR");
 
-    private String value;
-
-    private Role(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+    private String value; 
 }

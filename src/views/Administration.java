@@ -5,44 +5,51 @@
  */
 package views;
 
+import entities.Customer;
 import entities.Product; 
+import enums.Constans; 
 import java.awt.Image; 
+import java.util.Objects;
 import java.util.Optional; 
 import javax.swing.Icon;
-import javax.swing.ImageIcon; 
-import javax.swing.JScrollPane; 
+import javax.swing.ImageIcon;   
+import model.ModelCustomer;
 import model.ModelProduct;
+import modules.moduleCustomer;
 import modules.modulePorduct;
 import modules.moduleSale;
 import render.table.TableModelCart;
 import render.table.TableModelProduct;
 import util.Commons; 
+import views.alerts.AlertErrors;
+import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
-import views.maintenance.products_views;
+import views.maintenance.products_views; 
 
 /**
  *
  * @author kpalmall
  */
 public class Administration extends javax.swing.JFrame {  
+    private final moduleCustomer moduleCustomer;
     private final modulePorduct modulePorduct;
     private final moduleSale moduleSale;
     
-    private ModelProduct modelproduct = new ModelProduct();
+    private ModelProduct modelproduct = new ModelProduct(); 
+    private ModelCustomer modelcustomer = new ModelCustomer();
     
     private TableModelProduct tableModelProduct;
     private TableModelCart tableModelCart;
     
     private final products_views products;
-    private final category_views category;
-    
-    private JScrollPane scrollPane;
+    private final category_views category; 
 
     /**
      * Creates new form Administration
      */
     public Administration() { 
         modulePorduct = new modulePorduct(); 
+        moduleCustomer = new moduleCustomer(); 
         moduleSale = new moduleSale(1, 0.0);
         
         tableModelProduct = new TableModelProduct();
@@ -59,19 +66,29 @@ public class Administration extends javax.swing.JFrame {
     private void addImageLogo(String src) { 
         ImageIcon img = new ImageIcon(getClass().getResource(src));
         Icon fond1 = new ImageIcon(img.getImage()
-                .getScaledInstance(txtApllidoCliente.getWidth(), txtApllidoCliente.getHeight(), Image.SCALE_DEFAULT));
-        txtApllidoCliente.setIcon(fond1);
+                .getScaledInstance(PANELIMAGE.getWidth(), PANELIMAGE.getHeight(), Image.SCALE_DEFAULT));
+        PANELIMAGE.setIcon(fond1);
         this.repaint();
     }
     
     
     private void recharge_data(){ 
-        this.tableModelProduct.tableProductData(tblProduct); 
+        this.tableModelProduct.tableProductData(tblProduct);
     }
 
-    private void SetValueSelected(ModelProduct model) {
-        labelNameProduct1.setText(model.getName()+ " "+ model.getBrand());
-        labelPrecioProduct1.setText(model.getPrice()+" Soles.");  
+    private void SetValueProductSelected(ModelProduct model) {
+        labelNameProduct1.setText(model.getName()
+                .concat(Constans.space)
+                .concat(model.getBrand()));
+        labelPrecioProduct1.setText(model.getPrice()+Constans.money);  
+    }
+
+    private void SetValueCustomerSelected(ModelCustomer model) { 
+        txtNombreCliente.setText(model.getFirtsname());
+        txtApllidoCliente.setText(model.getLastname());
+        txtEmailCliente.setText(model.getEmail());
+        txtDniCliente.setText(model.getDni().toString());
+        txtNumeroCliente.setText(model.getPhone());
     }
     
     private void detail_sale(){
@@ -85,6 +102,35 @@ public class Administration extends javax.swing.JFrame {
         this.tableModelCart.tableCartData(tblCarrito, 
                 this.moduleSale.viewDetails().getCart());
     }
+    
+    private boolean verifyEmptyInput(){
+        String fname = txtNombreCliente.getText();
+        String lname = txtApllidoCliente.getText();
+        String dni = txtDniCliente.getText();
+        String email = txtEmailCliente.getText();
+        String phone = txtNumeroCliente.getText();
+        
+        boolean verify = Commons.StringsIsEmpty(fname, lname, dni, email, phone);
+        
+        if (verify) AlertErrors.errorMessageVoidData();   
+        return verify; 
+    }
+    
+    private void clearInputCustomer() {
+        txtDniCliente.setText(Constans.empty);
+        txtEmailCliente.setText(Constans.empty);
+        txtNumeroCliente.setText(Constans.empty);
+        txtNombreCliente.setText(Constans.empty);
+        txtApllidoCliente.setText(Constans.empty);
+    }  
+    
+    private void SetLabelValueCustomer() { 
+        labelNameCliente.setText(txtNombreCliente.getText());  
+        labelApellidoCliente.setText(txtApllidoCliente.getText());  
+        labelDNICliente.setText(txtDniCliente.getText());  
+        labelEmailCliente.setText(txtEmailCliente.getText());  
+        labelNumberCliente.setText(txtNumeroCliente.getText()); 
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,7 +160,7 @@ public class Administration extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
-        txtApllidoCliente = new javax.swing.JLabel();
+        PANELIMAGE = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -138,7 +184,7 @@ public class Administration extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtApllidoCliente = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         txtEmailCliente = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
@@ -222,7 +268,7 @@ public class Administration extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -288,7 +334,7 @@ public class Administration extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -359,12 +405,12 @@ public class Administration extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        txtApllidoCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        PANELIMAGE.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel28.setText(" DATOS DEL CLIENTE");
+        jLabel28.setText("  DATOS DEL CLIENTE");
         jLabel28.setToolTipText("");
         jLabel28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -521,7 +567,7 @@ public class Administration extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -537,7 +583,7 @@ public class Administration extends javax.swing.JFrame {
         jLabel24.setText(" Apellido:");
         jLabel24.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtApllidoCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText(" Email:");
@@ -587,7 +633,7 @@ public class Administration extends javax.swing.JFrame {
                     .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(txtApllidoCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(txtEmailCliente, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombreCliente, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(30, 30, 30)
@@ -618,7 +664,7 @@ public class Administration extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApllidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumeroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -804,12 +850,12 @@ public class Administration extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -878,7 +924,7 @@ public class Administration extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtApllidoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PANELIMAGE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -895,7 +941,7 @@ public class Administration extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtApllidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PANELIMAGE, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -954,20 +1000,56 @@ public class Administration extends javax.swing.JFrame {
         String category = tblProduct.getValueAt(row, 5).toString();
         Boolean state = Commons.StringToBoolean(tblProduct.getValueAt(row, 6).toString());
 
-        modelproduct = new ModelProduct(id, name, brand, price, stock, category, state);
-        this.SetValueSelected(modelproduct);
+        modelproduct =  ModelProduct.builder()
+                .id(id)
+                .name(name)
+                .brand(brand)
+                .price(price)
+                .stock(stock)
+                .category(category)
+                .state(state)
+                .build();
+        this.SetValueProductSelected(modelproduct);
     }//GEN-LAST:event_tblProductMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        Customer findCustomer = moduleCustomer.searchCustomer(txtBuscarCliente.getText());
+        
+        boolean verifyCUstomer = Objects.nonNull(findCustomer);
+        if (verifyCUstomer) {
+            
+            modelcustomer = ModelCustomer.builder()
+                    .id(findCustomer.getId())
+                    .firtsname(findCustomer.getFirtsname())
+                    .lastname(findCustomer.getLastname())
+                    .dni(findCustomer.getDni())
+                    .email(findCustomer.getEmail())
+                    .phone(findCustomer.getPhone())
+                    .build();
+            this.SetValueCustomerSelected(modelcustomer); 
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        boolean verify = !this.verifyEmptyInput();
+        String mssg = Constans.empty;
+        if (verify)  
+            mssg = this.moduleCustomer.saveCustomer(0, txtNombreCliente.getText()
+                    , txtApllidoCliente.getText(), Commons.StringToInteger(txtDniCliente.getText())
+                    , txtEmailCliente.getText(), txtNumeroCliente.getText());  
+        
+        AlertSuccessMessage.alertSetMessage(mssg);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        if (!this.verifyEmptyInput()) { 
+            this.SetLabelValueCustomer();
+            this.clearInputCustomer();
+        }
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1031,6 +1113,7 @@ public class Administration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PANELIMAGE;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1079,7 +1162,6 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel labelApellidoCliente;
     private javax.swing.JLabel labelDNICliente;
     private javax.swing.JLabel labelEmailCliente;
@@ -1099,7 +1181,7 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JSpinner spnCant1;
     private javax.swing.JTable tblCarrito;
     private javax.swing.JTable tblProduct;
-    private javax.swing.JLabel txtApllidoCliente;
+    private javax.swing.JTextField txtApllidoCliente;
     private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtBuscarProducto;
     private javax.swing.JTextField txtDniCliente;

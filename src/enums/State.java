@@ -5,26 +5,18 @@
  */
 package enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  *
  * @author kpalmall
  */
+@Getter 
+@AllArgsConstructor
 public enum State {
     ACTIVO("Activo"),
     INACTIVO("Inactivo");
 
-    private String value;
-
-    private State(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-    
+    private String value;  
 }

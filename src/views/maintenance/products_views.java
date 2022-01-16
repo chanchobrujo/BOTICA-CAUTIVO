@@ -5,7 +5,9 @@
  */
 package views.maintenance;
 
+import com.sun.org.apache.bcel.internal.Const;
 import entities.Category; 
+import enums.Constans;
 import java.util.List;  
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;  
@@ -68,8 +70,8 @@ public class products_views extends javax.swing.JFrame {
     }
 
     private void clear() {
-        txtName.setText("");
-        txtBrand.setText("");
+        txtName.setText(Constans.empty);
+        txtBrand.setText(Constans.empty);
 
         spnPrecio.setValue(0);
         spnStock.setValue(0);
@@ -421,7 +423,15 @@ public class products_views extends javax.swing.JFrame {
         String category = tblProduct.getValueAt(row, 5).toString();
         Boolean state = Commons.StringToBoolean(tblProduct.getValueAt(row, 6).toString());
 
-        modelproduct = new ModelProduct(id, name, brand, price, stock, category, state);
+        modelproduct = ModelProduct.builder()
+                .id(id)
+                .name(name)
+                .brand(brand)
+                .price(price)
+                .stock(stock)
+                .category(category)
+                .state(state)
+                .build();
         this.SetValueSelected(modelproduct);
     }//GEN-LAST:event_tblProductMouseClicked
 
