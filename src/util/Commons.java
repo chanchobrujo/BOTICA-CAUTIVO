@@ -29,8 +29,7 @@ public class Commons {
     public static Double StringToDouble(String value){
         try {
             return Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            System.err.println(e);
+        } catch (NumberFormatException e) { 
             return -1.0;
         }
     }

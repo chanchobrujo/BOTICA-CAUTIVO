@@ -30,7 +30,7 @@ public class category_views extends javax.swing.JFrame {
     } 
     
     private void table_category(){
-        this.tableModelCategory.tableCategroiyData(tblCategory);
+        this.tableModelCategory.tableCategroyData(tblCategory);
     }
     
     private void SetValueSelected(String category){
