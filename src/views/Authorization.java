@@ -5,7 +5,6 @@
  */
 package views;
 
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlContrastIJTheme;
 import entities.User;
 import modules.moduleAuth; 
@@ -15,6 +14,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import java.util.Date;
+import util.Commons;
 
 /**
  *
@@ -202,8 +202,10 @@ public class Authorization extends javax.swing.JFrame {
         Optional<User> user = moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
         
         if (user.isPresent()) {
+                String id = Commons.IntegerToString(user.get().getId());
+                Administration.UserId.setText(id);
             
-            if (!user.get().getRole().getName().equals(enums.Role.ROLE_ADMIN.getValue())) {
+            if (!user.get().getRole().getName().equals(enums.Role.ROLE_ADMIN.getValue())) { 
                 Administration.menuMantenimiento.setVisible(false);
                 Administration.menuOperaciones.setVisible(false);
                 Administration.menuReportes.setVisible(false);

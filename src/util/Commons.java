@@ -18,6 +18,9 @@ public class Commons {
     public static Boolean IntegerToBoolean(int value){
         return  value == 1;
     }
+    public static String IntegerToString(int id){
+        return  id + Constans.empty;
+    }
     public static Boolean StringToBoolean(String value){
         return  value.endsWith(enums.State.ACTIVO.getValue());
     }
