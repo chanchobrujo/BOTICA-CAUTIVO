@@ -35,14 +35,14 @@ public class Administration extends javax.swing.JFrame {
     private final modulePorduct modulePorduct;
     private final moduleSale moduleSale;
     
+    private final products_views products;
+    private final category_views category; 
+    
     private ModelProduct modelproduct = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
     
     private TableModelProduct tableModelProduct;
     private TableModelCart tableModelCart;
-    
-    private final products_views products;
-    private final category_views category; 
 
     /**
      * Creates new form Administration
@@ -61,6 +61,7 @@ public class Administration extends javax.swing.JFrame {
         this.addImageLogo("/Assets/logo.jpeg");
         
         this.recharge_data();
+        System.err.println(UserId.getText());
     }
 
     private void addImageLogo(String src) { 
@@ -209,6 +210,7 @@ public class Administration extends javax.swing.JFrame {
         labelImpuesto = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        UserId = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuMantenimiento = new javax.swing.JMenu();
         menuItemProduct = new javax.swing.JMenuItem();
@@ -567,7 +569,7 @@ public class Administration extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -871,6 +873,9 @@ public class Administration extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        UserId.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        UserId.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
         menuMantenimiento.setText("Mantenimientos");
@@ -918,7 +923,8 @@ public class Administration extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(UserId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -952,7 +958,9 @@ public class Administration extends javax.swing.JFrame {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UserId)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1114,6 +1122,7 @@ public class Administration extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PANELIMAGE;
+    public static javax.swing.JLabel UserId;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
