@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
+import enums.Role; 
 import java.util.Date;
 import util.Commons;
 
@@ -30,6 +31,13 @@ public class Authorization extends javax.swing.JFrame {
         moduleAuth = new moduleAuth();
         
         initComponents();
+    }
+    
+    private void AssingRule(Role Role){
+        Administration.menuMantenimiento.setVisible(Role.isMenuMantenimiento());
+        Administration.menuOperaciones.setVisible(Role.isMenuOperaciones());
+        Administration.menuReportes.setVisible(Role.isMenuReportes());
+        Administration.menuUsuarios.setVisible(Role.isMenuUsuarios());
     }
 
     /**
@@ -203,14 +211,11 @@ public class Authorization extends javax.swing.JFrame {
         
         if (user.isPresent()) {
                 String id = Commons.IntegerToString(user.get().getId());
-                Administration.UserId.setText(id);
-            
-            if (!user.get().getRole().getName().equals(enums.Role.ROLE_ADMIN.getValue())) { 
-                Administration.menuMantenimiento.setVisible(false);
-                Administration.menuOperaciones.setVisible(false);
-                Administration.menuReportes.setVisible(false);
-                Administration.menuUsuarios.setVisible(false);
-            } 
+                Administration.UserId.setText(id); 
+                
+                String role = user.get().getRole().getName();
+                Optional<Role> roleFind = Role.findRole(role);
+                roleFind.ifPresent(this::AssingRule); 
             
             administration.setVisible(true);
             this.dispose();

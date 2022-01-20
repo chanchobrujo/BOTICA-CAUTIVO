@@ -5,17 +5,34 @@
  */
 package enums;
 
+import java.util.Optional; 
+import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import util.Commons;
 
 /**
  *
  * @author kpalmall
  */
-@Getter 
+@Getter  
 @AllArgsConstructor
-public enum Role { 
-    ROLE_ADMIN("ADMINISTRADOR");
+@NoArgsConstructor
+public enum Role {  
+    
+    ROLE_ADMIN("ADMINISTRADOR", true, true, true, true),
+    ROLE_USER("USER", false, false, false, false);   
 
-    private String value; 
+    private String value;
+    private boolean menuMantenimiento;
+    private boolean menuOperaciones;
+    private boolean menuUsuarios;
+    private boolean menuReportes;
+    
+    public static Optional<Role> findRole(String value){
+        return Stream.of(values())
+                .filter(role -> Commons.StringEqualString(role.getValue(), value))
+                .findFirst(); 
+    } 
 }
