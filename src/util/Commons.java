@@ -8,6 +8,7 @@ package util;
 import enums.Constans;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -86,11 +87,18 @@ public class Commons {
                 .concat(second);
     }
     public static String generatedDateNow(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        SimpleDateFormat format = new SimpleDateFormat(Constans.format_date); 
         return format.format(new Date()); 
     } 
     public static String generatedTimeNow(){
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss"); 
+        SimpleDateFormat format = new SimpleDateFormat(Constans.format_time); 
         return format.format(new Date()); 
     }   
+
+    public static boolean collectionEmptyOrNull(List<?> list){
+        return Objects.isNull(list) || list.isEmpty();
+    }
+    public static boolean collectionNonEmptyOrNull(List<?> list){
+        return !( Objects.isNull(list) || list.isEmpty() );
+    }
 }
