@@ -7,6 +7,7 @@ package repository;
 import entities.Category; 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
 
@@ -15,6 +16,19 @@ import util.GestorBd;
  * @author umbke
  */
 public class categoryRepository {
+    private static final List list = GestorBd.findAll("SELECT * FROM category;");
+    
+    private Category mapperCategory(Object obj){
+        Object[] category = (Object[]) obj;
+        Integer id = Commons.StringToInteger(category[0].toString());
+        boolean state = Commons.IntegerToBoolean(Integer.parseInt(category[2].toString()));
+        
+        return Category.builder()
+                .id(id)
+                .name(category[1].toString())
+                .state(state)
+                .build();
+    }
 
     public String insert(Category category) {
         return GestorBd.execute("INSERT INTO category (name, state) "
@@ -34,22 +48,13 @@ public class categoryRepository {
     }
 
     public List<Category> findAll() {
-        List<Category> findAll = new ArrayList<>();
-        List list = GestorBd.findAll("SELECT * FROM category;");
+        List<Category> findAll = new ArrayList<>(); 
         
-        if (!list.isEmpty()) { 
-            for (Object object : list) {
-                Object[] row = (Object[]) object;
-                boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[2].toString()));
-                
-                Category category = Category.builder()
-                        .id(Integer.parseInt(row[0].toString()))
-                        .name(row[1].toString())
-                        .state(state)
-                        .build();
-                findAll.add(category);
-            }
-        }  
+        if (Commons.collectionNonEmptyOrNull(list)) { 
+            list.stream()
+                    .map(mapper -> findAll.add(this.mapperCategory(mapper)))
+                    .collect(Collectors.toList()); 
+        }   
         return findAll;
     }
 }

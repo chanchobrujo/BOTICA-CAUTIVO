@@ -12,6 +12,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -51,7 +52,7 @@ public class GestorBd {
         List lista = new ArrayList<>();
         try {
             Connection cn = Connectionn.getConexion();
-            if (cn != null) {
+            if (Objects.nonNull(cn)) {
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 ResultSetMetaData rm = rs.getMetaData();
@@ -65,11 +66,9 @@ public class GestorBd {
                     lista.add(fila);
                 }
                 cn.close();
-            } else {
-                lista = null;
-            }
+            } 
         } catch (Exception e) {
-            lista = null;
+            lista = new ArrayList<>();
         }
         return lista;
     }
