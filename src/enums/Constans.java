@@ -9,9 +9,12 @@ package enums;
  *
  * @author kpalmall
  */
-public class Constans {
-    public static final String apiReniec = "https://api.reniec.online/dni/";
+public class Constans { 
     public static final String empty = ""; 
     public static final String space = " ";
-    public static final String money = " Soles.";
+    
+    public static final String money = space.concat("Soles.");
+    
+    public static final String format_date = "yyyy-MM-dd";
+    public static final String format_time = "hh:mm:ss";
 }
