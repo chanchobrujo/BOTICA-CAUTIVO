@@ -9,14 +9,17 @@ import entities.Customer;
 import enums.Constans;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
+import util.Mapper;
 
 /**
  *
  * @author kpalmall
  */
 public class customerRepository {
+    private static final List list = GestorBd.findAll("SELECT * FROM customer;");
 
     public String insert(Customer customer) {
         String sql = "INSERT INTO customer (firtsname, lastname, dni, email, phone) VALUES"
@@ -37,27 +40,13 @@ public class customerRepository {
     }
 
     public List<Customer> findAll() {
-        List<Customer> findAll = new ArrayList<>();
-        List list = GestorBd.findAll("SELECT * FROM customer;");
+        List<Customer> findAll = new ArrayList<>(); 
         
-        if (!list.isEmpty()) { 
-            for (Object object : list) {
-                Object[] row = (Object[]) object;
-                Integer id = Commons.StringToInteger(row[0].toString());
-                Integer dni = Commons.StringToInteger(row[3].toString());
-                
-                Customer customer = Customer.builder()
-                        .id(id)
-                        .firtsname(row[1].toString())
-                        .lastname(row[2].toString())
-                        .dni(dni)
-                        .email(row[4].toString())
-                        .phone(row[5].toString())
-                        .build();
-                
-                findAll.add(customer);
-            }
-        }  
+        if (Commons.collectionNonEmptyOrNull(list))   
+            list.stream()
+                    .map(mapper -> findAll.add(Mapper.mapperCustomer(mapper)))
+                    .collect(Collectors.toList()); 
+          
         return findAll;
     }
 }

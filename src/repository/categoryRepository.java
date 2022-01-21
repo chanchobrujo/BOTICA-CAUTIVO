@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
+import util.Mapper;
 
 /**
  *
@@ -17,18 +18,6 @@ import util.GestorBd;
  */
 public class categoryRepository {
     private static final List list = GestorBd.findAll("SELECT * FROM category;");
-    
-    private Category mapperCategory(Object obj){
-        Object[] category = (Object[]) obj;
-        Integer id = Commons.StringToInteger(category[0].toString());
-        boolean state = Commons.IntegerToBoolean(Integer.parseInt(category[2].toString()));
-        
-        return Category.builder()
-                .id(id)
-                .name(category[1].toString())
-                .state(state)
-                .build();
-    }
 
     public String insert(Category category) {
         return GestorBd.execute("INSERT INTO category (name, state) "
@@ -52,7 +41,7 @@ public class categoryRepository {
         
         if (Commons.collectionNonEmptyOrNull(list)) { 
             list.stream()
-                    .map(mapper -> findAll.add(this.mapperCategory(mapper)))
+                    .map(mapper -> findAll.add( Mapper.mapperCategory(mapper) ))
                     .collect(Collectors.toList()); 
         }   
         return findAll;
