@@ -14,24 +14,25 @@ import util.GestorBd;
  * @author chanchobrujo
  */
 public class saleRepository {
+
     private productRepository productRepository;
-    
-    public saleRepository(){
+
+    public saleRepository() {
         productRepository = new productRepository();
     }
-    
+
     public String grabarVentasParaUsuarioCliente(Sale sale) {
         String sql = "INSERT INTO sale "
                 + "(id,date,time,subtotal,discount,total,state,id_user,id_customer) "
-                + "VALUES('"+sale.getId()+"',"
-                + " '"+sale.getDate()+"',"
-                + " '"+sale.getTime()+"',"
-                + " "+sale.getSubtotal()+","
-                + " "+sale.getDesc()+","
-                + " "+sale.getTotal()+","
-                + " "+Commons.BooleanToInteger(sale.getState())+","
-                + " "+sale.getUser().getId()+","
-                + " "+sale.getCustomer().getId()+")";
+                + "VALUES('" + sale.getId() + "',"
+                + " '" + sale.getDate() + "',"
+                + " '" + sale.getTime() + "',"
+                + " " + sale.getSubtotal() + ","
+                + " " + sale.getDesc() + ","
+                + " " + sale.getTotal() + ","
+                + " " + Commons.BooleanToInteger(sale.getState()) + ","
+                + " " + sale.getUser().getId() + ","
+                + " " + sale.getCustomer().getId() + ")";
         return GestorBd.execute(sql);
     }
 }

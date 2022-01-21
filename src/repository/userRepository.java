@@ -9,8 +9,10 @@ import entities.Rol;
 import entities.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
+import util.Mapper;
 
 /**
  *
@@ -18,13 +20,15 @@ import util.GestorBd;
  */
 public class userRepository {
 
+    private static final List list = GestorBd.findAll("SELECT * FROM user;");
+
     private rolRepository rolRepository;
 
     public userRepository() {
         rolRepository = new rolRepository();
     }
-    
-    public Rol findRole(String id){
+
+    public Rol findRole(String id) {
         return this.rolRepository.findAll()
                 .stream()
                 .filter(rol -> rol.getId() == Integer.parseInt(id))
@@ -32,28 +36,22 @@ public class userRepository {
                 .get();
     }
 
-    public List<User> findAll() { 
+    public List<User> findAll() {
         List<User> findAll = new ArrayList<>();
-        List list = GestorBd.findAll("SELECT * FROM user;");
-        if (!list.isEmpty()) { 
-            for (Object object : list) {
-                Object[] row = (Object[]) object;
-                Integer id = Integer.parseInt(row[0].toString());
-                boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
-                
-                User user = User.builder()
-                        .id(id)
-                        .firtsname(row[1].toString())
-                        .lastname(row[2].toString())
-                        .email(row[3].toString())
-                        .password(row[4].toString())
-                        .role(this.findRole(row[5].toString()))
-                        .state(state)
-                        .build();
-                
-                findAll.add(user);
-            }
-        } 
+
+        if (Commons.collectionNonEmptyOrNull(list)) {
+            list.stream()
+                    .map(mapper -> {
+                        User user = Mapper.mapperUser(mapper);
+
+                        Object[] row = (Object[]) mapper;
+                        user.setRole(this.findRole(row[5].toString()));
+
+                        findAll.add(user);
+                        return mapper;
+                    })
+                    .collect(Collectors.toList());
+        }
         return findAll;
     }
 }

@@ -9,14 +9,18 @@ import entities.Category;
 import entities.Product;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
+import util.Mapper;
 
 /**
  *
  * @author kpalmall
  */
 public class productRepository {
+    private static final List list = GestorBd.findAll("SELECT * FROM product;");
+    
     private categoryRepository categoryRepository;
     
     public productRepository(){
@@ -59,36 +63,22 @@ public class productRepository {
     }
     
     public List<Product> findAll() {
-        List<Product> findAll = new ArrayList<>();
-        List list = GestorBd.findAll("SELECT * FROM product;");
+        List<Product> findAll = new ArrayList<>(); 
         
-        if (!list.isEmpty()) { 
-            for (Object object : list) {
-                Object[] row = (Object[]) object;
-                
-                Integer id = Integer.parseInt(row[0].toString());
-                String name = row[1].toString();
-                String brand = row[2].toString();
-                Double price = Double.parseDouble(row[3].toString());
-                Integer stock = Integer.parseInt(row[4].toString());
-                
-                Integer id_category = Integer.parseInt(row[5].toString());
-                Category category = this.findCategory(id_category);
-                
-                Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
-                
-                Product product = Product.builder()
-                        .id(id)
-                        .name(name)
-                        .brand(brand)
-                        .price(price)
-                        .stock(stock)
-                        .category(category)
-                        .state(state)
-                        .build();
-                
-                findAll.add(product);
-            }
+        if (Commons.collectionNonEmptyOrNull(list)) {
+            list.stream()
+                    .map(mapper -> {
+                        Object[] row = (Object[]) mapper;
+                        Integer id_category = Integer.parseInt(row[5].toString());
+                        Category category = this.findCategory(id_category);
+                        
+                        Product product = Mapper.mapperProduct(mapper);
+                        product.setCategory(category);
+                        
+                        findAll.add(product);
+                        return mapper;
+                    })
+                    .collect(Collectors.toList());  
         } 
         return findAll;
     }
