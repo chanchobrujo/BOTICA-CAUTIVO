@@ -9,6 +9,7 @@ import entities.Product;
 import entities.Sale;
 import java.util.List;
 import java.util.stream.Collectors;
+import repository.saleRepository;
 
 /**
  *
@@ -18,15 +19,18 @@ public class saleService {
     private final userService userService;
     private final productService productService;
     
+    private saleRepository saleRepository;
+    
     private final Sale sale = new Sale();
 
     public saleService() {
         userService = new userService();
         productService = new productService();
+        
+        saleRepository = new saleRepository();
     } 
     
-    public void newSale(int idUser, Double porDes){ 
-        this.sale.setUser(userService.findById(idUser));
+    public void newSale(Double porDes){ 
         this.sale.setPordes(porDes); 
     }
     
@@ -50,6 +54,10 @@ public class saleService {
     
     public Sale viewDetails() {
         return this.sale;
+    }
+    
+    public String saveOrder(Sale sale){
+        return this.saleRepository.grabarVentasParaUsuarioCliente(sale);
     }
 
 }
