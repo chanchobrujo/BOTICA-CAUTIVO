@@ -99,6 +99,6 @@ public class Commons {
         return Objects.isNull(list) || list.isEmpty();
     }
     public static boolean collectionNonEmptyOrNull(List<?> list){
-        return !( Objects.isNull(list) || list.isEmpty() );
+        return !collectionEmptyOrNull(list);
     }
 }

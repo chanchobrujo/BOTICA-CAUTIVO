@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class AlertSuccessMessage {
 
-    public static void alertSetMessage(String value){ 
-        JOptionPane.showMessageDialog(null, AlertMessage.MESSAGE.getValue(), 
-                value, JOptionPane.OK_OPTION); 
+    public static void alertSetMessage(String value){
+        JOptionPane.showMessageDialog(null, value, 
+                AlertMessage.MESSAGE.getValue(), JOptionPane.OK_OPTION); 
     }
     
 }
