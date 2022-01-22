@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter; 
 import lombok.Setter;
+import lombok.ToString;
 import util.Commons;
 
 /**
@@ -21,6 +22,7 @@ import util.Commons;
 @Getter
 @Setter 
 @Builder
+@ToString
 @AllArgsConstructor
 public class Sale {
     private String id;
@@ -43,6 +45,7 @@ public class Sale {
         this.date = Commons.generatedDateNow();
         this.time = Commons.generatedTimeNow();
         this.cart = new ArrayList<>();  
+        this.state = true;
     }
     
     public Sale(Double subtotal, Double desc, Double total, User user, 
@@ -51,7 +54,7 @@ public class Sale {
         this.desc = desc;
         this.total = total;
         this.user = user;
-        this.Customer = Customer;
+        this.Customer = Customer; 
     }
 
     public Sale(String id, String date, String time, Double subtotal, Double desc, 
