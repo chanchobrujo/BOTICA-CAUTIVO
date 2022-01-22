@@ -8,7 +8,7 @@ package views.maintenance;
 import entities.Category;  
 import enums.Constans;
 import modules.modulePorduct; 
-import render.table.TableModelCategory;
+import render.table.Entity.TableModelCategory;
 import util.Commons; 
 
 /**
