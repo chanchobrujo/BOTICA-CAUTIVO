@@ -24,7 +24,9 @@ public class categoryService {
     
     public String save(int id, String name){
         String message = enums.ErrorMessage.REPETED_VALUES.getValue();
-        Boolean verify = this.verifyByName(name);
+        
+        Boolean verify = this.verifyByName(name) 
+                || Commons.StringsIsEmpty(name);
         
         if (!verify) return message;
         
