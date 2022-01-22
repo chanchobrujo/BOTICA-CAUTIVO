@@ -20,8 +20,6 @@ import util.Mapper;
  */
 public class userRepository {
 
-    private static final List list = GestorBd.findAll("SELECT * FROM user;");
-
     private rolRepository rolRepository;
 
     public userRepository() {
@@ -37,6 +35,7 @@ public class userRepository {
     }
 
     public List<User> findAll() {
+        List list = GestorBd.findAll("SELECT * FROM user;");
         List<User> findAll = new ArrayList<>();
 
         if (Commons.collectionNonEmptyOrNull(list)) {

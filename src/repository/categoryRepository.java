@@ -17,7 +17,6 @@ import util.Mapper;
  * @author umbke
  */
 public class categoryRepository {
-    private static final List list = GestorBd.findAll("SELECT * FROM category;");
 
     public String insert(Category category) {
         return GestorBd.execute("INSERT INTO category (name, state) "
@@ -37,6 +36,7 @@ public class categoryRepository {
     }
 
     public List<Category> findAll() {
+        List list = GestorBd.findAll("SELECT * FROM category;");
         List<Category> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list)) { 

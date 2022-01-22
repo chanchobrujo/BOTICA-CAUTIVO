@@ -17,14 +17,14 @@ import util.Mapper;
  *
  * @author kpalmall
  */
-public class rolRepository {
-    private static final List list = GestorBd.findAll("SELECT * FROM rol;");
+public class rolRepository { 
     
     public String insert(Rol rol){
         return GestorBd.execute("INSERT INTO rol (name) VALUES('"+rol.getName()+"');");
     }
     
     public List<Rol> findAll(){ 
+        List list = GestorBd.findAll("SELECT * FROM rol;");
         List<Rol> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list)) { 

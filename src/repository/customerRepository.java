@@ -18,8 +18,7 @@ import util.Mapper;
  *
  * @author kpalmall
  */
-public class customerRepository {
-    private static final List list = GestorBd.findAll("SELECT * FROM customer;");
+public class customerRepository { 
 
     public String insert(Customer customer) {
         String sql = "INSERT INTO customer (firtsname, lastname, dni, email, phone) VALUES"
@@ -40,6 +39,7 @@ public class customerRepository {
     }
 
     public List<Customer> findAll() {
+        List list = GestorBd.findAll("SELECT * FROM customer;");
         List<Customer> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list))   

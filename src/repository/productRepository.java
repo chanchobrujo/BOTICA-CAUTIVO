@@ -19,7 +19,6 @@ import util.Mapper;
  * @author kpalmall
  */
 public class productRepository {
-    private static final List list = GestorBd.findAll("SELECT * FROM product;");
     
     private categoryRepository categoryRepository;
     
@@ -63,6 +62,7 @@ public class productRepository {
     }
     
     public List<Product> findAll() {
+        List list = GestorBd.findAll("SELECT * FROM product;");
         List<Product> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list)) {
