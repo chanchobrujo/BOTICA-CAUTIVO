@@ -39,9 +39,11 @@ public class productService {
         
         String message = enums.ErrorMessage.REPETED_VALUES.getValue();
         Optional<Category> _category = this.findByName_Categories(category);
-        Boolean verify = this.verifyByNameOrBrand(name, brand);
         
-        if (!verify) return message;
+        Boolean verify = this.verifyByNameOrBrand(name, brand).isPresent() 
+                || Commons.StringsIsEmpty(name, brand); 
+        
+        if (verify) return message;
         
         Product product = Product.builder()
                 .name(name)
@@ -49,6 +51,7 @@ public class productService {
                 .price(price)
                 .stock(Stock)
                 .category(_category.get())
+                .state(Boolean.TRUE)
                 .build();
         
         switch(id){
@@ -73,11 +76,11 @@ public class productService {
         return message;
     } 
     
-    public Boolean verifyByNameOrBrand(String name, String brand){
+    public Optional<Product> verifyByNameOrBrand(String name, String brand){
         return this.findAll().stream()
                 .filter(pp -> pp.getBrand().equals(brand))
                 .filter(pp -> pp.getName().equals(name))
-                .count() == 0;
+                .findFirst();
     }
     
     public Optional<Product> findById(int id){
