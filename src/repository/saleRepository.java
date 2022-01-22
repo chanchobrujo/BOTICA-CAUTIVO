@@ -6,6 +6,7 @@
 package repository;
 
 import entities.Sale;
+import enums.ErrorMessage; 
 import util.Commons;
 import util.GestorBd;
 
@@ -13,12 +14,11 @@ import util.GestorBd;
  *
  * @author chanchobrujo
  */
-public class saleRepository {
-
-    private productRepository productRepository;
-
-    public saleRepository() {
-        productRepository = new productRepository();
+public class saleRepository {  
+    private detailsRepository detailsRepository;
+    
+    public saleRepository(){
+        detailsRepository = new detailsRepository();
     }
 
     public String grabarVentasParaUsuarioCliente(Sale sale) {
@@ -33,6 +33,9 @@ public class saleRepository {
                 + " " + Commons.BooleanToInteger(sale.getState()) + ","
                 + " " + sale.getUser().getId() + ","
                 + " " + sale.getCustomer().getId() + ")";
-        return GestorBd.execute(sql);
+        GestorBd.execute(sql);
+        this.detailsRepository.grabarDetalles(sale.getCart());
+        
+        return ErrorMessage.EXECUTE_SUCCESS.getValue();
     }
 }
