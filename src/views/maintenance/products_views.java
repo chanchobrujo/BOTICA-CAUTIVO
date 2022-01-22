@@ -13,7 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;  
 import model.ModelProduct;
 import modules.modulePorduct;
-import render.table.TableModelProduct;
+import render.table.Entity.TableModelProduct;
 import util.Commons; 
 
 /**

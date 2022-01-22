@@ -37,8 +37,9 @@ public class customerService {
     public String save(Integer id, String firtsname, String lastname, 
             Integer dni, String email, String phone){
         
-        boolean verifyRepetedData = this.VerifyRpetedData(dni, email, phone);
         String message = enums.ErrorMessage.REPETED_VALUES.getValue(); 
+        boolean verifyRepetedData = this.VerifyRpetedData(dni, email, phone)
+                || Commons.StringsIsEmpty(firtsname, lastname, email, phone);
         
         if (verifyRepetedData) return message;
         

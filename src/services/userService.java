@@ -29,10 +29,10 @@ public class userService {
         return userRepository.findAll();
     }
     
-    public User findById(int id){
+    public Optional<User> findById(int id){
         return userRepository.findAll().stream()
                 .filter(u->u.getId() == id)
-                .findFirst().orElse(null);
+                .findFirst();
     }
     
     public Optional<User> login(String email, String password){

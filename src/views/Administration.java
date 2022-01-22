@@ -18,8 +18,8 @@ import model.ModelProduct;
 import modules.moduleCustomer;
 import modules.modulePorduct;
 import modules.moduleSale;
-import render.table.TableModelCart;
-import render.table.TableModelProduct;
+import render.table.Entity.TableModelCart;
+import render.table.Entity.TableModelProduct;
 import util.Commons; 
 import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
@@ -50,7 +50,7 @@ public class Administration extends javax.swing.JFrame {
     public Administration() { 
         modulePorduct = new modulePorduct(); 
         moduleCustomer = new moduleCustomer(); 
-        moduleSale = new moduleSale(1, 0.0);
+        moduleSale = new moduleSale(0.0);
         
         tableModelProduct = new TableModelProduct();
         tableModelCart = new TableModelCart();
@@ -1069,6 +1069,12 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        Integer id = modelcustomer.getId();
+        
+        if (!Objects.equals(id,0)) {
+            String message = this.moduleSale.confirmSale(Commons.StringToInteger(UserId.getText()),id); 
+            AlertSuccessMessage.alertSetMessage(message);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

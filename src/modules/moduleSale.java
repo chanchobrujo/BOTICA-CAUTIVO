@@ -5,8 +5,18 @@
  */
 package modules;
 
+import com.jgoodies.common.base.Objects;
+import entities.Customer;
+import entities.Details; 
 import entities.Sale;
+import entities.User;
+import enums.ErrorMessage;
+import java.util.List; 
+import java.util.Optional; 
+import services.customerService;
 import services.saleService;
+import services.userService;
+import util.Commons;
 
 /**
  *
@@ -15,9 +25,14 @@ import services.saleService;
 public class moduleSale {
     private final saleService saleService;
     
-    public moduleSale(int iduser, Double pordesc){ 
+    private final userService userService;
+    private final customerService customerService;
+    
+    public moduleSale(Double pordesc){ 
         saleService = new saleService();
-        this.saleService.newSale(iduser, pordesc); 
+        userService = new userService();
+        customerService = new customerService();
+        this.saleService.newSale(pordesc); 
     }
     
     public void AddProductToCart(int id, int cantidad){
@@ -26,5 +41,28 @@ public class moduleSale {
     
     public Sale viewDetails(){
         return this.saleService.viewDetails();
+    }
+    
+    public String confirmSale(Integer iduser, Integer idCustomer){
+        String message = ErrorMessage.NOTFOUND.getValue();
+        
+        List<Details> cart = this.viewDetails().getCart();
+        boolean verifyCollection = Commons.collectionNonEmptyOrNull(cart); 
+        
+        Optional<User> findUser = userService.findById(iduser);
+        Optional<Customer> findCustomer = customerService.findAll().stream()
+                .filter(customer -> Objects.equals(customer.getId(), idCustomer))
+                .findFirst();
+        boolean verifyUser = findUser.isPresent(); 
+        boolean verifyCustomer = findCustomer.isPresent(); 
+                
+        if (verifyCollection && verifyUser && verifyCustomer) {
+            this.viewDetails().setUser(findUser.get());
+            this.viewDetails().setCustomer(findCustomer.get());
+            
+            message = this.saleService.saveOrder(this.viewDetails()); 
+        }
+        
+        return message;
     }
 }

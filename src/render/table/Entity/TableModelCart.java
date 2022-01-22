@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package render.table;
+package render.table.Entity;
 
 import entities.Details; 
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel; 
+import render.table.TableModel;
 import util.Headers;
 
 /**
