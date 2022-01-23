@@ -40,8 +40,7 @@ public class productService {
         String message = enums.ErrorMessage.REPETED_VALUES.getValue();
         Optional<Category> _category = this.findByName_Categories(category);
         
-        Boolean verify = this.verifyByNameOrBrand(name, brand).isPresent() 
-                || Commons.StringsIsEmpty(name, brand); 
+        Boolean verify = this.verifyByNameOrBrand(name, brand).isPresent(); 
         
         if (verify) return message;
         

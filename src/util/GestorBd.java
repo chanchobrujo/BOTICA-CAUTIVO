@@ -5,6 +5,7 @@
  */
 package util;
 
+import enums.AlertMessage;
 import enums.ErrorMessage;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.Objects;
 public class GestorBd {
 
     public static String execute(String sql) {
-        String m = ErrorMessage.EXECUTE_SUCCESS.getValue();
+        String m = AlertMessage.EXECUTE_SUCCESS.getValue();
         try {
             Connection cn = Connectionn.getConexion();
             if (cn != null) {

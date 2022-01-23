@@ -6,7 +6,7 @@
 package repository;
 
 import entities.Sale;
-import enums.ErrorMessage; 
+import enums.AlertMessage;
 import util.Commons;
 import util.GestorBd;
 
@@ -36,6 +36,6 @@ public class saleRepository {
         GestorBd.execute(sql);
         this.detailsRepository.grabarDetalles(sale.getCart());
         
-        return ErrorMessage.EXECUTE_SUCCESS.getValue();
+        return AlertMessage.EXECUTE_SUCCESS.getValue();
     }
 }

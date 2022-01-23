@@ -5,6 +5,7 @@
  */
 package services;
 
+import com.jgoodies.common.base.Objects;
 import entities.Rol;
 import java.util.List;
 import java.util.Optional; 
@@ -37,7 +38,7 @@ public class rolService {
     
     public Optional<Rol> findById(int id){
         return repository.findAll().stream()
-                .filter(rol->rol.getId()==id )
+                .filter(rol-> Objects.equals(rol.getId(), id))
                 .findFirst();
     }
 }

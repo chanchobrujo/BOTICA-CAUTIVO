@@ -38,8 +38,7 @@ public class customerService {
             Integer dni, String email, String phone){
         
         String message = enums.ErrorMessage.REPETED_VALUES.getValue(); 
-        boolean verifyRepetedData = this.VerifyRpetedData(dni, email, phone)
-                || Commons.StringsIsEmpty(firtsname, lastname, email, phone);
+        boolean verifyRepetedData = this.VerifyRpetedData(dni, email, phone);
         
         if (verifyRepetedData) return message;
         

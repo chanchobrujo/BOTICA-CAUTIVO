@@ -16,22 +16,58 @@ import java.util.Objects;
  * @author kpalmall
  */
 public class Commons {
+    /**
+     * Devuelve el valor booleano dependiendo si el dato es 1/0.
+     * @param value
+     * @return Boolean
+     */
     public static Boolean IntegerToBoolean(int value){
         return  value == 1;
     }
+    
+    /**
+     * Convierte un valor 'int' y lo convierte en String.
+     * @param id
+     * @return String
+     */
     public static String IntegerToString(int id){
         return  id + Constans.empty;
     }
-    public static Boolean StringToBoolean(String value){
+    
+    /**
+     * Convierte un String 'ACTIVO' en un valor booleano.
+     * @param value
+     * @return Boolean
+     */
+    public static Boolean StringStateToBoolean(String value){
         return  value.endsWith(enums.State.ACTIVO.getValue());
     }
+    
+    /**
+     * Convierte un booleano en un valor 'int' 1/0.
+     * @param value
+     * @return Integer
+     */
     public static Integer BooleanToInteger(Boolean value){
         return  value ? 1 : 0;
     }
+    
+    /**
+     * Convierte un booleano en un 'String' ACTIVO/INACTIVO.
+     * @param value
+     * @return String
+     */
     public static String BooleanToString(Boolean value){
         return  value ? enums.State.ACTIVO.getValue() 
                 : enums.State.INACTIVO.getValue();
     } 
+    
+    /**
+     * Convierte un valor String en un valor 'double', 
+     * si hay algun error devuelve -1.0
+     * @param value
+     * @return Double
+     */
     public static Double StringToDouble(String value){
         try {
             return Double.parseDouble(value);
@@ -39,6 +75,13 @@ public class Commons {
             return -1.0;
         }
     }
+    
+    /**
+     * Convierte un valor String en un valor 'Integer', 
+     * si hay algun error devuelve -1
+     * @param value
+     * @return Integer
+     */
     public static Integer StringToInteger(String value){
         try {
             return Integer.parseInt(value);
@@ -46,29 +89,64 @@ public class Commons {
             return -1;
         }
     }
-     
+    
+    /**
+     * Recibe un array de Strings, para verificar 
+     * si alguno está vacio o es nulo.
+     * @param value
+     * @return Boolean
+     */
     public static Boolean StringsIsEmpty(String ...value){
-        for (String string : value) return string.length() == 0 
+        for (String string : value) 
+            return Objects.equals(string.length(), 0)
                 || Objects.isNull(string) 
                 || string.equals(Constans.empty)
                 || string.equals(Constans.space);
         return false;
     }
+    
+    /**
+     * Recibe un array de Doubles, para verificar 
+     * si alguno es 0 o es nulo.
+     * @param value
+     * @return Boolean
+     */
     public static Boolean DoublesIsEmpty(Double ...value){
-        for (Double val : value) return val <= 0;
-        return false;
-    }
-    public static Boolean IntegerIsEmpty(Integer ...value){
-        for (Integer val : value) return val <= 0;
+        for (Double val : value) return val <= 0 
+                || Objects.isNull(val);
         return false;
     }
     
+    
+    /**
+     * Recibe un array de Integers, para verificar 
+     * si alguno es 0 o es nulo.
+     * @param value
+     * @return Boolean
+     */
+    public static Boolean IntegerIsEmpty(Integer ...value){
+        for (Integer val : value) return val <= 0 
+                || Objects.isNull(val);
+        return false;
+    }
+    
+    /**
+     * Recibe 2 Strings y verifica si tienen algun coincidencia.
+     * @param valueA
+     * @param valueB
+     * @return Boolean
+     */
     public static Boolean StringEqualString(String valueA, String valueB){
         valueA = valueA.toUpperCase();
         valueB = valueB.toUpperCase();
         
         return valueA.equals(valueB) || valueA.contains(valueB);
     } 
+    
+    /**
+     * Genera un ID para las ventas.
+     * @return String
+     */
     public static String generatedIdNumber(){
         Date date = new Date();  
         
@@ -86,19 +164,41 @@ public class Commons {
                 .concat(minute)
                 .concat(second);
     }
+    
+    /**
+     * Devuelve la fecha en String.
+     * @return String
+     */
     public static String generatedDateNow(){
         SimpleDateFormat format = new SimpleDateFormat(Constans.format_date); 
         return format.format(new Date()); 
     } 
+    
+    /**
+     * Devuelve la hora en String.
+     * @return String
+     */
     public static String generatedTimeNow(){
         SimpleDateFormat format = new SimpleDateFormat(Constans.format_time); 
         return format.format(new Date()); 
     }   
-
+    
+    /**
+     * Recibe una colección y verifica si es nula o está vacia.
+     * @param list
+     * @return boolean
+     */
     public static boolean collectionEmptyOrNull(List<?> list){
         return Objects.isNull(list) || list.isEmpty();
     }
+    
+    /**
+     * Recibe una colección y verifica si NO es nula o está vacia.
+     * @param list
+     * @return boolean
+     */
     public static boolean collectionNonEmptyOrNull(List<?> list){
         return !collectionEmptyOrNull(list);
     }
+    
 }

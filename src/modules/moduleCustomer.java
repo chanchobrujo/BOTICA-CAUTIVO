@@ -6,9 +6,11 @@
 package modules;
 
 import entities.Customer;
+import enums.ErrorMessage;
 import java.util.List;
 import java.util.Optional;
 import services.customerService;
+import util.Commons;
 
 /**
  *
@@ -24,7 +26,11 @@ public class moduleCustomer {
     
     public String saveCustomer(Integer id, String firtsname, String lastname, 
             Integer dni, String email, String phone){  
-        return customerService.save(id, firtsname, lastname, dni, email, phone);
+        
+        boolean verify = Commons.StringsIsEmpty(firtsname, lastname, email, phone); 
+        
+        return verify ? ErrorMessage.DATA_VOID.getValue() 
+                : this.customerService.save(id, firtsname, lastname, dni, email, phone);
     } 
     
     public Customer searchCustomer(String value){

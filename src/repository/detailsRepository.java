@@ -6,7 +6,7 @@
 package repository;
 
 import entities.Details;  
-import enums.ErrorMessage;
+import enums.AlertMessage; 
 import java.util.List;
 import util.GestorBd;
 
@@ -27,7 +27,7 @@ public class detailsRepository {
     
     public String grabarDetalles(List<Details> cart){
         cart.stream().forEach(this::grabarDetalle);
-        return ErrorMessage.EXECUTE_SUCCESS.getValue();
+        return AlertMessage.EXECUTE_SUCCESS.getValue();
     }
     
 }

@@ -230,7 +230,7 @@ public class category_views extends javax.swing.JFrame {
         int row = tblCategory.getSelectedRow();
         int id = Integer.parseInt(tblCategory.getValueAt(row, 0).toString());
         String name = tblCategory.getValueAt(row, 1).toString();
-        Boolean state = Commons.StringToBoolean(tblCategory.getValueAt(row, 2).toString());
+        Boolean state = Commons.StringStateToBoolean(tblCategory.getValueAt(row, 2).toString());
         
         modelcategory.setId(id);
         modelcategory.setName(name);

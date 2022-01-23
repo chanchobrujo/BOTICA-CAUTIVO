@@ -15,8 +15,9 @@ import lombok.Getter;
 @Getter 
 @AllArgsConstructor
 public enum AlertMessage {
-    FORBIDENN(" Verifique su correo o su contraseña."),
     MESSAGE("Mensaje"),
+    EXECUTE_SUCCESS("Datos guardados correctamente."),
+    FORBIDENN(" Verifique su correo o su contraseña."),
     RECOVERY_PASSWORD("Escriba su correo, se le enviará una contraseña."),
     RESTORED_PASSWORD("Se reestableció su contraseña.");
 
