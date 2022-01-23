@@ -10,6 +10,7 @@ import entities.Customer;
 import entities.Product;
 import entities.Rol;
 import entities.User;
+import model.ModelSale;
 
 /**
  *
@@ -86,10 +87,20 @@ public class Mapper {
                 .name(name)
                 .brand(brand)
                 .price(price)
-                .stock(stock)
-                .category(null)
+                .stock(stock) 
                 .state(state)
                 .build();
 
     }
-}
+
+    public static ModelSale mapperSale(Object object) {
+        Object[] row = (Object[]) object;
+        return  ModelSale.builder()
+                        .date(row[1].toString())
+                        .time(row[2].toString())
+                        .subtotal(Commons.StringToDouble(row[3].toString()))
+                        .desc(Commons.StringToDouble(row[4].toString()))
+                        .total(Commons.StringToDouble(row[5].toString()))
+                        .build();
+    }
+} 

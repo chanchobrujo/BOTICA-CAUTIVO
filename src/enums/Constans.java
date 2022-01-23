@@ -12,6 +12,7 @@ package enums;
 public class Constans { 
     public static final String empty = ""; 
     public static final String space = " ";
+    public static final String double_point = ":";
     
     public static final String money = space.concat("Soles.");
     

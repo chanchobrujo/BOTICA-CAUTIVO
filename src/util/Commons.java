@@ -63,6 +63,16 @@ public class Commons {
     } 
     
     /**
+     * Separa una cadena string dependiento del caracter separador.
+     * @param value
+     * @param constant
+     * @return String
+     */
+    public static String[] StringSeparate(String value, String constant){ 
+        return value.split(constant);
+    } 
+    
+    /**
      * Convierte un valor String en un valor 'double', 
      * si hay algun error devuelve -1.0
      * @param value
