@@ -10,14 +10,20 @@ package util;
  * @author kpalmall
  */
 public class Headers { 
-    public static final String headres_category[] = new String[] {"ID", "NOMBRE", "ESTADO"};
+    public static final String headres_category[] = new String[] {"ID", "NOMBRE"
+            , "ESTADO"};
     
     public static final String headres_product[] = 
-            new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA", "ESTADO"};
+            new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA"
+                    , "ESTADO"};
     
     public static final String headres_cart[] = 
             new String[] {"ID", "PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
     
     public static final String headres_customer[] = 
             new String[] {"ID", "CLIENTE", "DNI", "EMAIL", "PHONE"};
+    
+    public static final String headres_sale[] = 
+            new String[] {"USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
+                    , "SUBTOTAL", "TOTAL"};
 }
