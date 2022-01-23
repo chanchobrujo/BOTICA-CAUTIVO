@@ -15,9 +15,9 @@ import lombok.Getter;
 @Getter 
 @AllArgsConstructor
 public enum ErrorMessage {
-    EXECUTE_SUCCESS("Datos guardados correctamente."),
     ERROR_CONECTION("No hay conexion."), 
-    REPETED_VALUES("Datos repetidos o incorrectos."),
+    REPETED_VALUES("Datos repetidos."),
+    VOID_VALUES("Datos vacios."),
     NOTFOUND("Elemento no encontrado."), 
     USER_NOTFOUND("Usuario no encontrado."),
     ERROR_TITLE("Error detectado."),
