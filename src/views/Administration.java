@@ -1004,9 +1004,11 @@ public class Administration extends javax.swing.JFrame {
         String name = tblProduct.getValueAt(row, 1).toString();
         String brand = tblProduct.getValueAt(row, 2).toString();
         Double price = Double.parseDouble(tblProduct.getValueAt(row, 3).toString());
+        
         int stock = Integer.parseInt(tblProduct.getValueAt(row, 4).toString());
         String category = tblProduct.getValueAt(row, 5).toString();
-        Boolean state = Commons.StringToBoolean(tblProduct.getValueAt(row, 6).toString());
+        
+        Boolean state = Commons.StringStateToBoolean(tblProduct.getValueAt(row, 6).toString());
 
         modelproduct =  ModelProduct.builder()
                 .id(id)
