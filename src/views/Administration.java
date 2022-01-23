@@ -25,6 +25,7 @@ import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
 import views.maintenance.products_views; 
+import views.reports.ReportSales;
 
 /**
  *
@@ -37,6 +38,8 @@ public class Administration extends javax.swing.JFrame {
     
     private final products_views products;
     private final category_views category; 
+    
+    private final ReportSales reportSales; 
     
     private ModelProduct modelproduct = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
@@ -57,6 +60,7 @@ public class Administration extends javax.swing.JFrame {
                 
         products = new products_views();
         category = new category_views();
+        reportSales = new ReportSales();
         initComponents();
         this.addImageLogo("/Assets/logo.jpeg");
         
@@ -218,6 +222,7 @@ public class Administration extends javax.swing.JFrame {
         menuOperaciones = new javax.swing.JMenu();
         menuUsuarios = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -911,6 +916,16 @@ public class Administration extends javax.swing.JFrame {
 
         menuReportes.setText("Reportes");
         menuReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem1.setText("Ventas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuReportes.add(jMenuItem1);
+
         jMenuBar1.add(menuReportes);
 
         setJMenuBar(jMenuBar1);
@@ -1093,6 +1108,11 @@ public class Administration extends javax.swing.JFrame {
         modelproduct.setId(id); 
     }//GEN-LAST:event_tblCarritoMouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here: 
+        reportSales.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1162,6 +1182,7 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
