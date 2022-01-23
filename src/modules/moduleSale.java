@@ -13,6 +13,8 @@ import entities.User;
 import enums.ErrorMessage;
 import java.util.List; 
 import java.util.Optional; 
+import lombok.NoArgsConstructor;
+import model.ModelSale;
 import services.customerService;
 import services.saleService;
 import services.userService;
@@ -21,12 +23,12 @@ import util.Commons;
 /**
  *
  * @author kpalmall
- */
+ */ 
 public class moduleSale {
     private final saleService saleService;
     
     private final userService userService;
-    private final customerService customerService;
+    private final customerService customerService;  
     
     public moduleSale(Double pordesc){ 
         saleService = new saleService();
@@ -64,5 +66,9 @@ public class moduleSale {
         }
         
         return message;
+    }
+    
+    public List<ModelSale> findAll() {
+        return this.saleService.findAll();
     }
 }
