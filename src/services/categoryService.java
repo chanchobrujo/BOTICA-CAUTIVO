@@ -6,9 +6,10 @@ package services;
 
 import entities.Category;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import repository.categoryRepository;
+import repository.categoryRepository; 
 import util.Commons;
 
 /**
@@ -23,12 +24,9 @@ public class categoryService {
     } 
     
     public String save(int id, String name){
-        String message = enums.ErrorMessage.REPETED_VALUES.getValue();
+        String message = enums.ErrorMessage.REPETED_VALUES.getValue(); 
         
-        Boolean verify = this.verifyByName(name) 
-                || Commons.StringsIsEmpty(name);
-        
-        if (!verify) return message;
+        if (!this.verifyByName(name)) return message;
         
         Category category = Category.builder()
                 .name(name)
@@ -57,11 +55,7 @@ public class categoryService {
     } 
     
     public Boolean verifyByName(String name){ 
-        double count = (double) categoryRepository.findAll().stream()
-                .filter(cat -> cat.getName().equals(name))
-                .count();
-        
-        return Commons.DoublesIsEmpty(count);
+        return this.findByName(name).isPresent();
     }
     
     public List<Category> findAll(){
@@ -70,13 +64,13 @@ public class categoryService {
     
     public Optional<Category> findByName(String name){
         return categoryRepository.findAll().stream()
-                .filter(cat -> cat.getName().equals(name))
+                .filter(cat -> Commons.StringEqualString(cat.getName(), name))
                 .findFirst();
     }
     
     public Optional<Category> findById(int id){
         return categoryRepository.findAll().stream()
-                .filter(rol -> rol.getId()==id )
+                .filter(rol -> Objects.equals(rol.getId(), id))
                 .findFirst();
     }
     
