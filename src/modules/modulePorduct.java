@@ -6,17 +6,21 @@ package modules;
 
 import entities.Category;
 import entities.Product; 
-import java.util.List;
+import enums.ErrorMessage;
+import java.util.List; 
 import java.util.Optional; 
 import java.util.stream.Collectors;
 import services.categoryService;
 import services.productService; 
+import util.Commons;
 
 /**
  *
  * @author umbke
  */
 public class modulePorduct {
+    
+    private static final String messageError = ErrorMessage.DATA_VOID.getValue();
     
     private categoryService categoryService; 
     private productService productService; 
@@ -27,11 +31,14 @@ public class modulePorduct {
     }
     
     public String saveCategory(int id, String name, Boolean state){  
-        return categoryService.save(id, name);
+        boolean verify = Commons.StringsIsEmpty(name) 
+                || Commons.IntegerIsEmpty(id);
+        return verify ? messageError : categoryService.save(id, name);
     } 
     
     public String changeStateCategory(int id){
-        return categoryService.changeState(id);
+        boolean verify = Commons.IntegerIsEmpty(id);  
+        return verify ? messageError : categoryService.changeState(id);
     }
     
     public List<Category> findAll_Categories(){
@@ -60,13 +67,16 @@ public class modulePorduct {
                 .collect(Collectors.toList());
     } 
     
-    public String saveProduct(int id, String name, String brand, Double price, 
-            Integer Stock, String category){
-        return productService.save(id, name, brand, price, Stock, category);
+    public String saveProduct(int id, String name, String brand, Double price, Integer Stock, String category){ 
+        boolean verify = Commons.StringsIsEmpty(name, brand, category) 
+                || Commons.IntegerIsEmpty(id, Stock) 
+                || Commons.DoublesIsEmpty(price);
+        return verify ? messageError : productService.save(id, name, brand, price, Stock, category);
     }
     
     public String changeStateProduct(int id){
-        return productService.changeState(id);
+        boolean verify = Commons.IntegerIsEmpty(id);
+        return verify ? messageError : productService.changeState(id);
     }
     
     public List<Product> searchProduct(String value){
