@@ -5,16 +5,17 @@
  */
 package views.maintenance;
 
-import com.sun.org.apache.bcel.internal.Const;
 import entities.Category; 
 import enums.Constans;
 import java.util.List;  
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;  
+import javax.swing.JTable;
 import model.ModelProduct;
 import modules.modulePorduct;
 import render.table.Entity.TableModelProduct;
 import util.Commons; 
+import views.Administration;
 
 /**
  *
@@ -40,7 +41,9 @@ public class products_views extends javax.swing.JFrame {
     }
     
     private void recharge_data(){ 
-        this.tableModelProduct.tableProductData(tblProduct);
+        
+        this.tableModelProduct.tableProductData(tblProduct); 
+        
         this.combo_categories();
     } 
 
@@ -396,14 +399,14 @@ public class products_views extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
         String message = modulePorduct.saveProduct(modelproduct.getId(), txtName.getText(), 
                     txtBrand.getText(), Double.parseDouble(spnPrecio.getValue().toString()),
                     Integer.parseInt(spnStock.getValue().toString()), 
                     cmbCategories.getSelectedItem().toString());
         
-        lblMessage.setText(message);
-
+        lblMessage.setText(message); 
+        this.tableModelProduct.tableProductData(Administration.tblProduct);
         this.clear(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 

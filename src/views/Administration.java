@@ -1218,7 +1218,7 @@ public class Administration extends javax.swing.JFrame {
     public static javax.swing.JMenu menuUsuarios;
     private javax.swing.JSpinner spnCant1;
     private javax.swing.JTable tblCarrito;
-    private javax.swing.JTable tblProduct;
+    public static javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtApllidoCliente;
     private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtBuscarProducto;
