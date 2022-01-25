@@ -18,4 +18,9 @@ public class AlertErrors {
         JOptionPane.showMessageDialog(null, ErrorMessage.DATA_VOID.getValue(), 
                 ErrorMessage.ERROR_TITLE.getValue(), JOptionPane.ERROR_MESSAGE); 
     }
+
+    public static void errorMessageSetMessage(String value){ 
+        JOptionPane.showMessageDialog(null, value, 
+                ErrorMessage.ERROR_TITLE.getValue(), JOptionPane.ERROR_MESSAGE); 
+    }
 }

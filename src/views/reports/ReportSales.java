@@ -6,12 +6,14 @@
 package views.reports;
 
 import enums.Constans;
-import java.util.Date; 
-import javax.swing.JOptionPane;
-import model.ModelDetail;
-import modules.moduleSale;
+
+import java.util.Date;  
+
+import modules.moduleSale; 
 import render.table.Entity.TableModelSale;
-import util.Commons;
+import render.table.Pdf_Report.PdfReportSale;
+import util.Commons; 
+import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 
 /**
@@ -22,10 +24,13 @@ public class ReportSales extends javax.swing.JFrame {
     private static String IDSALE = Constans.empty;
     
     private TableModelSale tableModelSale;
+    private PdfReportSale pdfReportSale;
+    
     private moduleSale modulesale;
     
     public ReportSales() {
         modulesale = new moduleSale(0.0);
+        pdfReportSale = new PdfReportSale();
         tableModelSale = new TableModelSale();
         initComponents();
         
@@ -382,6 +387,12 @@ public class ReportSales extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        boolean verify = this.pdfReportSale.generatedPdfSale(IDSALE).isPresent();
+        
+        if (verify) 
+            AlertSuccessMessage.alertSetMessage("Reporte creado correctamente.");  
+         else 
+            AlertErrors.errorMessageSetMessage("Error al generar PDF, contacte al administrador"); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

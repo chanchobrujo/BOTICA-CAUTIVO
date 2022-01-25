@@ -62,7 +62,7 @@ public class Administration extends javax.swing.JFrame {
         category = new category_views();
         reportSales = new ReportSales();
         initComponents();
-        this.addImageLogo("/Assets/logo.jpeg");
+        this.addImageLogo(Constans.src_image_logo);
         
         this.recharge_data();
         System.err.println(UserId.getText());
