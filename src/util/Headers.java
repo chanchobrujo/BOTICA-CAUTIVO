@@ -20,10 +20,13 @@ public class Headers {
     public static final String headres_cart[] = 
             new String[] {"ID", "PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
     
+    public static final String headres_detail[] = 
+            new String[] {"PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
+    
     public static final String headres_customer[] = 
             new String[] {"ID", "CLIENTE", "DNI", "EMAIL", "PHONE"};
     
     public static final String headres_sale[] = 
-            new String[] {"USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
+            new String[] {"ID", "USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
                     , "SUBTOTAL", "TOTAL"};
 }

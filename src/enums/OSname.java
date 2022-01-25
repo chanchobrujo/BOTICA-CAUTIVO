@@ -5,6 +5,7 @@
  */
 package enums;
  
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter; 
 
@@ -17,17 +18,18 @@ import util.Commons;
 @Getter 
 @AllArgsConstructor
 public enum OSname {
-    WINDOWS("WINDOWS 10","\\bd\\db.db"),
-    LINUX("LINUX","/bd/db.db");
+    WINDOWS("WINDOWS 10", "\\bd\\db.db", "C:\\"),
+    LINUX("LINUX", "/bd/db.db", "");
     
     private String name; 
     private String src;   
+    private String srcByPdf;   
         
-    public static String findUrlByOsName(String osname){ 
+    public static Optional<OSname> findUrlByOsName(String osname){ 
         for (OSname oSname : values()) { 
             boolean verify = Commons.StringEqualString(osname, oSname.getName());  
-            if (verify) return oSname.getSrc(); 
+            if (verify) return Optional.of(oSname); 
         }
-        return null;
+        return Optional.empty();
     } 
 }

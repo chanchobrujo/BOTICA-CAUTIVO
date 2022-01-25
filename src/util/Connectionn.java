@@ -22,9 +22,9 @@ public class Connectionn {
         String jdbc = "jdbc:sqlite:";
         
         String osname = System.getProperty("os.name").toUpperCase();
-        String url; 
-        
-        url = OSname.findUrlByOsName(osname); 
+        String url = OSname.findUrlByOsName(osname)
+                .get()
+                .getSrc(); 
         url = jdbc.concat(src).concat(url); 
         
         return DriverManager.getConnection(url);

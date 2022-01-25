@@ -22,8 +22,7 @@ import util.Commons;
  * @author kpalmall
  */
 public class Authorization extends javax.swing.JFrame { 
-    private moduleAuth moduleAuth;
-
+    private moduleAuth moduleAuth; 
     private Administration administration;
 
     public Authorization() {  

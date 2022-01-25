@@ -34,7 +34,8 @@ public class TableModelSale {
         table.removeAll(); 
 
         array.stream().map((ModelSale sale) -> {
-            Vector row = new Vector();
+            Vector row = new Vector(); 
+            row.add(sale.getId());
             
             row.add(Commons.StringSeparate(sale.getUser(), Constans.double_point)[0]);
             row.add(Commons.StringSeparate(sale.getCustomer(), Constans.double_point)[0]);
@@ -49,6 +50,8 @@ public class TableModelSale {
         }).forEachOrdered(row -> {
             ((DefaultTableModel) table.getModel()).addRow(row);
         });
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        
         table.getColumnModel().getColumn(2).setMaxWidth(100);
         table.getColumnModel().getColumn(3).setMaxWidth(70);
         
@@ -64,6 +67,14 @@ public class TableModelSale {
     
     public void tableSaleByDateData(JTable table, String date){ 
         this.renderTable(table, this.moduleSale.findAllByDate(date));
+    }
+    
+    public void tableSaleByCustomerData(JTable table, String customer){ 
+        this.renderTable(table, this.moduleSale.findAllByCustomer(customer));
+    }
+    
+    public void tableSaleByUserData(JTable table, String user){ 
+        this.renderTable(table, this.moduleSale.findAllByUser(user));
     }
     
 }

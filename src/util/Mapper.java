@@ -96,6 +96,7 @@ public class Mapper {
     public static ModelSale mapperSale(Object object) {
         Object[] row = (Object[]) object;
         return  ModelSale.builder()
+                        .id(row[0].toString())
                         .date(row[1].toString())
                         .time(row[2].toString())
                         .subtotal(Commons.StringToDouble(row[3].toString()))

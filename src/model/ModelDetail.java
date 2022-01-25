@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model; 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,22 +17,15 @@ import lombok.ToString;
  * @author kpalmall
  */
 @Getter
-@Setter 
+@Setter
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModelSale {
-    private String id;
-    
-    private String date;
-    private String time;
-    
-    private Double subtotal;
-    private Double desc;
-    private Double total; 
-    
-    private String user;
-    private String customer;
+public class ModelDetail {  
+    private String product;
+    private Double product_price;
+    private Integer quantity;
+    private Double _import;
     
 }
