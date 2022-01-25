@@ -175,6 +175,17 @@ public class Commons {
                 .concat(second);
     }
     
+    public static String[] separateDate(Date date){
+        SimpleDateFormat formatDate = new SimpleDateFormat(Constans.format_date); 
+        SimpleDateFormat formatTime = new SimpleDateFormat(Constans.format_time); 
+        
+        String date_ = formatDate.format(date);
+        String time_ = formatTime.format(date);
+        
+        String[] datetime = {date_, time_};
+        return datetime; 
+    } 
+    
     /**
      * Devuelve la fecha en String.
      * @return String
