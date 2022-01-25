@@ -11,7 +11,9 @@ import enums.Constans;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import model.ModelDetail;
 import model.ModelSale;
+import repository.detailsRepository;
 import repository.saleRepository;
 import util.Commons;
 
@@ -20,19 +22,18 @@ import util.Commons;
  * @author chanchobrujo
  */
 public class saleService {
-
-    private final userService userService;
-    private final productService productService;
-
+    
+    private final productService productService; 
     private final Sale sale = new Sale();
 
     private saleRepository saleRepository;
+    private detailsRepository detailsRepository;
 
-    public saleService() {
-        userService = new userService();
+    public saleService() { 
         productService = new productService();
 
         saleRepository = new saleRepository();
+        detailsRepository = new detailsRepository();
     }
 
     private Integer separateStringID(String id) {
@@ -85,6 +86,10 @@ public class saleService {
         return this.saleRepository.findAll().stream()
                 .filter(filter -> Objects.equals(this.separateStringID(filter.getCustomer()), id))
                 .collect(Collectors.toList());
+    } 
+    
+    public List<ModelDetail> findAllDetails(String id) {
+        return this.detailsRepository.findAll(id);
     }
 
 }
