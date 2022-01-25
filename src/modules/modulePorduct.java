@@ -31,8 +31,7 @@ public class modulePorduct {
     }
     
     public String saveCategory(int id, String name, Boolean state){  
-        boolean verify = Commons.StringsIsEmpty(name) 
-                || Commons.IntegerIsEmpty(id);
+        boolean verify = Commons.StringsIsEmpty(name);
         return verify ? messageError : categoryService.save(id, name);
     } 
     
@@ -69,8 +68,7 @@ public class modulePorduct {
     
     public String saveProduct(int id, String name, String brand, Double price, Integer Stock, String category){ 
         boolean verify = Commons.StringsIsEmpty(name, brand, category) 
-                || Commons.IntegerIsEmpty(id, Stock) 
-                || Commons.DoublesIsEmpty(price);
+                || Commons.IntegerIsEmpty(Stock) || Commons.DoublesIsEmpty(price);
         return verify ? messageError : productService.save(id, name, brand, price, Stock, category);
     }
     

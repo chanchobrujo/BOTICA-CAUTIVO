@@ -13,7 +13,7 @@ import entities.User;
 import enums.ErrorMessage;
 import java.util.List; 
 import java.util.Optional; 
-import lombok.NoArgsConstructor;
+import java.util.stream.Collectors; 
 import model.ModelSale;
 import services.customerService;
 import services.saleService;
@@ -70,5 +70,11 @@ public class moduleSale {
     
     public List<ModelSale> findAll() {
         return this.saleService.findAll();
+    }
+    
+    public List<ModelSale> findAllByDate(String date) {
+        return this.saleService.findAll().stream()
+                .filter(sale -> Commons.StringEqualString(sale.getDate(), date))
+                .collect(Collectors.toList());
     }
 }
