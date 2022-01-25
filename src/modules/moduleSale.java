@@ -5,15 +5,16 @@
  */
 package modules;
 
-import com.jgoodies.common.base.Objects;
 import entities.Customer;
 import entities.Details; 
 import entities.Sale;
 import entities.User;
 import enums.ErrorMessage;
 import java.util.List; 
+import java.util.Objects;
 import java.util.Optional; 
 import java.util.stream.Collectors; 
+import model.ModelDetail;
 import model.ModelSale;
 import services.customerService;
 import services.saleService;
@@ -88,5 +89,9 @@ public class moduleSale {
         return this.saleService.findAll().stream()
                 .filter(sale -> Commons.StringEqualString(sale.getDate(), date))
                 .collect(Collectors.toList());
+    }
+    
+    public List<ModelDetail> findAllDetails(String id) {
+        return this.saleService.findAllDetails(id);
     }
 }

@@ -23,6 +23,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ModelSale {
+    private String id;
+    
     private String date;
     private String time;
     
