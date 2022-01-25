@@ -24,6 +24,6 @@ public class Headers {
             new String[] {"ID", "CLIENTE", "DNI", "EMAIL", "PHONE"};
     
     public static final String headres_sale[] = 
-            new String[] {"USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
+            new String[] {"ID", "USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
                     , "SUBTOTAL", "TOTAL"};
 }
