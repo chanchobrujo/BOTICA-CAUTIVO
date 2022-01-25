@@ -222,4 +222,24 @@ public class Commons {
         return !collectionEmptyOrNull(list);
     }
     
+    /**
+     * Recibe un objeto date y lo separa para extraer la fecha.
+     * @param date
+     * @return String
+     */
+    public static String dateValue(Date date){ 
+        boolean verify = Objects.nonNull(date);
+        return verify ? separateDate(date)[0] : Constans.empty; 
+    }
+    
+    /**
+     * Recibe un objeto date y lo separa para extraer la hora.
+     * @param date
+     * @return String
+     */
+    public static String timeValue(Date date){ 
+        boolean verify = Objects.nonNull(date);
+        return verify ? separateDate(date)[1] : Constans.empty; 
+    }
+    
 }

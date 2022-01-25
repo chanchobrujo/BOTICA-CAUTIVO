@@ -72,6 +72,18 @@ public class moduleSale {
         return this.saleService.findAll();
     }
     
+    public List<ModelSale> findAllByCustomer(String customer) {
+        return this.saleService.findAll().stream()
+                .filter(sale -> Commons.StringEqualString(sale.getCustomer(), customer))
+                .collect(Collectors.toList());
+    }
+    
+    public List<ModelSale> findAllByUser(String user) {
+        return this.saleService.findAll().stream()
+                .filter(sale -> Commons.StringEqualString(sale.getUser(), user))
+                .collect(Collectors.toList());
+    }
+    
     public List<ModelSale> findAllByDate(String date) {
         return this.saleService.findAll().stream()
                 .filter(sale -> Commons.StringEqualString(sale.getDate(), date))

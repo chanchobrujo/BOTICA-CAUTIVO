@@ -66,4 +66,12 @@ public class TableModelSale {
         this.renderTable(table, this.moduleSale.findAllByDate(date));
     }
     
+    public void tableSaleByCustomerData(JTable table, String customer){ 
+        this.renderTable(table, this.moduleSale.findAllByCustomer(customer));
+    }
+    
+    public void tableSaleByUserData(JTable table, String user){ 
+        this.renderTable(table, this.moduleSale.findAllByUser(user));
+    }
+    
 }

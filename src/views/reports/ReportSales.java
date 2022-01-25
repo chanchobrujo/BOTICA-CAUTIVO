@@ -5,9 +5,7 @@
  */
 package views.reports;
 
-import enums.Constans;
-import java.util.Date;
-import java.util.Objects;
+import java.util.Date; 
 import render.table.Entity.TableModelSale;
 import util.Commons;
 
@@ -30,7 +28,23 @@ public class ReportSales extends javax.swing.JFrame {
     }
     
     private void table_sales_date(String date){
+        this.clear();
         this.tableModelSale.tableSaleByDateData(this.tableSale, date); 
+    }
+    
+    private void table_sales_customer(String customer){
+        this.clear();
+        this.tableModelSale.tableSaleByCustomerData(this.tableSale, customer); 
+    }
+    
+    private void table_sales_user(String user){
+        this.clear();
+        this.tableModelSale.tableSaleByUserData(this.tableSale, user); 
+    }
+    
+    private void clear(){
+        txtName.setText("");
+        txtName1.setText(""); 
     }
 
     /**
@@ -349,24 +363,22 @@ public class ReportSales extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        this.table_sales_user(txtName.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.table_sales_customer(txtName1.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        Date date = jDateChooser1.getDate();
-        boolean verify = Objects.nonNull(date);
-        String datefilter = verify ? Commons.separateDate(date)[0] : Constans.empty;
-        
-        this.table_sales_date(datefilter); 
+        // TODO add your handling code here: 
+        this.table_sales_date(Commons.dateValue(jDateChooser1.getDate())); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        this.table_sales_date(Commons.dateValue(new Date())); 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
