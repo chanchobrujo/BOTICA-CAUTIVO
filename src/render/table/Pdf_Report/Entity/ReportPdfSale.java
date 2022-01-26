@@ -20,6 +20,7 @@ import model.ModelSale;
 import model.PdfParams.ParamsFont;
 import modules.moduleSale; 
 import render.table.Pdf_Report.PDFInit;
+import util.Commons;
 
 import util.Headers;
 
@@ -36,8 +37,9 @@ public class ReportPdfSale {
         modulesale = new moduleSale(0.0);
     } 
     
-    private PdfPTable TableRenderSale(ModelSale modelSale) {
+    private PdfPTable TableRenderSale(ModelSale modelSale) throws DocumentException {
         PdfPTable tbl = new PdfPTable(2);
+        tbl.setWidths(new int[]{175, 300});
         
         tbl.addCell(Headers.headres_sale[1].intern());
         tbl.addCell(modelSale.getUser());
@@ -62,13 +64,15 @@ public class ReportPdfSale {
         return tbl;
     }
     
-    private PdfPTable TableRenderCart(String codsale) {
+    private PdfPTable TableRenderCart(String codsale) throws DocumentException {
         PdfPTable tbl = new PdfPTable(4);
+        tbl.setWidths(new int[]{600, 200, 200, 200});
+        
         for (String element : Headers.headres_detail) tbl.addCell(element);
 
         this.modulesale.findAllDetails(codsale).stream()
                 .forEach(element -> {
-                    tbl.addCell(element.getProduct());
+                    tbl.addCell(Commons.setPropertiesProduct(element.getProduct()));
                     tbl.addCell(Constans.empty + element.getProduct_price());
                     tbl.addCell(Constans.empty + element.getQuantity());
                     tbl.addCell(Constans.empty + element.get_import());

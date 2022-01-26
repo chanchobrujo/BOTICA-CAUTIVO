@@ -42,11 +42,9 @@ public class detailsRepository {
         return verify ? 
                 findProduct.get()
                         .getName()
-                        .concat(Constans.space)
-                        .concat(findProduct.get().getBrand())
-                        .concat(Constans.space)
                         .concat(Constans.double_point)
-                        .concat(Constans.space)
+                        .concat(findProduct.get().getBrand())
+                        .concat(Constans.double_point)  
                         .concat(findProduct.get().getCategory().getName()) 
                 : Constans.empty;
     }

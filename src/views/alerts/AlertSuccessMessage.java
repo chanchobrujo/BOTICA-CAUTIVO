@@ -10,6 +10,7 @@ import enums.Constans;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.ModelDetail; 
+import util.Commons;
 
 /**
  *
@@ -31,8 +32,9 @@ public class AlertSuccessMessage {
         for (ModelDetail modelDetail : collection) {
             details += "Producto: "
                     .concat("\n")
-                    .concat(" -Nombre: ")
-                    .concat(modelDetail.getProduct())
+                    .concat(" -Producto: ")
+                    .concat(Constans.salt_line
+                            .concat(Commons.setPropertiesProduct(modelDetail.getProduct())))
                     .concat("\n")
                     .concat(" -Precio: ")
                     .concat(modelDetail.getProduct_price()+"\n")
