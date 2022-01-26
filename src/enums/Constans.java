@@ -15,6 +15,8 @@ public class Constans {
     public static final String point = ".";
     public static final String double_point = ":";
     
+    public static final String zero = "0";
+    
     public static final String money = space.concat("Soles.");
     
     public static final String format_date = "yyyy-MM-dd";

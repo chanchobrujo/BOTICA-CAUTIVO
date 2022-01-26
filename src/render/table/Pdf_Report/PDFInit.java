@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package render.table.Pdf_Report.PdfGenerator;
+package render.table.Pdf_Report;
 
 import com.itextpdf.text.BadElementException; 
 import com.itextpdf.text.Document;
