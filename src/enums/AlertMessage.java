@@ -16,6 +16,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AlertMessage {
     MESSAGE("Mensaje"),
+    PDF_SUCCESS("Pdf generado correctamente, revise sus documentos."),
     EXECUTE_SUCCESS("Datos guardados correctamente."),
     FORBIDENN(" Verifique su correo o su contraseña."),
     RECOVERY_PASSWORD("Escriba su correo, se le enviará una contraseña."),

@@ -12,9 +12,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;  
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable; 
+import enums.AlertMessage;
 import enums.Constans; 
 import java.io.IOException; 
 import java.util.Optional; 
+import model.Messages.Message;
 import model.PdfParams.ParamsFont;
 import modules.moduleSale;
 import render.table.Pdf_Report.PdfGenerator.PDFInit;
@@ -48,7 +50,10 @@ public class PdfReportTableSale {
         return tablaCliente;
     }
     
-    public Optional<Document> generatedPdfSale(String codsale){  
+    public Message generatedPdfSale(String codsale){  
+        String msg = AlertMessage.PDF_SUCCESS.getValue();
+        Boolean iserror = false;
+        
         try { 
             Document doc = PDFInit.initializeDocument(codsale);  
             
@@ -64,11 +69,12 @@ public class PdfReportTableSale {
             doc.add(this.PDFInit.addParagraph("INFORMACIÓN DE LA VENTA.", paramsFont, Paragraph.ALIGN_CENTER));   
             doc.add(this.detailRenderSale(codsale));  
             
-            doc.close();
-            return Optional.of(doc);
-        } catch (DocumentException | IOException e) {
-            System.err.println(e.getMessage());
-            return Optional.empty();
+            doc.close(); 
+        } catch (DocumentException | IOException e) { 
+            iserror = true;
+            msg = e.getMessage();
         }
+        
+        return new Message(msg, iserror);
     }
 }

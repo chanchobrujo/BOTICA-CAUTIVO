@@ -8,6 +8,7 @@ package views.reports;
 import enums.Constans;
 
 import java.util.Date;  
+import model.Messages.Message;
 
 import modules.moduleSale; 
 import render.table.Entity.TableModelSale;
@@ -387,12 +388,11 @@ public class ReportSales extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        boolean verify = this.pdfReportSale.generatedPdfSale(IDSALE).isPresent();
+        Message msg = this.pdfReportSale.generatedPdfSale(IDSALE);
+        String m = msg.getMsg();
         
-        if (verify) 
-            AlertSuccessMessage.alertSetMessage("Reporte creado correctamente.");  
-         else 
-            AlertErrors.errorMessageSetMessage("Error al generar PDF, contacte al administrador"); 
+        if (!msg.getError()) AlertSuccessMessage.alertSetMessage(m);  
+         else  AlertErrors.errorMessageSetMessage(m); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
