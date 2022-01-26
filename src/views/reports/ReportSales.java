@@ -11,7 +11,7 @@ import java.util.Date;
 
 import modules.moduleSale; 
 import render.table.Entity.TableModelSale;
-import render.table.Pdf_Report.PdfReportSale;
+import render.table.Pdf_Report.PdfReportTableSale;
 import util.Commons; 
 import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
@@ -24,13 +24,13 @@ public class ReportSales extends javax.swing.JFrame {
     private static String IDSALE = Constans.empty;
     
     private TableModelSale tableModelSale;
-    private PdfReportSale pdfReportSale;
+    private PdfReportTableSale pdfReportSale;
     
     private moduleSale modulesale;
     
     public ReportSales() {
         modulesale = new moduleSale(0.0);
-        pdfReportSale = new PdfReportSale();
+        pdfReportSale = new PdfReportTableSale();
         tableModelSale = new TableModelSale();
         initComponents();
         

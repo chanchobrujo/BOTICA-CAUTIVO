@@ -9,28 +9,27 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Image;
+import com.itextpdf.text.Font;  
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import enums.Constans;
-import enums.OSname;
-import java.io.FileOutputStream;
+import com.itextpdf.text.pdf.PdfPTable; 
+import enums.Constans; 
 import java.io.IOException; 
 import java.util.Optional; 
+import model.PdfParams.ParamsFont;
 import modules.moduleSale;
+import render.table.Pdf_Report.PdfGenerator.PDFInit;
 import util.Headers;
 
 /**
  *
  * @author kpalmall
  */
-public class PdfReportSale {
+public class PdfReportTableSale {
     private moduleSale modulesale;
+    private PDFInit PDFInit;
 
-    public PdfReportSale( ) {
+    public PdfReportTableSale( ) {
+        PDFInit = new PDFInit();
         modulesale = new moduleSale(0.0);
     } 
     
@@ -49,30 +48,21 @@ public class PdfReportSale {
         return tablaCliente;
     }
     
-    public Optional<Document> generatedPdfSale(String codsale){
-        Document doc = new Document();
-        
+    public Optional<Document> generatedPdfSale(String codsale){  
         try { 
-            String osname = System.getProperty("os.name").toUpperCase();
-            String url = OSname.findUrlByOsName(osname).get().getSrcByPdf();
-        
-            url = url.concat(codsale).concat(Constans.format_file);
-            PdfWriter.getInstance(doc, new FileOutputStream(url));  
+            Document doc = PDFInit.initializeDocument(codsale);  
             
-            Image header = Image.getInstance(Constans.src_image_logo); 
-            header.scaleToFit(650, 1000);
-            header.setAlignment(Chunk.ALIGN_CENTER);  
-
-            Paragraph parrafo = new Paragraph();
-            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.setFont(FontFactory.getFont("Console", 14, Font.BOLD, BaseColor.BLUE));
-            parrafo.add("INFORMACIÓN DE LA VENTA. \n \n");
+            ParamsFont paramsFont = ParamsFont.builder()
+                    .fontsize(14)
+                    .fontf(Font.BOLD)
+                    .fontcolor(BaseColor.BLUE)
+                    .fontname("Console").build();
 
             doc.open();
             
-            doc.add(header);
-            doc.add(parrafo);   
-            doc.add(this.detailRenderSale(codsale)); 
+            doc.add(this.PDFInit.addHeaderImage(Constans.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
+            doc.add(this.PDFInit.addParagraph("INFORMACIÓN DE LA VENTA.", paramsFont, Paragraph.ALIGN_CENTER));   
+            doc.add(this.detailRenderSale(codsale));  
             
             doc.close();
             return Optional.of(doc);
