@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package render.table.Pdf_Report;
+package render.table.Pdf_Report.Entity;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -20,17 +20,18 @@ import model.Messages.Message;
 import model.PdfParams.ParamsFont;
 import modules.moduleSale;
 import render.table.Pdf_Report.PdfGenerator.PDFInit;
+import render.table.Pdf_Report.PdfGenerator.PDFInit;
 import util.Headers;
 
 /**
  *
  * @author kpalmall
  */
-public class PdfReportTableSale {
+public class Sale {
     private moduleSale modulesale;
     private PDFInit PDFInit;
 
-    public PdfReportTableSale( ) {
+    public Sale( ) {
         PDFInit = new PDFInit();
         modulesale = new moduleSale(0.0);
     } 
