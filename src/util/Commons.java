@@ -252,4 +252,23 @@ public class Commons {
         return verify ? separateDate(date)[1] : Constans.empty; 
     }
     
+    /**
+     * Recibe una cadena que separa las propiedades del proudcto.
+     * @param value
+     * @return String
+     */  
+    public static String setPropertiesProduct(String value){ 
+        String name = Commons.StringSeparate(value, Constans.double_point)[0];
+        String brand = Commons.StringSeparate(value, Constans.double_point)[1];
+        String category = Commons.StringSeparate(value, Constans.double_point)[2];
+        return "    -Nombre: "
+                .concat(name)
+                .concat(Constans.salt_line)
+                .concat("    -Marca: ")
+                .concat(brand)
+                .concat(Constans.salt_line)
+                .concat("    -Categoria: ")
+                .concat(category)
+                .concat(Constans.salt_line);
+    } 
 }
