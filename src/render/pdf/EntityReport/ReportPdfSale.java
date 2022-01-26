@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package render.table.Pdf_Report.Entity;
+package render.pdf.EntityReport;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -19,7 +19,7 @@ import model.Messages.Message;
 import model.ModelSale;
 import model.PdfParams.ParamsFont;
 import modules.moduleSale; 
-import render.table.Pdf_Report.PDFInit;
+import render.pdf.PDFInit;
 import util.Commons;
 
 import util.Headers;

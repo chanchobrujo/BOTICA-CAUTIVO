@@ -13,7 +13,7 @@ import model.ModelSale;
 
 import modules.moduleSale; 
 import render.table.Entity.TableModelSale;
-import render.table.Pdf_Report.Entity.ReportPdfSale;
+import render.pdf.EntityReport.ReportPdfSale;
 import util.Commons; 
 import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
