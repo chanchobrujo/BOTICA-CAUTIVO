@@ -154,19 +154,29 @@ public class Commons {
     } 
     
     /**
+     * Recibe un parámetro integer y devuelve un string concatenado con 0.
+     * @param value
+     * @return String
+     */
+    private static String completedZero(Integer value){
+        String x = value.toString();
+        return value < 10 ? Constans.zero.concat(x) : x;
+    }
+    
+    /**
      * Genera un ID para las ventas.
      * @return String
      */
     public static String generatedIdNumber(){
         Date date = new Date();  
         
-        String year = date.getYear() + "";
-        String month = (date.getMonth()+1) + "";
-        String day = date.getDate() + "";
+        String year =  completedZero(date.getYear());
+        String month = completedZero(date.getMonth()+1);
+        String day = completedZero(date.getDate()) ;
         
-        String hour = date.getHours() + "";
-        String minute = date.getMinutes() + "";
-        String second = date.getSeconds() + ""; 
+        String hour = completedZero(date.getHours());
+        String minute = completedZero(date.getMinutes());
+        String second = completedZero(date.getSeconds()); 
         
         return year.concat(month)
                 .concat(day)
