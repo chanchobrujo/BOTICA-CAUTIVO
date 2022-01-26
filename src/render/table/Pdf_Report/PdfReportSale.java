@@ -65,8 +65,8 @@ public class PdfReportSale {
 
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.DARK_GRAY));
-            parrafo.add("Información de venta. \n \n");
+            parrafo.setFont(FontFactory.getFont("Console", 14, Font.BOLD, BaseColor.BLUE));
+            parrafo.add("INFORMACIÓN DE LA VENTA. \n \n");
 
             doc.open();
             
@@ -77,6 +77,7 @@ public class PdfReportSale {
             doc.close();
             return Optional.of(doc);
         } catch (DocumentException | IOException e) {
+            System.err.println(e.getMessage());
             return Optional.empty();
         }
     }

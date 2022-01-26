@@ -18,7 +18,7 @@ import util.Commons;
 @Getter 
 @AllArgsConstructor
 public enum OSname {
-    WINDOWS("WINDOWS 10", "\\bd\\db.db", "C:\\"),
+    WINDOWS("WINDOWS 10", "\\bd\\db.db", "C:\\Docs\\"),
     LINUX("LINUX", "/bd/db.db", "");
     
     private String name; 

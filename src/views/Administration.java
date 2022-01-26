@@ -69,7 +69,7 @@ public class Administration extends javax.swing.JFrame {
     }
 
     private void addImageLogo(String src) { 
-        ImageIcon img = new ImageIcon(getClass().getResource(src));
+        ImageIcon img = new ImageIcon(src);
         Icon fond1 = new ImageIcon(img.getImage()
                 .getScaledInstance(PANELIMAGE.getWidth(), PANELIMAGE.getHeight(), Image.SCALE_DEFAULT));
         PANELIMAGE.setIcon(fond1);
