@@ -413,7 +413,7 @@ public class ReportSales extends javax.swing.JFrame {
         String m = msg.getMsg();
         
         if (!msg.getError()) AlertSuccessMessage.alertSetMessage(m);  
-         else  AlertErrors.errorMessageSetMessage(m); 
+        else  AlertErrors.errorMessageSetMessage(m); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
