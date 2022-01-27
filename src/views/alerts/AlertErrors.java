@@ -5,7 +5,7 @@
  */
 package views.alerts;
 
-import enums.ErrorMessage;
+import Constans.Enums.ErrorMessage;
 import javax.swing.JOptionPane;
 
 /**

@@ -5,8 +5,8 @@
  */
 package views.alerts;
 
-import enums.AlertMessage;
-import enums.Constans;
+import Constans.Enums.AlertMessage;
+import Constans.Constan;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.ModelDetail; 
@@ -24,7 +24,7 @@ public class AlertSuccessMessage {
     }
 
     public static void alertSetCollections(List<ModelDetail> collection){
-        String details = Constans.empty;
+        String details = Constan.empty;
         Double total = collection.stream()
                 .mapToDouble(ModelDetail::get_import)
                 .sum();
@@ -33,7 +33,7 @@ public class AlertSuccessMessage {
             details += "Producto: "
                     .concat("\n")
                     .concat(" -Producto: ")
-                    .concat(Constans.salt_line
+                    .concat(Constan.salt_line
                             .concat(Commons.setPropertiesProduct(modelDetail.getProduct())))
                     .concat("\n")
                     .concat(" -Precio: ")
@@ -46,7 +46,7 @@ public class AlertSuccessMessage {
         }
         details = details
                 .concat("Total: ")
-                .concat(total + Constans.empty);
+                .concat(total + Constan.empty);
         
         JOptionPane.showMessageDialog(null, details, 
                 AlertMessage.MESSAGE.getValue(), JOptionPane.OK_OPTION); 

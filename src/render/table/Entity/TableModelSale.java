@@ -5,7 +5,7 @@
  */
 package render.table.Entity;
 
-import enums.Constans;
+import Constans.Constan;
 import java.util.List;
 import java.util.Vector; 
 import javax.swing.JTable;
@@ -14,7 +14,7 @@ import model.ModelSale;
 import modules.moduleSale;
 import render.table.TableModel;
 import util.Commons;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -30,15 +30,15 @@ public class TableModelSale {
     } 
     
     private void renderTable(JTable table, List<ModelSale> array){
-        this.tableModel.tableNoEditable(table, Headers.headres_sale); 
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_sale); 
         table.removeAll(); 
 
         array.stream().map((ModelSale sale) -> {
             Vector row = new Vector(); 
             row.add(sale.getId());
             
-            row.add(Commons.StringSeparate(sale.getUser(), Constans.double_point)[0]);
-            row.add(Commons.StringSeparate(sale.getCustomer(), Constans.double_point)[0]);
+            row.add(Commons.StringSeparate(sale.getUser(), Constan.double_point)[0]);
+            row.add(Commons.StringSeparate(sale.getCustomer(), Constan.double_point)[0]);
             
             row.add(sale.getDate());
             row.add(sale.getTime());

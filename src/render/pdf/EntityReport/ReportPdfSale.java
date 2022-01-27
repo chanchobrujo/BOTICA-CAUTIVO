@@ -12,8 +12,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;  
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable; 
-import enums.AlertMessage;
-import enums.Constans; 
+import Constans.Enums.AlertMessage;
+import Constans.Constan; 
 import java.io.IOException;  
 import model.Messages.Message;
 import model.ModelSale;
@@ -22,7 +22,8 @@ import modules.moduleSale;
 import render.pdf.PDFInit;
 import util.Commons;
 
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
+import Constans.Headers.HeadersWidthSizePdf;
 
 /**
  *
@@ -39,43 +40,43 @@ public class ReportPdfSale {
     
     private PdfPTable TableRenderSale(ModelSale modelSale) throws DocumentException {
         PdfPTable tbl = new PdfPTable(2);
-        tbl.setWidths(new int[]{175, 300});
+        tbl.setWidths(HeadersWidthSizePdf.headres_with_report_sale);
         
-        tbl.addCell(Headers.headres_sale[1].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[1].intern());
         tbl.addCell(modelSale.getUser());
         
-        tbl.addCell(Headers.headres_sale[2].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[2].intern());
         tbl.addCell(modelSale.getCustomer());
         
-        tbl.addCell(Headers.headres_sale[3].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[3].intern());
         tbl.addCell(modelSale.getDate());
         
-        tbl.addCell(Headers.headres_sale[4].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[4].intern());
         tbl.addCell(modelSale.getTime());
         
-        tbl.addCell(Headers.headres_sale[6].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[6].intern());
         tbl.addCell(modelSale.getSubtotal().toString());
         
-        tbl.addCell(Headers.headres_sale[5].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[5].intern());
         tbl.addCell(modelSale.getDesc().toString());
         
-        tbl.addCell(Headers.headres_sale[7].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[7].intern());
         tbl.addCell(modelSale.getTotal().toString());
         return tbl;
     }
     
     private PdfPTable TableRenderCart(String codsale) throws DocumentException {
         PdfPTable tbl = new PdfPTable(4);
-        tbl.setWidths(new int[]{600, 200, 200, 200});
+        tbl.setWidths(HeadersWidthSizePdf.headres_with_report_detail);
         
-        for (String element : Headers.headres_detail) tbl.addCell(element);
-
+        for (String element : HeadersTableSwing.headres_detail) tbl.addCell(element); 
+        
         this.modulesale.findAllDetails(codsale).stream()
                 .forEach(element -> {
                     tbl.addCell(Commons.setPropertiesProduct(element.getProduct()));
-                    tbl.addCell(Constans.empty + element.getProduct_price());
-                    tbl.addCell(Constans.empty + element.getQuantity());
-                    tbl.addCell(Constans.empty + element.get_import());
+                    tbl.addCell(Constan.empty + element.getProduct_price());
+                    tbl.addCell(Constan.empty + element.getQuantity());
+                    tbl.addCell(Constan.empty + element.get_import());
                 });
 
         return tbl;
@@ -100,7 +101,7 @@ public class ReportPdfSale {
             
             doc.open();
             
-            doc.add(this.PDFInit.addHeaderImage(Constans.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
+            doc.add(this.PDFInit.addHeaderImage(Constan.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
             
             doc.add(this.addParagraph(11, Font.BOLD, BaseColor.BLACK, "Console", "INFORMACIÓN DE LA VENTA."));   
             doc.add(this.TableRenderSale(modelSale));  

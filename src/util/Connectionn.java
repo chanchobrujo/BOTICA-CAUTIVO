@@ -7,7 +7,7 @@ package util;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
-import enums.OSname;
+import Constans.Enums.OSname;
 
 /**
  *

@@ -6,7 +6,7 @@
 package repository;
 
 import entities.Customer; 
-import enums.Constans;
+import Constans.Constan;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +31,7 @@ public class customerRepository {
         String sql =  "UPDATE customer SET "
                 .concat("firtsname='").concat(customer.getFirtsname()).concat("', ")
                 .concat("lastname='").concat(customer.getLastname()).concat("', ")
-                .concat("dni=").concat(customer.getDni()+Constans.empty).concat(", ")
+                .concat("dni=").concat(customer.getDni()+Constan.empty).concat(", ")
                 .concat("email='").concat(customer.getEmail()).concat("', ")
                 .concat("phone='").concat(customer.getPhone()).concat("' ")
                 .concat("' WHERE id=").concat(customer.getId()+"");

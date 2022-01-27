@@ -5,7 +5,7 @@
  */
 package views.reports;
 
-import enums.Constans;
+import Constans.Constan;
 
 import java.util.Date;  
 import model.Messages.Message;
@@ -23,7 +23,7 @@ import views.alerts.AlertSuccessMessage;
  * @author kpalmall
  */
 public class ReportSales extends javax.swing.JFrame { 
-    private static String IDSALE = Constans.empty;
+    private static String IDSALE = Constan.empty;
     
     private TableModelSale tableModelSale;
     private ReportPdfSale pdfReportSale;

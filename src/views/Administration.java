@@ -7,7 +7,7 @@ package views;
 
 import entities.Customer;
 import entities.Product; 
-import enums.Constans; 
+import Constans.Constan; 
 import java.awt.Image; 
 import java.util.Objects;
 import java.util.Optional; 
@@ -62,7 +62,7 @@ public class Administration extends javax.swing.JFrame {
         category = new category_views();
         reportSales = new ReportSales();
         initComponents();
-        this.addImageLogo(Constans.src_image_logo);
+        this.addImageLogo(Constan.src_image_logo);
         
         this.recharge_data();
         System.err.println(UserId.getText());
@@ -83,9 +83,9 @@ public class Administration extends javax.swing.JFrame {
 
     private void SetValueProductSelected(ModelProduct model) {
         labelNameProduct1.setText(model.getName()
-                .concat(Constans.space)
+                .concat(Constan.space)
                 .concat(model.getBrand()));
-        labelPrecioProduct1.setText(model.getPrice()+Constans.money);  
+        labelPrecioProduct1.setText(model.getPrice()+Constan.money);  
     }
 
     private void SetValueCustomerSelected(ModelCustomer model) { 
@@ -122,11 +122,11 @@ public class Administration extends javax.swing.JFrame {
     }
     
     private void clearInputCustomer() {
-        txtDniCliente.setText(Constans.empty);
-        txtEmailCliente.setText(Constans.empty);
-        txtNumeroCliente.setText(Constans.empty);
-        txtNombreCliente.setText(Constans.empty);
-        txtApllidoCliente.setText(Constans.empty);
+        txtDniCliente.setText(Constan.empty);
+        txtEmailCliente.setText(Constan.empty);
+        txtNumeroCliente.setText(Constan.empty);
+        txtNombreCliente.setText(Constan.empty);
+        txtApllidoCliente.setText(Constan.empty);
     }  
     
     private void SetLabelValueCustomer() { 
@@ -1059,7 +1059,7 @@ public class Administration extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         boolean verify = !this.verifyEmptyInput();
-        String mssg = Constans.empty;
+        String mssg = Constan.empty;
         if (verify)  
             mssg = this.moduleCustomer.saveCustomer(0, txtNombreCliente.getText()
                     , txtApllidoCliente.getText(), Commons.StringToInteger(txtDniCliente.getText())

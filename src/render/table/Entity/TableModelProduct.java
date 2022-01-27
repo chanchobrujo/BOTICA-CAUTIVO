@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import render.table.TableModel;
 import util.Commons;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -29,7 +29,7 @@ public class TableModelProduct {
     } 
     
     private void renderTable(JTable table, List<Product> array){
-        this.tableModel.tableNoEditable(table, Headers.headres_product);
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_product);
         
         array.stream().map(product -> {
             Vector row = new Vector();

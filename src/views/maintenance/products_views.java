@@ -6,7 +6,7 @@
 package views.maintenance;
 
 import entities.Category; 
-import enums.Constans;
+import Constans.Constan;
 import java.util.List;  
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;   
@@ -72,8 +72,8 @@ public class products_views extends javax.swing.JFrame {
     }
 
     private void clear() {
-        txtName.setText(Constans.empty);
-        txtBrand.setText(Constans.empty);
+        txtName.setText(Constan.empty);
+        txtBrand.setText(Constan.empty);
 
         spnPrecio.setValue(0);
         spnStock.setValue(0);

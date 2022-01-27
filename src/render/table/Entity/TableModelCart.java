@@ -11,7 +11,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel; 
 import render.table.TableModel;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TableModelCart {
     } 
     
     private void renderTable(JTable table, List<Details> array){
-        this.tableModel.tableNoEditable(table, Headers.headres_cart); 
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_cart); 
         table.removeAll(); 
 
         array.stream().map(details -> {

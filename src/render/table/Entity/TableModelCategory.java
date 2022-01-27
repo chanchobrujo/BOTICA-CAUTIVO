@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import modules.modulePorduct;
 import render.table.TableModel;
 import util.Commons;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -27,7 +27,7 @@ public class TableModelCategory {
     } 
     
     private void renderTable(JTable table){
-        this.tableModel.tableNoEditable(table, Headers.headres_category); 
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_category); 
         table.removeAll(); 
         
         modulePorduct.findAll_Categories().stream().map(category -> {
