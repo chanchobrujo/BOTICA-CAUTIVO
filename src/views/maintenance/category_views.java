@@ -7,23 +7,28 @@ package views.maintenance;
 
 import entities.Category;  
 import Constans.Constan;
-import modules.modulePorduct; 
+import modules.modelProduct; 
+import render.ComboBox.ComboBoxCategories;
 import render.table.Entity.TableModelCategory;
 import util.Commons; 
+import static views.maintenance.products_views.cmbCategories;
 
 /**
  *
  * @author kpalmall
  */
 public class category_views extends javax.swing.JFrame {
-    private modulePorduct modulePorduct;
+    private modelProduct modulePorduct;
     private Category modelcategory = new Category();
     
     private TableModelCategory tableModelCategory;
     
+    private ComboBoxCategories comboBoxCategories;
+    
     public category_views() {
-        modulePorduct = new modulePorduct();
+        modulePorduct = new modelProduct();
         tableModelCategory = new TableModelCategory();
+        comboBoxCategories = new ComboBoxCategories(); 
         initComponents();
         
         this.table_category();
@@ -212,6 +217,7 @@ public class category_views extends javax.swing.JFrame {
                 txtName.getText(), modelcategory.getState());
         lblMessage.setText(message); 
         
+        this.comboBoxCategories.combo_categories(products_views.cmbCategories); 
         this.clear();
         this.table_category();
     }//GEN-LAST:event_jButton1ActionPerformed

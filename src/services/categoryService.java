@@ -26,10 +26,11 @@ public class categoryService {
     public String save(int id, String name){
         String message = Constans.Enums.ErrorMessage.REPETED_VALUES.getValue(); 
         
-        if (!this.verifyByName(name)) return message;
+        if (this.verifyByName(name)) return message;
         
         Category category = Category.builder()
                 .name(name)
+                .state(Boolean.TRUE)
                 .build();
         
         switch(id){

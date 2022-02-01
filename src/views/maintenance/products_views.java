@@ -8,11 +8,13 @@ package views.maintenance;
 import entities.Category; 
 import Constans.Constan;
 import java.util.List;  
+import javafx.scene.control.ComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;   
 import model.ModelProduct;
-import modules.modulePorduct;
-import render.table.Entity.TableModelProduct;
+import modules.modelProduct;
+import render.ComboBox.ComboBoxCategories;
+import render.table.Entity.TableModelProduct; 
 import util.Commons; 
 import views.Administration;
 
@@ -22,39 +24,31 @@ import views.Administration;
  */
 public class products_views extends javax.swing.JFrame {
 
-    private modulePorduct modulePorduct;
+    private modelProduct modulePorduct;
     private ModelProduct modelproduct = new ModelProduct();
     
-    private TableModelProduct tableModelProduct;
+    private TableModelProduct tableModelProduct; 
+    
+    private ComboBoxCategories comboBoxCategories;
 
     /**
      * Creates new form products
      */
     public products_views() {
-        modulePorduct = new modulePorduct();
-        tableModelProduct = new TableModelProduct();
+        modulePorduct = new modelProduct();
+        tableModelProduct = new TableModelProduct(); 
+        comboBoxCategories = new ComboBoxCategories(); 
+        
         initComponents();
 
         this.recharge_data();
         this.SetModelSpinner(this.spnPrecio);
     }
     
-    private void recharge_data(){ 
-        
-        this.tableModelProduct.tableProductData(tblProduct); 
-        
-        this.combo_categories();
-    } 
-
-    private void combo_categories() {
-        cmbCategories.removeAllItems();
-        List<Category> array = modulePorduct.findAll_Categories();
-
-        for (Category category : array) {
-            ((DefaultComboBoxModel) cmbCategories.getModel())
-                    .addElement(category.getName());
-        }
-    }
+    private void recharge_data(){  
+        this.tableModelProduct.setProductListUpdate(tblProduct);  
+        this.comboBoxCategories.combo_categories(cmbCategories);
+    }  
 
     private void SetValueSelected(ModelProduct model) {
         txtName.setText(model.getName());
@@ -404,8 +398,9 @@ public class products_views extends javax.swing.JFrame {
                     Integer.parseInt(spnStock.getValue().toString()), 
                     cmbCategories.getSelectedItem().toString());
         
-        lblMessage.setText(message); 
-        this.tableModelProduct.tableProductData(Administration.tblProduct);
+        lblMessage.setText(message);  
+        
+        this.tableModelProduct.setProductListUpdate(Administration.tblProduct);  
         this.clear(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -482,7 +477,7 @@ public class products_views extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbCategories;
+    public static javax.swing.JComboBox<String> cmbCategories;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

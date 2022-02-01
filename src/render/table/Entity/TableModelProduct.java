@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modules.modulePorduct;
+import modules.modelProduct;
 import render.table.TableModel;
 import util.Commons;
 import Constans.Headers.HeadersTableSwing;
+import java.util.stream.Stream;
 
 /**
  *
@@ -21,11 +22,11 @@ import Constans.Headers.HeadersTableSwing;
  */
 public class TableModelProduct {
     private TableModel tableModel;
-    private modulePorduct modulePorduct;
+    private modelProduct modulePorduct;
 
     public TableModelProduct() {
         tableModel = new TableModel();
-        modulePorduct = new modulePorduct();
+        modulePorduct = new modelProduct();
     } 
     
     private void renderTable(JTable table, List<Product> array){
@@ -56,5 +57,9 @@ public class TableModelProduct {
     
     public void tableProductDataSearch(JTable table, String value){
         this.renderTable(table, modulePorduct.searchProduct(value));
+    }
+    
+    public void setProductListUpdate(JTable ...tables){
+        Stream.of(tables).forEach(this::tableProductData); 
     }
 }
