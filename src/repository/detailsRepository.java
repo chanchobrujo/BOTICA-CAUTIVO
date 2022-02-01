@@ -7,8 +7,8 @@ package repository;
 
 import entities.Details;  
 import entities.Product;
-import enums.AlertMessage; 
-import enums.Constans;
+import Constans.Enums.AlertMessage;
+import Constans.Constan;
 import java.util.ArrayList;
 import java.util.List; 
 import java.util.Objects;
@@ -42,11 +42,11 @@ public class detailsRepository {
         return verify ? 
                 findProduct.get()
                         .getName()
-                        .concat(Constans.double_point)
+                        .concat(Constan.double_point)
                         .concat(findProduct.get().getBrand())
-                        .concat(Constans.double_point)  
+                        .concat(Constan.double_point)  
                         .concat(findProduct.get().getCategory().getName()) 
-                : Constans.empty;
+                : Constan.empty;
     }
     
     private Double findPriceProduct(Integer id){ 

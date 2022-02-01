@@ -8,10 +8,10 @@ package render.table.Entity;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modules.modulePorduct;
+import modules.modelProduct;
 import render.table.TableModel;
 import util.Commons;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -19,15 +19,15 @@ import util.Headers;
  */
 public class TableModelCategory {
     private TableModel tableModel;
-    private modulePorduct modulePorduct;
+    private modelProduct modulePorduct;
 
     public TableModelCategory() {
         tableModel = new TableModel(); 
-        modulePorduct = new modulePorduct();
+        modulePorduct = new modelProduct();
     } 
     
     private void renderTable(JTable table){
-        this.tableModel.tableNoEditable(table, Headers.headres_category); 
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_category); 
         table.removeAll(); 
         
         modulePorduct.findAll_Categories().stream().map(category -> {

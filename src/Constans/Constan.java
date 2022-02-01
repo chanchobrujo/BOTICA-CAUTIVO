@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package enums;
+package Constans;
 
 /**
  *
  * @author kpalmall
  */
-public class Constans { 
+public class Constan { 
     public static final String empty = ""; 
     public static final String space = " ";
     public static final String point = ".";

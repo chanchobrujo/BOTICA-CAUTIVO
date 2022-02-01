@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package render.table.Pdf_Report;
+package render.pdf;
 
 import com.itextpdf.text.BadElementException; 
 import com.itextpdf.text.Document;
@@ -11,8 +11,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import enums.Constans;
-import enums.OSname;
+import Constans.Constan;
+import Constans.Enums.OSname;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class PDFInit {
         String osname = System.getProperty("os.name").toUpperCase();
         String url = OSname.findUrlByOsName(osname).get().getSrcByPdf();
 
-        return url.concat(nameDoc).concat(Constans.format_file);
+        return url.concat(nameDoc).concat(Constan.format_file);
     }
 
     public Document initializeDocument(String nameDoc) throws FileNotFoundException, DocumentException {

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
-import enums.Role; 
+import Constans.Enums.Role; 
 import java.util.Date;
 import util.Commons;
 
@@ -219,13 +219,13 @@ public class Authorization extends javax.swing.JFrame {
             administration.setVisible(true);
             this.dispose();
         } else {
-            lblMessage.setText(enums.AlertMessage.FORBIDENN.getValue());
+            lblMessage.setText(Constans.Enums.AlertMessage.FORBIDENN.getValue());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:   
-        String email = JOptionPane.showInputDialog(enums.AlertMessage.RECOVERY_PASSWORD.getValue());
+        String email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
         lblMessage.setText(moduleAuth.restoredPassword(email));
     }//GEN-LAST:event_jButton2ActionPerformed
 

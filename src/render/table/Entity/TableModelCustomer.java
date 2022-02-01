@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modules.moduleCustomer;  
 import render.table.TableModel;
-import util.Headers;
+import Constans.Headers.HeadersTableSwing;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TableModelCustomer {
     }
     
     private void renderTable(JTable table){
-        this.tableModel.tableNoEditable(table, Headers.headres_customer); 
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_customer); 
         table.removeAll(); 
         
         moduleCustomer.findAll().stream().map(customer -> {

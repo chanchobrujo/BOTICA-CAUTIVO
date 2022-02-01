@@ -6,7 +6,7 @@ package modules;
 
 import entities.Category;
 import entities.Product; 
-import enums.ErrorMessage;
+import Constans.Enums.ErrorMessage;
 import java.util.List; 
 import java.util.Optional; 
 import java.util.stream.Collectors;
@@ -18,14 +18,14 @@ import util.Commons;
  *
  * @author umbke
  */
-public class modulePorduct {
+public class modelProduct {
     
     private static final String messageError = ErrorMessage.DATA_VOID.getValue();
     
     private categoryService categoryService; 
     private productService productService; 
 
-    public modulePorduct() { 
+    public modelProduct() { 
         categoryService = new categoryService(); 
         productService = new productService(); 
     }

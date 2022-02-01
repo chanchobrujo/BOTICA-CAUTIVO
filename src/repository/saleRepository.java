@@ -7,8 +7,8 @@ package repository;
 
 import com.jgoodies.common.base.Objects;
 import entities.Sale;
-import enums.AlertMessage;
-import enums.Constans;
+import Constans.Enums.AlertMessage;
+import Constans.Constan;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,9 +38,9 @@ public class saleRepository {
                 .filter(user -> Objects.equals(user.getId(), Commons.StringToInteger(id)))
                 .map(mapper -> {
                     return mapper.getFirtsname()
-                            .concat(Constans.space)
+                            .concat(Constan.space)
                             .concat(mapper.getLastname())
-                            .concat(Constans.double_point)
+                            .concat(Constan.double_point)
                             .concat(id);
                 })
                 .findFirst()
@@ -52,9 +52,9 @@ public class saleRepository {
                 .filter(customer -> Objects.equals(customer.getId(), Commons.StringToInteger(id)))
                 .map(mapper -> {
                     return mapper.getFirtsname()
-                            .concat(Constans.space)
+                            .concat(Constan.space)
                             .concat(mapper.getLastname())
-                            .concat(Constans.double_point)
+                            .concat(Constan.double_point)
                             .concat(id);
                 })
                 .findFirst()

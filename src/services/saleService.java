@@ -7,7 +7,7 @@ package services;
 
 import entities.Product;
 import entities.Sale;
-import enums.Constans;
+import Constans.Constan;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class saleService {
     }
 
     private Integer separateStringID(String id) {
-        String iduser = Commons.StringSeparate(id, Constans.double_point)[1];
+        String iduser = Commons.StringSeparate(id, Constan.double_point)[1];
         return Commons.StringToInteger(iduser);
 
     }

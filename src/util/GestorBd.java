@@ -5,8 +5,8 @@
  */
 package util;
 
-import enums.AlertMessage;
-import enums.ErrorMessage;
+import Constans.Enums.AlertMessage;
+import Constans.Enums.ErrorMessage;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

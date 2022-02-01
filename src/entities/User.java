@@ -5,7 +5,7 @@
  */
 package entities;  
 
-import enums.Constans;
+import Constans.Constan;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +34,7 @@ public class User {
         this.firtsname = firtsname;
         this.lastname = lastname;
         this.email = email;
-        this.password = Constans.empty;
+        this.password = Constan.empty;
         this.role = role;
         this.state = true;
     }

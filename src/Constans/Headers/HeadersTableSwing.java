@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util; 
+package Constans.Headers; 
 
 /**
  *
  * @author kpalmall
  */
-public class Headers { 
+public class HeadersTableSwing { 
     public static final String headres_category[] = new String[] {"ID", "NOMBRE"
             , "ESTADO"};
     

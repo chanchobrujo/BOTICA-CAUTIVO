@@ -5,7 +5,8 @@
  */
 package util;
 
-import enums.Constans;
+import Constans.Constan;
+import Constans.Enums.State;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Commons {
      * @return String
      */
     public static String IntegerToString(int id){
-        return  id + Constans.empty;
+        return  id + Constan.empty;
     }
     
     /**
@@ -40,7 +41,7 @@ public class Commons {
      * @return Boolean
      */
     public static Boolean StringStateToBoolean(String value){
-        return  value.endsWith(enums.State.ACTIVO.getValue());
+        return  value.endsWith(State.ACTIVO.getValue());
     }
     
     /**
@@ -58,8 +59,8 @@ public class Commons {
      * @return String
      */
     public static String BooleanToString(Boolean value){
-        return  value ? enums.State.ACTIVO.getValue() 
-                : enums.State.INACTIVO.getValue();
+        return  value ? State.ACTIVO.getValue() 
+                : State.INACTIVO.getValue();
     } 
     
     /**
@@ -110,8 +111,8 @@ public class Commons {
         for (String string : value) 
             return Objects.equals(string.length(), 0)
                 || Objects.isNull(string) 
-                || string.equals(Constans.empty)
-                || string.equals(Constans.space);
+                || string.equals(Constan.empty)
+                || string.equals(Constan.space);
         return false;
     }
     
@@ -160,7 +161,7 @@ public class Commons {
      */
     private static String completedZero(Integer value){
         String x = value.toString();
-        return value < 10 ? Constans.zero.concat(x) : x;
+        return value < 10 ? Constan.zero.concat(x) : x;
     }
     
     /**
@@ -186,8 +187,8 @@ public class Commons {
     }
     
     public static String[] separateDate(Date date){
-        SimpleDateFormat formatDate = new SimpleDateFormat(Constans.format_date); 
-        SimpleDateFormat formatTime = new SimpleDateFormat(Constans.format_time); 
+        SimpleDateFormat formatDate = new SimpleDateFormat(Constan.format_date); 
+        SimpleDateFormat formatTime = new SimpleDateFormat(Constan.format_time); 
         
         String date_ = formatDate.format(date);
         String time_ = formatTime.format(date);
@@ -201,7 +202,7 @@ public class Commons {
      * @return String
      */
     public static String generatedDateNow(){
-        SimpleDateFormat format = new SimpleDateFormat(Constans.format_date); 
+        SimpleDateFormat format = new SimpleDateFormat(Constan.format_date); 
         return format.format(new Date()); 
     } 
     
@@ -210,7 +211,7 @@ public class Commons {
      * @return String
      */
     public static String generatedTimeNow(){
-        SimpleDateFormat format = new SimpleDateFormat(Constans.format_time); 
+        SimpleDateFormat format = new SimpleDateFormat(Constan.format_time); 
         return format.format(new Date()); 
     }   
     
@@ -239,7 +240,7 @@ public class Commons {
      */
     public static String dateValue(Date date){ 
         boolean verify = Objects.nonNull(date);
-        return verify ? separateDate(date)[0] : Constans.empty; 
+        return verify ? separateDate(date)[0] : Constan.empty; 
     }
     
     /**
@@ -249,7 +250,7 @@ public class Commons {
      */
     public static String timeValue(Date date){ 
         boolean verify = Objects.nonNull(date);
-        return verify ? separateDate(date)[1] : Constans.empty; 
+        return verify ? separateDate(date)[1] : Constan.empty; 
     }
     
     /**
@@ -258,17 +259,17 @@ public class Commons {
      * @return String
      */  
     public static String setPropertiesProduct(String value){ 
-        String name = Commons.StringSeparate(value, Constans.double_point)[0];
-        String brand = Commons.StringSeparate(value, Constans.double_point)[1];
-        String category = Commons.StringSeparate(value, Constans.double_point)[2];
+        String name = Commons.StringSeparate(value, Constan.double_point)[0];
+        String brand = Commons.StringSeparate(value, Constan.double_point)[1];
+        String category = Commons.StringSeparate(value, Constan.double_point)[2];
         return "    -Nombre: "
                 .concat(name)
-                .concat(Constans.salt_line)
+                .concat(Constan.salt_line)
                 .concat("    -Marca: ")
                 .concat(brand)
-                .concat(Constans.salt_line)
+                .concat(Constan.salt_line)
                 .concat("    -Categoria: ")
                 .concat(category)
-                .concat(Constans.salt_line);
+                .concat(Constan.salt_line);
     } 
 }

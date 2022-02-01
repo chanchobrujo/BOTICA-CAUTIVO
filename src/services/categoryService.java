@@ -24,12 +24,13 @@ public class categoryService {
     } 
     
     public String save(int id, String name){
-        String message = enums.ErrorMessage.REPETED_VALUES.getValue(); 
+        String message = Constans.Enums.ErrorMessage.REPETED_VALUES.getValue(); 
         
-        if (!this.verifyByName(name)) return message;
+        if (this.verifyByName(name)) return message;
         
         Category category = Category.builder()
                 .name(name)
+                .state(Boolean.TRUE)
                 .build();
         
         switch(id){
@@ -45,7 +46,7 @@ public class categoryService {
     }
     
     public String changeState(int id){
-        String message = enums.ErrorMessage.NOTFOUND.getValue();
+        String message = Constans.Enums.ErrorMessage.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent()) {
             Boolean state = !this.findById(id).get().getState();
