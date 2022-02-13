@@ -7,8 +7,10 @@ package repository;
 
 import entities.Rol;
 import entities.User;
+import Constans.Constan; 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
@@ -19,6 +21,11 @@ import util.Mapper;
  * @author kpalmall
  */
 public class userRepository {
+    private static final String SCRIPT_SELECT = "SELECT * FROM user";
+    private static final String SCRIPT_FINDALL = SCRIPT_SELECT.concat(Constan.semicolon);
+    private static String SCRIPT_FINDBYID (Integer id){
+        return SCRIPT_SELECT.concat(" WHERE id = ").concat(id.toString()).concat(Constan.semicolon);
+    }
 
     private rolRepository rolRepository;
 
@@ -52,5 +59,16 @@ public class userRepository {
                     .collect(Collectors.toList());
         }
         return findAll;
+    }
+
+    public User findById(Integer id) {
+        User user = null;
+        Object[] find = GestorBd.find(SCRIPT_FINDBYID(id));
+        
+        if (Objects.nonNull(find)) {
+            user = Mapper.mapperUser(find);
+            user.setRole(this.findRole(find[5].toString()));
+        }
+        return user;
     }
 }

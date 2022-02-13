@@ -8,6 +8,7 @@ package services;
 import entities.Category; 
 import entities.Product; 
 import java.util.List;   
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import repository.categoryRepository;
@@ -80,12 +81,11 @@ public class productService {
                 .filter(pp -> pp.getBrand().equals(brand))
                 .filter(pp -> pp.getName().equals(name))
                 .findFirst();
-    }
+    } 
     
-    public Optional<Product> findById(int id){
-        return this.findAll().stream()
-                .filter(pro -> pro.getId() == id)
-                .findFirst();
+    public Optional<Product> findById(Integer id){
+        Product product = this.productRepository.findById(id);
+        return Objects.nonNull(product) ? Optional.of(product) : Optional.empty();
     }
     
     public List<Product> findAll(){

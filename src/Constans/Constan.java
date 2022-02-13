@@ -14,6 +14,7 @@ public class Constan {
     public static final String space = " ";
     public static final String point = ".";
     public static final String double_point = ":";
+    public static final String semicolon = ";";
     
     public static final String salt_line = "\n";
     

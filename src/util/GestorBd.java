@@ -25,7 +25,7 @@ public class GestorBd {
         String m = AlertMessage.EXECUTE_SUCCESS.getValue();
         try {
             Connection cn = Connectionn.getConexion();
-            if (cn != null) {
+            if (Objects.nonNull(cn)) {
                 Statement st = cn.createStatement();
                 st.executeUpdate(sql);
                 cn.close();
@@ -38,15 +38,12 @@ public class GestorBd {
         return m;
     }
 
-    public static Object[] find(String sql) {
-        Object[] fila = null;
+    public static Object[] find(String sql) { 
         List lista = findAll(sql);
-        if (lista != null) {
-            if (lista.size() > 1) {
-                fila = (Object[]) lista.get(1);
-            }
-        }
-        return fila;
+        if (Commons.collectionNonEmptyOrNull(lista))
+            return (Object[]) lista.stream().findFirst().get();
+        
+        return null;
     }
 
     public static List findAll(String sql) {

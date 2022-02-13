@@ -23,7 +23,7 @@ public class categoryService {
         categoryRepository = new categoryRepository();
     } 
     
-    public String save(int id, String name){
+    public String save(Integer id, String name){
         String message = Constans.Enums.ErrorMessage.REPETED_VALUES.getValue(); 
         
         if (this.verifyByName(name)) return message;
@@ -45,7 +45,7 @@ public class categoryService {
         return message;
     }
     
-    public String changeState(int id){
+    public String changeState(Integer id){
         String message = Constans.Enums.ErrorMessage.NOTFOUND.getValue();
         
         if (this.findById(id).isPresent()) {
@@ -55,12 +55,14 @@ public class categoryService {
         return message;
     } 
     
-    public Boolean verifyByName(String name){ 
-        return this.findByName(name).isPresent();
-    }
-    
     public List<Category> findAll(){
         return categoryRepository.findAll();
+    }
+    
+    public List<Category> findAll_States(Boolean state){
+        return this.findAll().stream()
+                .filter(cat->cat.getState().equals(state))
+                .collect(Collectors.toList());
     }
     
     public Optional<Category> findByName(String name){
@@ -69,16 +71,13 @@ public class categoryService {
                 .findFirst();
     }
     
-    public Optional<Category> findById(int id){
-        return categoryRepository.findAll().stream()
-                .filter(rol -> Objects.equals(rol.getId(), id))
-                .findFirst();
+    private Optional<Category> findById(Integer id){
+        Category category = categoryRepository.findById(id);
+        return Objects.nonNull(category) ? Optional.of(category) : Optional.empty();
     }
     
-    public List<Category> findAll_States(Boolean state){
-        return this.findAll().stream()
-                .filter(cat->cat.getState().equals(state))
-                .collect(Collectors.toList());
+    private Boolean verifyByName(String name){ 
+        return this.findByName(name).isPresent();
     }
     
 }

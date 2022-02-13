@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter 
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class User { 

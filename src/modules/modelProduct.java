@@ -52,10 +52,6 @@ public class modelProduct {
         return categoryService.findByName(name);
     }
     
-    public Optional<Category> findById_Categories(int id){
-        return categoryService.findById(id);
-    }
-    
     public List<Product> findAll_Products(){
         return productService.findAll();
     } 

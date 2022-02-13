@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -18,19 +19,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
-    private int id;
+    private Integer id;
     private String name;
     private String brand;
     private Double price;
-    private int stock; 
+    private Integer stock; 
     private Category category;
     private Boolean state; 
     
-    public Product(String name, String brand, Double price, int stock, 
+    public Product(String name, String brand, Double price, Integer stock, 
             Category category) { 
         this.name = name;
         this.brand = brand;
@@ -40,7 +42,7 @@ public class Product {
         this.state = true;
     }
 
-    public Product(int id, String name, String brand, Double price, int stock, 
+    public Product(int id, String name, String brand, Double price, Integer stock, 
             Category category) {
         this.id = id;
         this.name = name;

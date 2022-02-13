@@ -5,10 +5,12 @@
  */
 package repository;
 
+import Constans.Constan;
 import entities.Category;
 import entities.Product;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import util.Commons;
 import util.GestorBd;
@@ -19,18 +21,16 @@ import util.Mapper;
  * @author kpalmall
  */
 public class productRepository {
+    private static final String SCRIPT_SELECT = "SELECT * FROM product";
+    private static final String SCRIPT_FINDALL = SCRIPT_SELECT.concat(Constan.semicolon);
+    private static String SCRIPT_FINDBYID (Integer id){
+        return SCRIPT_SELECT.concat(" WHERE id = ").concat(id.toString()).concat(Constan.semicolon);
+    }
     
     private categoryRepository categoryRepository;
     
     public productRepository(){
         categoryRepository = new categoryRepository();
-    }
-    
-    private Category findCategory(Integer id_category){ 
-        return this.categoryRepository.findAll().stream()
-                .filter(cat -> cat.getId() == id_category)
-                .findFirst()
-                 .get();
     }
 
     public String insert(Product product) {
@@ -65,12 +65,12 @@ public class productRepository {
         List list = GestorBd.findAll("SELECT * FROM product;");
         List<Product> findAll = new ArrayList<>(); 
         
-        if (Commons.collectionNonEmptyOrNull(list)) {
+        if (Commons.collectionNonEmptyOrNull(list))
             list.stream()
                     .map(mapper -> {
                         Object[] row = (Object[]) mapper;
                         Integer id_category = Integer.parseInt(row[5].toString());
-                        Category category = this.findCategory(id_category);
+                        Category category = this.categoryRepository.findById(id_category);
                         
                         Product product = Mapper.mapperProduct(mapper);
                         product.setCategory(category);
@@ -79,7 +79,21 @@ public class productRepository {
                         return mapper;
                     })
                     .collect(Collectors.toList());  
-        } 
+        
         return findAll;
+    }
+
+    public Product findById(Integer id) {
+        Product product = null;
+        Object[] find = GestorBd.find(SCRIPT_FINDBYID(id));
+        
+        if (Objects.nonNull(find)) { 
+            Integer id_category = Integer.parseInt(find[5].toString());
+            Category category = this.categoryRepository.findById(id_category); 
+            
+            product = Mapper.mapperProduct(find);
+            product.setCategory(category);
+        }
+        return product;
     }
 }

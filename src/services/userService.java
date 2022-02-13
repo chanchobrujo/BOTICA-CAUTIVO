@@ -7,6 +7,7 @@ package services;
 
 import entities.User;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import repository.rolRepository;
 import repository.userRepository;
@@ -29,10 +30,9 @@ public class userService {
         return userRepository.findAll();
     }
     
-    public Optional<User> findById(int id){
-        return userRepository.findAll().stream()
-                .filter(u->u.getId() == id)
-                .findFirst();
+    public Optional<User> findById(Integer id){ 
+        User user = this.userRepository.findById(id);
+        return Objects.nonNull(user) ? Optional.of(user) : Optional.empty();
     }
     
     public Optional<User> login(String email, String password){
