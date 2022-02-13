@@ -5,12 +5,14 @@
  */
 package repository;
 
-import com.jgoodies.common.base.Objects;
 import entities.Sale;
 import Constans.Enums.AlertMessage;
 import Constans.Constan;
+import entities.Customer;
+import entities.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import model.ModelSale;
 import util.Commons;
@@ -22,6 +24,7 @@ import util.Mapper;
  * @author chanchobrujo
  */
 public class saleRepository {
+    private static final String SCRIPT_SELECT = "SELECT * FROM sale";
 
     private customerRepository customerRepository;
     private detailsRepository detailsRepository;
@@ -32,33 +35,29 @@ public class saleRepository {
         detailsRepository = new detailsRepository();
         customerRepository = new customerRepository();
     }
+    
+    private String builderName(String first, String last, String id){
+        return first
+                .concat(Constan.space)
+                .concat(last)
+                .concat(Constan.double_point)
+                .concat(id) ;
+    }
 
     private String UserNameById(String id) {
-        return this.userRepository.findAll().stream()
-                .filter(user -> Objects.equals(user.getId(), Commons.StringToInteger(id)))
-                .map(mapper -> {
-                    return mapper.getFirtsname()
-                            .concat(Constan.space)
-                            .concat(mapper.getLastname())
-                            .concat(Constan.double_point)
-                            .concat(id);
-                })
-                .findFirst()
-                .get();
+        User user = this.userRepository.findById(Integer.parseInt(id)); 
+        
+        return Objects.nonNull(user) 
+                ? this.builderName(user.getFirtsname(), user.getLastname(), id)
+                : Constan.empty;
     }
 
     private String CustomerNameById(String id) {
-        return this.customerRepository.findAll().stream()
-                .filter(customer -> Objects.equals(customer.getId(), Commons.StringToInteger(id)))
-                .map(mapper -> {
-                    return mapper.getFirtsname()
-                            .concat(Constan.space)
-                            .concat(mapper.getLastname())
-                            .concat(Constan.double_point)
-                            .concat(id);
-                })
-                .findFirst()
-                .get();
+        Customer customer = this.customerRepository.findById(Integer.parseInt(id));  
+        
+        return Objects.nonNull(customer) 
+                ? this.builderName(customer.getFirtsname(), customer.getLastname(), id)
+                : Constan.empty;
     }
 
     public String grabarVentasParaUsuarioCliente(Sale sale) {
@@ -80,7 +79,7 @@ public class saleRepository {
     }
 
     public List<ModelSale> findAll() {
-        List list = GestorBd.findAll("SELECT * FROM sale;");
+        List list = GestorBd.findAll(SCRIPT_SELECT);
         List<ModelSale> findAll = new ArrayList<>();
 
         if (Commons.collectionNonEmptyOrNull(list)) {

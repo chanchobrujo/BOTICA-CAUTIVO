@@ -33,25 +33,18 @@ public class userRepository {
         rolRepository = new rolRepository();
     }
 
-    public Rol findRole(String id) {
-        return this.rolRepository.findAll()
-                .stream()
-                .filter(rol -> rol.getId() == Integer.parseInt(id))
-                .findFirst()
-                .get();
-    }
-
     public List<User> findAll() {
-        List list = GestorBd.findAll("SELECT * FROM user;");
+        List list = GestorBd.findAll(SCRIPT_SELECT);
         List<User> findAll = new ArrayList<>();
 
         if (Commons.collectionNonEmptyOrNull(list)) {
             list.stream()
-                    .map(mapper -> {
-                        User user = Mapper.mapperUser(mapper);
-
+                    .map(mapper -> { 
                         Object[] row = (Object[]) mapper;
-                        user.setRole(this.findRole(row[5].toString()));
+                        Integer id_role = Integer.parseInt(row[5].toString());
+                        
+                        User user = Mapper.mapperUser(mapper);
+                        user.setRole(this.rolRepository.findById(id_role));
 
                         findAll.add(user);
                         return mapper;
@@ -66,8 +59,9 @@ public class userRepository {
         Object[] find = GestorBd.find(SCRIPT_FINDBYID(id));
         
         if (Objects.nonNull(find)) {
+            Integer id_role = Integer.parseInt(find[5].toString());
             user = Mapper.mapperUser(find);
-            user.setRole(this.findRole(find[5].toString()));
+            user.setRole(this.rolRepository.findById(id_role));
         }
         return user;
     }

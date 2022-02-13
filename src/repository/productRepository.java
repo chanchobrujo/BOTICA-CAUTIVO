@@ -62,7 +62,7 @@ public class productRepository {
     }
     
     public List<Product> findAll() {
-        List list = GestorBd.findAll("SELECT * FROM product;");
+        List list = GestorBd.findAll(SCRIPT_SELECT);
         List<Product> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list))

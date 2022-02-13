@@ -12,7 +12,6 @@ import Constans.Constan;
 import java.util.ArrayList;
 import java.util.List; 
 import java.util.Objects;
-import java.util.Optional;
 import model.ModelDetail;
 import util.Commons;
 import util.GestorBd;
@@ -28,32 +27,22 @@ public class detailsRepository {
         productRepository = new productRepository();
     }
     
-    private Optional<Product> findProductByID(Integer id){
-        return this.productRepository.findAll()
-                .stream()
-                .filter(p -> Objects.equals(p.getId(), id))
-                .findFirst();
-    }
-    
     private String findNameProduct(Integer id){
-        Optional<Product> findProduct = this.findProductByID(id);
-        boolean verify = findProduct.isPresent();
+        Product findProduct = this.productRepository.findById(id); 
         
-        return verify ? 
-                findProduct.get()
-                        .getName()
+        return Objects.nonNull(findProduct) ? 
+                findProduct.getName()
                         .concat(Constan.double_point)
-                        .concat(findProduct.get().getBrand())
+                        .concat(findProduct.getBrand())
                         .concat(Constan.double_point)  
-                        .concat(findProduct.get().getCategory().getName()) 
+                        .concat(findProduct.getCategory().getName()) 
                 : Constan.empty;
     }
     
     private Double findPriceProduct(Integer id){ 
-        Optional<Product> findProduct = this.findProductByID(id);
-        boolean verify = findProduct.isPresent();
+        Product findProduct = this.productRepository.findById(id);
         
-        return verify ? findProduct.get().getPrice() : 0.0;
+        return Objects.nonNull(findProduct) ? findProduct.getPrice() : 0.0;
     }
     
     private String grabarDetalle(Details details) {
