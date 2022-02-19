@@ -10,8 +10,7 @@ import Constans.Constan;
 import modules.modelProduct; 
 import render.ComboBox.ComboBoxCategories;
 import render.table.Entity.TableModelCategory;
-import util.Commons; 
-import static views.maintenance.products_views.cmbCategories;
+import util.Commons;
 
 /**
  *

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import model.ModelProductsTop;
 import model.ModelSale;
 import util.Commons;
 import util.GestorBd;
@@ -25,6 +26,9 @@ import util.Mapper;
  */
 public class saleRepository {
     private static final String SCRIPT_SELECT = "SELECT * FROM sale";
+    private static final String SCRIPT_REPORT_PRODUCTS_TOP = "SELECT p.id as 'id_product', p.name, p.brand, COUNT(*) as 'count' FROM sale s "
+            + "INNER JOIN detail_sale_product d on s.id = d.id_sale "
+            + "INNER JOIN product p on d.id_product = p.id GROUP BY p.id LIMIT 10"; 
 
     private customerRepository customerRepository;
     private detailsRepository detailsRepository;
@@ -97,6 +101,34 @@ public class saleRepository {
                     .collect(Collectors.toList());
         }
 
+        return findAll;
+    }
+
+    public List<ModelProductsTop> productsTop() {
+        List list = GestorBd.findAll(SCRIPT_REPORT_PRODUCTS_TOP);
+        List<ModelProductsTop> findAll = new ArrayList<>(); 
+        
+        System.err.println(Commons.collectionNonEmptyOrNull(list));
+        if (Commons.collectionNonEmptyOrNull(list)) {
+            list.stream()
+                    .map(mapper -> {
+                        Object[] row = (Object[]) mapper;
+                        Integer idp = Commons.StringToInteger(row[0].toString());
+                        Integer count = Commons.StringToInteger(row[3].toString());
+                        String name = row[1].toString();
+                        String brand = row[2].toString();
+                        ModelProductsTop model = ModelProductsTop.builder()
+                                .id_product(idp)
+                                .name(name)
+                                .brand(brand)
+                                .count(count)
+                                .build();
+                        findAll.add(model);
+                        return mapper;
+                    })
+                    .collect(Collectors.toList());
+        }
+        
         return findAll;
     }
 }
