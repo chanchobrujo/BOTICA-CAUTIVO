@@ -25,7 +25,7 @@ import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
 import views.maintenance.products_views; 
-import views.reports.ReportProducts;
+import views.reports.SalesProductsTop;
 import views.reports.ReportSales;
 
 /**
@@ -41,7 +41,7 @@ public class Administration extends javax.swing.JFrame {
     private final category_views category; 
     
     private final ReportSales reportSales; 
-    private final ReportProducts reportProducts; 
+    private final SalesProductsTop reportProducts; 
     
     private ModelProduct modelproduct = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
@@ -64,7 +64,7 @@ public class Administration extends javax.swing.JFrame {
         category = new category_views();
         
         reportSales = new ReportSales();
-        reportProducts = new ReportProducts();
+        reportProducts = new SalesProductsTop();
         
         initComponents();
         this.addImageLogo(Constan.src_image_logo);

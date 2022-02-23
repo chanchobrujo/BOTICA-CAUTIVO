@@ -21,8 +21,8 @@ public class ReportsService {
         saleRepository = new saleRepository();
     }
 
-    public List<ModelProductsTop> productsTop() {
-        return this.saleRepository.productsTop();
+    public List<ModelProductsTop> productsTop(String top, String dateS, String dateE) {
+        return this.saleRepository.productsTop(top, dateS, dateE);
     }
     
 }

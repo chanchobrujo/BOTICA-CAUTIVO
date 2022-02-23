@@ -10,6 +10,7 @@ import entities.Customer;
 import entities.Product;
 import entities.Rol;
 import entities.User;
+import model.ModelProductsTop;
 import model.ModelSale;
 
 /**
@@ -103,5 +104,20 @@ public class Mapper {
                         .desc(Commons.StringToDouble(row[4].toString()))
                         .total(Commons.StringToDouble(row[5].toString()))
                         .build();
+    }
+
+    public static ModelProductsTop mapperModelProductsTop(Object object) {
+        Object[] row = (Object[]) object;
+        Integer idp = Commons.StringToInteger(row[0].toString());
+        String name = row[1].toString();
+        String brand = row[2].toString();
+        Integer count = Commons.StringToInteger(row[3].toString());
+
+        return ModelProductsTop.builder()
+                .id_product(idp)
+                .name(name)
+                .brand(brand)
+                .count(count)
+                .build();
     }
 } 

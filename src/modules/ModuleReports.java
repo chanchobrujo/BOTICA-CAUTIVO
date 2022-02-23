@@ -20,8 +20,8 @@ public class ModuleReports {
         reportsService = new ReportsService();
     }
 
-    public List<ModelProductsTop> productsTop() {
-        return this.reportsService.productsTop();
+    public List<ModelProductsTop> productsTop(String top, String dateS, String dateE) {
+        return this.reportsService.productsTop(top, dateS, dateE);
     }
     
 }
