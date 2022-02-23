@@ -7,8 +7,7 @@ package views.maintenance;
 
 import entities.Category; 
 import Constans.Constan;
-import java.util.List;  
-import javafx.scene.control.ComboBox;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;   
 import model.ModelProduct;
