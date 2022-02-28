@@ -9,6 +9,9 @@ import entities.User;
 import java.util.Optional;
 import services.rolService;
 import services.userService; 
+import util.Commons;
+import util.MyFuntions;
+import util.SenderMail;
 
 /**
  *
@@ -33,11 +36,13 @@ public class moduleAuth {
         return userService.findByEmail(email);
     }
     
-    public String restoredPassword(String email){
+    public String restoredPassword(String email) throws Exception{
         String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue();
         if (this.findByEmail(email).isPresent()) {
-            //logic
-            msg = Constans.Enums.AlertMessage.RESTORED_PASSWORD.getValue();
+            String password = Commons.generatedID(); 
+            msg = SenderMail.sendMail(email, "Restauración de contraseña", password);
+            
+            msg = msg.concat(" ").concat(this.userService.setPasswordUser(email, password));
         }
         return msg;
     }

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -271,5 +272,13 @@ public class Commons {
                 .concat("    -Categoria: ")
                 .concat(category)
                 .concat(Constan.salt_line);
-    } 
+    }  
+    
+    /**
+     * Genera una cadena aleatoria de caracteres.
+     * @return String
+     */
+    public static String generatedID() { 
+        return (String) UUID.randomUUID().toString().toUpperCase().subSequence(0,8);
+    }
 }

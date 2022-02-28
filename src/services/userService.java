@@ -49,4 +49,12 @@ public class userService {
                 .filter(user->user.getState())
                 .findFirst();
     }
+    
+    public String setPasswordUser(String email, String newpassword){
+        this.findByEmail(email).ifPresent(consumer -> {
+            consumer.setPassword(MyFuntions.encryptInSHA1(newpassword)); 
+            this.userRepository.update(consumer);
+        });
+        return Constans.Constan.empty;
+    }
 }

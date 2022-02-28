@@ -32,7 +32,13 @@ public class userRepository {
     public userRepository() {
         rolRepository = new rolRepository();
     }
+    
 
+    public String update(User user) {
+        String sql = "UPDATE user SET password = '"+user.getPassword()+"' WHERE id = "+user.getId();
+        return GestorBd.execute(sql);
+    }
+    
     public List<User> findAll() {
         List list = GestorBd.findAll(SCRIPT_SELECT);
         List<User> findAll = new ArrayList<>();

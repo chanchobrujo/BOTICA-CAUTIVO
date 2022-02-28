@@ -15,6 +15,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import Constans.Enums.Role; 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.Commons;
 
 /**
@@ -207,15 +209,15 @@ public class Authorization extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:  
         Optional<User> user = moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
-        
+
         if (user.isPresent()) {
-                String id = Commons.IntegerToString(user.get().getId());
-                Administration.UserId.setText(id); 
-                
-                String role = user.get().getRole().getName();
-                Optional<Role> roleFind = Role.findRole(role);
-                roleFind.ifPresent(this::AssingRule); 
-            
+            String id = Commons.IntegerToString(user.get().getId());
+            Administration.UserId.setText(id);
+
+            String role = user.get().getRole().getName();
+            Optional<Role> roleFind = Role.findRole(role);
+            roleFind.ifPresent(this::AssingRule);
+
             administration.setVisible(true);
             this.dispose();
         } else {
@@ -226,7 +228,11 @@ public class Authorization extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:   
         String email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
-        lblMessage.setText(moduleAuth.restoredPassword(email));
+        try {
+            lblMessage.setText(moduleAuth.restoredPassword(email));
+        } catch (Exception ex) {
+            Logger.getLogger(Authorization.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
