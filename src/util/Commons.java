@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  *
@@ -280,5 +281,39 @@ public class Commons {
      */
     public static String generatedID() { 
         return (String) UUID.randomUUID().toString().toUpperCase().subSequence(0,8);
+    }
+
+    /**
+     * Verifica si una cadena es númerica
+     * @param chard
+     * @return boolean
+     */
+    private static boolean isNumeric(String chard) {
+        try {
+            Integer.parseInt(chard);
+            return true;
+        } catch (NumberFormatException nfe) {
+            System.err.println(nfe.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Verifica si la contraseña es segura.
+     *
+     * @param password
+     * @return boolean
+     */
+    public static boolean validatePassword(String password) {
+        boolean validateLength = password.length() > 6;
+        if (validateLength) {
+            
+            boolean verifyArr = Stream.of(password.split(Constan.empty)).anyMatch(predicate -> predicate.equals("@"));
+            boolean verifyAst = Stream.of(password.split(Constan.empty)).anyMatch(predicate -> predicate.equals("*"));
+            boolean verifyIsNumeric = Stream.of(password.split(Constan.empty)).anyMatch(predicate -> isNumeric(predicate));
+
+            return (verifyArr || verifyAst) && verifyIsNumeric;
+        }
+        return validateLength;
     }
 }

@@ -6,6 +6,7 @@
 package util;
 
 import java.util.Properties;
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,6 +17,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import Constans.Constan;
+import java.util.Date;
 
 /**
  *
@@ -69,7 +73,7 @@ public class SenderMail {
                 transport.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
             }
 
-            return Constans.Constan.send_email;
+            return Constan.send_email;
         } catch (MessagingException e) {
             return e.getMessage();
         }
@@ -77,7 +81,7 @@ public class SenderMail {
     
     public static String assingPassword(String email, String password) throws Exception{
         try {
-            return sendMail("Recuperación de contraseña", email, Constans.Constan.recovery_password, password);
+            return sendMail("Recuperación de contraseña.", email, Constan.recovery_password, password);
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -85,7 +89,16 @@ public class SenderMail {
     
     public static String sendToken(String email) throws Exception{
         try {
-            return sendMail("Token para validar cambio de contraseña", email, Constans.Constan.token, Commons.generatedID());
+            String p = Commons.generatedID();
+            return sendMail("Token para validar cambio de contraseña.", email, Constan.token, p).concat(Constan.pipe).concat(p);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+    
+    public static String alertNewPassword(String email) throws Exception{
+        try {
+            return sendMail("ALERTA Cambio de contraseña", email, "ALERTA", "Su contraseña a sido cambiada satisfactoriamente.".concat((new Date()).toString()));
         } catch (Exception e) {
             return e.getMessage();
         }

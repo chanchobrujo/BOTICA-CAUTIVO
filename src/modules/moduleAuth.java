@@ -7,8 +7,6 @@ package modules;
 
 import entities.Rol;
 import entities.User;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,6 +44,15 @@ public class moduleAuth {
                 .collect(Collectors.toSet());
     }
     
+    public String updatePassword(String email, String password) throws Exception{
+        String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue();
+        if (this.findByEmail(email).isPresent()) {
+            SenderMail.alertNewPassword(email);
+            msg = userService.setPasswordUser(email, password);
+        }
+        return msg;
+    }
+    
     public String restoredPassword(String email) throws Exception{
         String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue();
         if (this.findByEmail(email).isPresent()) {
@@ -56,5 +63,14 @@ public class moduleAuth {
                     .concat(this.userService.setPasswordUser(email, password));
         }
         return msg;
+    }
+    
+    public String sendToken(String email) throws Exception{
+        String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue();
+        if (this.findByEmail(email).isPresent()) {
+            msg = SenderMail.sendToken(email);
+        }
+        return msg;
+        
     }
 }

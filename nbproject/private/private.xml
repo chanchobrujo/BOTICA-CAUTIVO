@@ -5,9 +5,7 @@
         <group>
             <file>file:/C:/car/BOTICA-CAUTIVO/src/util/SenderMail.java</file>
             <file>file:/C:/car/BOTICA-CAUTIVO/src/modules/moduleAuth.java</file>
-            <file>file:/C:/car/BOTICA-CAUTIVO/src/repository/productRepository.java</file>
-            <file>file:/C:/car/BOTICA-CAUTIVO/src/views/Authorization.java</file>
-            <file>file:/C:/car/BOTICA-CAUTIVO/src/services/userService.java</file>
+            <file>file:/C:/car/BOTICA-CAUTIVO/src/views/mydata/ChangePassword.java</file>
         </group>
     </open-files>
 </project-private>
