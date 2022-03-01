@@ -15,8 +15,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import Constans.Enums.Role; 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import util.Commons;
 
 /**
@@ -34,12 +32,22 @@ public class Authorization extends javax.swing.JFrame {
         initComponents();
     }
     
-    private void AssingRule(Role Role){
-        Administration.menuMantenimiento.setVisible(Role.isMenuMantenimiento());
-        Administration.menuOperaciones.setVisible(Role.isMenuOperaciones());
-        Administration.menuReportes.setVisible(Role.isMenuReportes());
-        Administration.menuUsuarios.setVisible(Role.isMenuUsuarios());
+    private void AssingRule(Role role){
+        Administration.menuMantenimiento.setVisible(role.isMenuMantenimiento());
+        Administration.menuOperaciones.setVisible(role.isMenuOperaciones());
+        Administration.menuReportes.setVisible(role.isMenuReportes());
     }
+    
+    private void setData(User user) {
+        String id = Commons.IntegerToString(user.getId());
+        String name = user.getFirtsname()
+                .concat(Constans.Constan.space)
+                .concat(user.getLastname());
+        
+        Administration.UserId.setText(id);
+        Administration.myData.setText(name);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +79,7 @@ public class Authorization extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +93,7 @@ public class Authorization extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Contraseña");
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPasswordField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,10 +110,10 @@ public class Authorization extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPasswordField1)
+                    .addComponent(jTextField1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +183,7 @@ public class Authorization extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -188,10 +196,10 @@ public class Authorization extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,8 +219,7 @@ public class Authorization extends javax.swing.JFrame {
         Optional<User> user = moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
 
         if (user.isPresent()) {
-            String id = Commons.IntegerToString(user.get().getId());
-            Administration.UserId.setText(id);
+            this.setData(user.get());
 
             String role = user.get().getRole().getName();
             Optional<Role> roleFind = Role.findRole(role);
@@ -227,12 +234,14 @@ public class Authorization extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:   
-        String email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
+        String msg, email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
+        
         try {
-            lblMessage.setText(moduleAuth.restoredPassword(email));
+            msg = moduleAuth.restoredPassword(email);
         } catch (Exception ex) {
-            Logger.getLogger(Authorization.class.getName()).log(Level.SEVERE, null, ex);
+            msg = ex.getMessage();
         }
+        lblMessage.setText(msg);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -5,10 +5,7 @@
  */
 package views.maintenance;
 
-import entities.Category; 
 import Constans.Constan;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;   
 import model.ModelProduct;
 import modules.ModuleProduct;
@@ -23,8 +20,8 @@ import views.Administration;
  */
 public class products_views extends javax.swing.JFrame {
 
-    private ModuleProduct modulePorduct;
     private ModelProduct modelproduct = new ModelProduct();
+    private ModuleProduct modulePorduct;
     
     private TableModelProduct tableModelProduct; 
     

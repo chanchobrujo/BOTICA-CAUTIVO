@@ -29,4 +29,5 @@ public class Constan {
     public static final String src_image_logo = "src/Assets/logo.jpeg";
     public static final String send_email = "Correo enviado";
     public static final String recovery_password = "Reasignación de contraseña";
+    public static final String token = "Token ";
 }

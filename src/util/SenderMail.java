@@ -38,31 +38,31 @@ public class SenderMail {
         return Session.getDefaultInstance(properties);
     }
 
-    private static MimeMultipart setContentHtml(String msg) throws MessagingException {
+    private static MimeMultipart setContentHtml(String description, String msg) throws MessagingException {
         String text = "Usted a solicitado una nueva contraseña: ".concat(msg);
         BodyPart html = new MimeBodyPart();
-        html.setContent("<br><h1>BOTICA CAUTIVO - Recuperación de contraseña</h1><br><h3>" + text + "</h3><br>", "text/html");
+        html.setContent("<br><h1>BOTICA CAUTIVO - "+description+"</h1><br><h3>" + text + "</h3><br>", "text/html");
 
         MimeMultipart mp = new MimeMultipart();
         mp.addBodyPart(html);
         return mp;
     }
 
-    private static MimeMessage paramsForMail(Session session, String destinatario, String Asunto, String msg) throws AddressException, MessagingException {
+    private static MimeMessage paramsForMail(String description, Session session, String destinatario, String Asunto, String msg) throws AddressException, MessagingException {
         MimeMessage mail = new MimeMessage(session);
         mail.setFrom(new InternetAddress(sender));
         mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
         mail.setSubject(Asunto);
         mail.setText(msg);
 
-        mail.setContent(setContentHtml(msg));
+        mail.setContent(setContentHtml(description, msg));
         return mail;
     }
 
-    private static String sendMail(String destinatario, String Asunto, String msg) throws Exception {
+    private static String sendMail(String description, String destinatario, String Asunto, String msg) throws Exception {
         try {
             Session session = sessionGetDefaultInstance(setPropertiesSenderMail());
-            MimeMessage mail = paramsForMail(session, destinatario, Asunto, msg);
+            MimeMessage mail = paramsForMail(description, session, destinatario, Asunto, msg);
 
             try (Transport transport = session.getTransport("smtp")) {
                 transport.connect(sender, password);
@@ -77,7 +77,15 @@ public class SenderMail {
     
     public static String assingPassword(String email, String password) throws Exception{
         try {
-            return sendMail(email, Constans.Constan.recovery_password, password);
+            return sendMail("Recuperación de contraseña", email, Constans.Constan.recovery_password, password);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+    
+    public static String sendToken(String email) throws Exception{
+        try {
+            return sendMail("Token para validar cambio de contraseña", email, Constans.Constan.token, Commons.generatedID());
         } catch (Exception e) {
             return e.getMessage();
         }

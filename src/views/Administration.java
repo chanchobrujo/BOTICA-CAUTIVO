@@ -25,6 +25,9 @@ import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
 import views.maintenance.products_views; 
+import views.maintenance.user_views;
+import views.mydata.ChangePassword;
+import views.mydata.My_Data;
 import views.reports.SalesProductsTop;
 import views.reports.ReportSales;
 
@@ -39,6 +42,10 @@ public class Administration extends javax.swing.JFrame {
     
     private final products_views products;
     private final category_views category; 
+    private final user_views user; 
+    
+     private final ChangePassword changePassword;
+     private final My_Data my_Data;
     
     private final ReportSales reportSales; 
     private final SalesProductsTop reportProducts; 
@@ -62,6 +69,10 @@ public class Administration extends javax.swing.JFrame {
                 
         products = new products_views();
         category = new category_views();
+        user = new user_views();
+        
+        changePassword = new ChangePassword();
+        my_Data = new My_Data();
         
         reportSales = new ReportSales();
         reportProducts = new SalesProductsTop();
@@ -220,11 +231,14 @@ public class Administration extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         UserId = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        myData = new javax.swing.JMenu();
+        menuItemProduct1 = new javax.swing.JMenuItem();
+        menuItemProduct2 = new javax.swing.JMenuItem();
         menuMantenimiento = new javax.swing.JMenu();
         menuItemProduct = new javax.swing.JMenuItem();
         menuItemCategory = new javax.swing.JMenuItem();
+        menuItemCategory1 = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
-        menuUsuarios = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -470,19 +484,15 @@ public class Administration extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)
-                        .addComponent(labelEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelNameCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNameCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -750,14 +760,13 @@ public class Administration extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -888,6 +897,28 @@ public class Administration extends javax.swing.JFrame {
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
+        myData.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        menuItemProduct1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemProduct1.setText("Mis datos");
+        menuItemProduct1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemProduct1ActionPerformed(evt);
+            }
+        });
+        myData.add(menuItemProduct1);
+
+        menuItemProduct2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemProduct2.setText("Cambiar contraseña");
+        menuItemProduct2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemProduct2ActionPerformed(evt);
+            }
+        });
+        myData.add(menuItemProduct2);
+
+        jMenuBar1.add(myData);
+
         menuMantenimiento.setText("Mantenimientos");
         menuMantenimiento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -909,15 +940,20 @@ public class Administration extends javax.swing.JFrame {
         });
         menuMantenimiento.add(menuItemCategory);
 
+        menuItemCategory1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemCategory1.setText("Usuarios");
+        menuItemCategory1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCategory1ActionPerformed(evt);
+            }
+        });
+        menuMantenimiento.add(menuItemCategory1);
+
         jMenuBar1.add(menuMantenimiento);
 
         menuOperaciones.setText("Operaciones");
         menuOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuBar1.add(menuOperaciones);
-
-        menuUsuarios.setText("Usuarios");
-        menuUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuBar1.add(menuUsuarios);
 
         menuReportes.setText("Reportes");
         menuReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -958,14 +994,15 @@ public class Administration extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(PANELIMAGE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(PANELIMAGE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1132,6 +1169,21 @@ public class Administration extends javax.swing.JFrame {
         reportProducts.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void menuItemCategory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCategory1ActionPerformed
+        // TODO add your handling code here:
+        user.setVisible(Boolean.TRUE);
+    }//GEN-LAST:event_menuItemCategory1ActionPerformed
+
+    private void menuItemProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProduct1ActionPerformed
+        // TODO add your handling code here:
+        my_Data.setVisible(Boolean.TRUE);
+    }//GEN-LAST:event_menuItemProduct1ActionPerformed
+
+    private void menuItemProduct2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProduct2ActionPerformed
+        // TODO add your handling code here:
+        changePassword.setVisible(Boolean.TRUE);
+    }//GEN-LAST:event_menuItemProduct2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1231,11 +1283,14 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JLabel labelSubTotal;
     private javax.swing.JLabel labelTotal;
     public static javax.swing.JMenuItem menuItemCategory;
+    public static javax.swing.JMenuItem menuItemCategory1;
     public static javax.swing.JMenuItem menuItemProduct;
+    public static javax.swing.JMenuItem menuItemProduct1;
+    public static javax.swing.JMenuItem menuItemProduct2;
     public static javax.swing.JMenu menuMantenimiento;
     public static javax.swing.JMenu menuOperaciones;
     public static javax.swing.JMenu menuReportes;
-    public static javax.swing.JMenu menuUsuarios;
+    public static javax.swing.JMenu myData;
     private javax.swing.JSpinner spnCant1;
     private javax.swing.JTable tblCarrito;
     public static javax.swing.JTable tblProduct;
