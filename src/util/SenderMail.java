@@ -59,7 +59,7 @@ public class SenderMail {
         return mail;
     }
 
-    public static String sendMail(String destinatario, String Asunto, String msg) throws Exception {
+    private static String sendMail(String destinatario, String Asunto, String msg) throws Exception {
         try {
             Session session = sessionGetDefaultInstance(setPropertiesSenderMail());
             MimeMessage mail = paramsForMail(session, destinatario, Asunto, msg);
@@ -71,6 +71,14 @@ public class SenderMail {
 
             return Constans.Constan.send_email;
         } catch (MessagingException e) {
+            return e.getMessage();
+        }
+    }
+    
+    public static String assingPassword(String email, String password) throws Exception{
+        try {
+            return sendMail(email, Constans.Constan.recovery_password, password);
+        } catch (Exception e) {
             return e.getMessage();
         }
     }

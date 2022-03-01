@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import model.ModelCustomer;
 import model.ModelProduct;
 import modules.moduleCustomer;
-import modules.modelProduct;
+import modules.ModuleProduct;
 import modules.moduleSale;
 import render.table.Entity.TableModelCart;
 import render.table.Entity.TableModelProduct;
@@ -34,7 +34,7 @@ import views.reports.ReportSales;
  */
 public class Administration extends javax.swing.JFrame {  
     private final moduleCustomer moduleCustomer;
-    private final modelProduct modulePorduct;
+    private final ModuleProduct modulePorduct;
     private final moduleSale moduleSale;
     
     private final products_views products;
@@ -53,7 +53,7 @@ public class Administration extends javax.swing.JFrame {
      * Creates new form Administration
      */
     public Administration() { 
-        modulePorduct = new modelProduct(); 
+        modulePorduct = new ModuleProduct(); 
         moduleCustomer = new moduleCustomer(); 
         moduleSale = new moduleSale(0.0);
         

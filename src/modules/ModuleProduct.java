@@ -9,6 +9,7 @@ import entities.Product;
 import Constans.Enums.ErrorMessage;
 import java.util.List; 
 import java.util.Optional; 
+import java.util.Set;
 import java.util.stream.Collectors;
 import services.categoryService;
 import services.productService; 
@@ -18,14 +19,14 @@ import util.Commons;
  *
  * @author umbke
  */
-public class modelProduct {
+public class ModuleProduct {
     
     private static final String messageError = ErrorMessage.DATA_VOID.getValue();
     
     private categoryService categoryService; 
     private productService productService; 
 
-    public modelProduct() { 
+    public ModuleProduct() { 
         categoryService = new categoryService(); 
         productService = new productService(); 
     }
@@ -38,6 +39,12 @@ public class modelProduct {
     public String changeStateCategory(int id){
         boolean verify = Commons.IntegerIsEmpty(id);  
         return verify ? messageError : categoryService.changeState(id);
+    }
+    
+    public Set<String> findAllCategoriesByCombo(){  
+        return this.categoryService.findAll().stream()
+                .map(Category::getName)
+                .collect(Collectors.toSet());
     }
     
     public List<Category> findAll_Categories(){

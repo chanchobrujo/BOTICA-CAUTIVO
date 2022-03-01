@@ -5,33 +5,24 @@
  */
 package render.ComboBox;
 
-import entities.Category; 
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import modules.modelProduct; 
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author kpalmall
  */
-public class ComboBoxCategories {
-    private modelProduct modulePorduct;  
-
-    public ComboBoxCategories() { 
-        modulePorduct = new modelProduct();
-    } 
+@NoArgsConstructor
+public class ComboBoxModel { 
     
     private void getModel(JComboBox jComboBox, String name){
         ((DefaultComboBoxModel) jComboBox.getModel()).addElement(name); 
     }
     
-    public void combo_categories(JComboBox jComboBox) { 
+    public void combo_categories(JComboBox jComboBox, Set<String> array) { 
         jComboBox.removeAllItems();  
-        this.modulePorduct.findAll_Categories()
-                .stream()
-                .map(Category::getName)
-                .forEach(cat -> {
-                    this.getModel(jComboBox, cat);
-                });
+        array.stream().forEach((String role) -> this.getModel(jComboBox, role));
     }
 }

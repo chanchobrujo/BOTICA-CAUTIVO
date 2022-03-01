@@ -8,7 +8,7 @@ package render.table.Entity;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modules.modelProduct;
+import modules.ModuleProduct;
 import render.table.TableModel;
 import util.Commons;
 import Constans.Headers.HeadersTableSwing;
@@ -19,11 +19,11 @@ import Constans.Headers.HeadersTableSwing;
  */
 public class TableModelCategory {
     private TableModel tableModel;
-    private modelProduct modulePorduct;
+    private ModuleProduct modulePorduct;
 
     public TableModelCategory() {
         tableModel = new TableModel(); 
-        modulePorduct = new modelProduct();
+        modulePorduct = new ModuleProduct();
     } 
     
     private void renderTable(JTable table){

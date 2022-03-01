@@ -11,8 +11,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;   
 import model.ModelProduct;
-import modules.modelProduct;
-import render.ComboBox.ComboBoxCategories;
+import modules.ModuleProduct;
+import render.ComboBox.Entity.ComboBoxCategories;
 import render.table.Entity.TableModelProduct; 
 import util.Commons; 
 import views.Administration;
@@ -23,7 +23,7 @@ import views.Administration;
  */
 public class products_views extends javax.swing.JFrame {
 
-    private modelProduct modulePorduct;
+    private ModuleProduct modulePorduct;
     private ModelProduct modelproduct = new ModelProduct();
     
     private TableModelProduct tableModelProduct; 
@@ -34,7 +34,7 @@ public class products_views extends javax.swing.JFrame {
      * Creates new form products
      */
     public products_views() {
-        modulePorduct = new modelProduct();
+        modulePorduct = new ModuleProduct();
         tableModelProduct = new TableModelProduct(); 
         comboBoxCategories = new ComboBoxCategories(); 
         
