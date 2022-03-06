@@ -7,6 +7,7 @@ package modules;
 
 import entities.Rol;
 import entities.User;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,6 +30,9 @@ public class moduleAuth {
         rolService = new rolService();
     }
     
+    public List<User> findAll(){
+        return userService.findAll();
+    } 
     
     public Optional<User> login(String email, String password){ 
         return userService.login(email, password);

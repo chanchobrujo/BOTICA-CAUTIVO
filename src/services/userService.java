@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Rol;
 import entities.User;
 import java.util.List;
 import java.util.Objects;
@@ -56,5 +57,18 @@ public class userService {
             this.userRepository.update(consumer);
         });
         return Constans.Constan.empty;
+    }
+    
+    public String save(String firtsname, String lastname, String email, String password, Rol role){
+        User user = User.builder()
+                .firtsname(firtsname)
+                .lastname(lastname)
+                .email(email)
+                .role(role)
+                .state(Boolean.TRUE)
+                .password(MyFuntions.encryptInSHA1(password))
+                .build();
+        this.userRepository.insert(user);
+        return "Usuario registrado.";
     }
 }

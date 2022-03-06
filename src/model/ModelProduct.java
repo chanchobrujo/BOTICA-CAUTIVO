@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -18,14 +19,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class ModelProduct {
-    private int id;
+    private Integer id;
     private String name;
     private String brand;
     private Double price;
-    private int stock; 
+    private Integer stock; 
     private String category;
     private Boolean state; 
     

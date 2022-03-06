@@ -5,6 +5,7 @@
  */
 package views.maintenance;
 
+import modules.ModuleUser;
 import modules.moduleAuth;
 import render.ComboBox.Entity.ComboBoxRoles;
 
@@ -14,6 +15,8 @@ import render.ComboBox.Entity.ComboBoxRoles;
  */
 public class user_views extends javax.swing.JFrame {
     private moduleAuth moduleAuth;
+    private ModuleUser moduleUser;
+    
     private ComboBoxRoles comboBoxRoles;
 
     /**
@@ -21,6 +24,7 @@ public class user_views extends javax.swing.JFrame {
      */
     public user_views() {
         moduleAuth = new moduleAuth();
+        moduleUser = new ModuleUser();
         comboBoxRoles = new ComboBoxRoles();
         
         initComponents();
@@ -333,6 +337,13 @@ public class user_views extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String msg;
+        try {
+            msg = this.moduleUser.saveUser(txtName.getText(), txtBrand.getText(), txtBrand1.getText(), cmbRoles.getSelectedItem().toString());
+        } catch (Exception ex) {
+            msg = ex.getMessage();
+        }
+        lblMessage.setText(msg);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -383,7 +394,7 @@ public class user_views extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JComboBox<String> cmbRoles;
+    private javax.swing.JComboBox<String> cmbRoles;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

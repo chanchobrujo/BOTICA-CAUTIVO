@@ -8,7 +8,9 @@ package util;
 import Constans.Constan;
 import Constans.Enums.State;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -138,8 +140,8 @@ public class Commons {
      * @return Boolean
      */
     public static Boolean IntegerIsEmpty(Integer ...value){
-        for (Integer val : value) return val <= 0 
-                || Objects.isNull(val);
+        for (Integer val : value) return Objects.isNull(val) 
+                || val <= 0;
         return false;
     }
     
@@ -170,16 +172,15 @@ public class Commons {
      * Genera un ID para las ventas.
      * @return String
      */
-    public static String generatedIdNumber(){
-        Date date = new Date();  
+    public static String generatedIdNumber(){ 
+        Calendar c = new GregorianCalendar(); 
+        String year =  completedZero(c.get(Calendar.YEAR));
+        String month = completedZero(c.get(Calendar.MONTH)+1);
+        String day = completedZero(c.get(Calendar.DAY_OF_MONTH)) ;
         
-        String year =  completedZero(date.getYear());
-        String month = completedZero(date.getMonth()+1);
-        String day = completedZero(date.getDate()) ;
-        
-        String hour = completedZero(date.getHours());
-        String minute = completedZero(date.getMinutes());
-        String second = completedZero(date.getSeconds()); 
+        String hour = completedZero(c.get(Calendar.HOUR_OF_DAY));
+        String minute = completedZero(c.get(Calendar.MINUTE));
+        String second = completedZero(c.get(Calendar.SECOND)); 
         
         return year.concat(month)
                 .concat(day)
