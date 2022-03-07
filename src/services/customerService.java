@@ -70,6 +70,15 @@ public class customerService {
                 .filter((Customer customer) -> this.verfifyParam(customer, firtsname, lastname, email, phone, dni))                                      
                 .findFirst();               
     }    
+    
+    public Optional<Customer> findById(Integer id){ 
+        if (!Commons.IntegerIsEmpty(id)) {
+            Customer customer = this.customerRepository.findById(id);
+            return Objects.nonNull(customer) ? Optional.of(customer) : Optional.empty();
+        }
+        return Optional.empty();
+    }
+    
                                                             
     private boolean VerifyRpetedData(Integer dni, String email, String phone){
         return this.customerRepository.findAll()            

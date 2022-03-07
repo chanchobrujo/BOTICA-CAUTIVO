@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rol {
-    private int id;
+    private Integer id;
     private String name;
 
     public Rol(String name) {

@@ -50,18 +50,14 @@ public class moduleSale {
         String message = ErrorMessage.NOTFOUND.getValue();
         
         List<Details> cart = this.viewDetails().getCart();
-        boolean verifyCollection = Commons.collectionNonEmptyOrNull(cart); 
         
         Optional<User> findUser = userService.findById(iduser);
-        Optional<Customer> findCustomer = customerService.findAll().stream()
-                .filter(customer -> Objects.equals(customer.getId(), idCustomer))
-                .findFirst();
-        boolean verifyUser = findUser.isPresent(); 
-        boolean verifyCustomer = findCustomer.isPresent(); 
+        Optional<Customer> findCustomer = customerService.findById(idCustomer);
                 
-        if (verifyCollection && verifyUser && verifyCustomer) {
+        if (Commons.collectionNonEmptyOrNull(cart) && findUser.isPresent()) {
+            
             this.viewDetails().setUser(findUser.get());
-            this.viewDetails().setCustomer(findCustomer.get());
+            this.viewDetails().setCustomer(findCustomer.orElse(null));
             
             message = this.saleService.saveOrder(this.viewDetails()); 
         }

@@ -8,6 +8,7 @@ package views;
 import entities.Customer;
 import entities.Product; 
 import Constans.Constan; 
+import entities.Details;
 import java.awt.Image; 
 import java.util.Objects;
 import java.util.Optional; 
@@ -16,7 +17,7 @@ import javax.swing.ImageIcon;
 import model.ModelCustomer;
 import model.ModelProduct;
 import modules.moduleCustomer;
-import modules.modelProduct;
+import modules.ModuleProduct;
 import modules.moduleSale;
 import render.table.Entity.TableModelCart;
 import render.table.Entity.TableModelProduct;
@@ -25,6 +26,8 @@ import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 import views.maintenance.category_views;
 import views.maintenance.products_views; 
+import views.maintenance.user_views;
+import views.mydata.ChangePassword;
 import views.reports.SalesProductsTop;
 import views.reports.ReportSales;
 
@@ -34,14 +37,18 @@ import views.reports.ReportSales;
  */
 public class Administration extends javax.swing.JFrame {  
     private final moduleCustomer moduleCustomer;
-    private final modelProduct modulePorduct;
-    private final moduleSale moduleSale;
+    private final ModuleProduct modulePorduct;
     
     private final products_views products;
     private final category_views category; 
+    private final user_views user; 
+    
+     private final ChangePassword changePassword;
     
     private final ReportSales reportSales; 
     private final SalesProductsTop reportProducts; 
+    
+    private moduleSale moduleSale;
     
     private ModelProduct modelproduct = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
@@ -53,7 +60,7 @@ public class Administration extends javax.swing.JFrame {
      * Creates new form Administration
      */
     public Administration() { 
-        modulePorduct = new modelProduct(); 
+        modulePorduct = new ModuleProduct(); 
         moduleCustomer = new moduleCustomer(); 
         moduleSale = new moduleSale(0.0);
         
@@ -62,6 +69,9 @@ public class Administration extends javax.swing.JFrame {
                 
         products = new products_views();
         category = new category_views();
+        user = new user_views();
+        
+        changePassword = new ChangePassword();
         
         reportSales = new ReportSales();
         reportProducts = new SalesProductsTop();
@@ -125,6 +135,17 @@ public class Administration extends javax.swing.JFrame {
         return verify; 
     }
     
+    
+    private void clearSale() {
+        this.moduleSale.viewDetails().clearCart();
+        this.recharge_dataCart();  
+        
+        moduleSale = new moduleSale(0.0);
+        this.clearLabelValueCustomer();
+        
+        System.err.println(this.moduleSale.viewDetails());
+    }
+    
     private void clearInputCustomer() {
         txtDniCliente.setText(Constan.empty);
         txtEmailCliente.setText(Constan.empty);
@@ -140,6 +161,24 @@ public class Administration extends javax.swing.JFrame {
         labelEmailCliente.setText(txtEmailCliente.getText());  
         labelNumberCliente.setText(txtNumeroCliente.getText()); 
     } 
+    
+    private void clearLabelValueCustomer() { 
+        labelNameCliente.setText(Constan.empty);  
+        labelApellidoCliente.setText(Constan.empty);  
+        labelDNICliente.setText(Constan.empty);  
+        labelEmailCliente.setText(Constan.empty);  
+        labelNumberCliente.setText(Constan.empty); 
+    } 
+    
+    private void setStockTable(Integer q, Boolean op) {
+        for (int count = 0; count < tblProduct.getRowCount(); count++) {
+            Integer idtbl = Commons.StringToInteger(tblProduct.getValueAt(count, 0).toString());
+            if (modelproduct.getId().equals(idtbl)) {
+                Integer stockbl = Commons.StringToInteger(tblProduct.getValueAt(count, 4).toString());
+                tblProduct.setValueAt(op ? stockbl - q : stockbl + q, count, 4);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,11 +259,12 @@ public class Administration extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         UserId = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        myData = new javax.swing.JMenu();
+        menuItemProduct2 = new javax.swing.JMenuItem();
         menuMantenimiento = new javax.swing.JMenu();
         menuItemProduct = new javax.swing.JMenuItem();
         menuItemCategory = new javax.swing.JMenuItem();
-        menuOperaciones = new javax.swing.JMenu();
-        menuUsuarios = new javax.swing.JMenu();
+        menuItemCategory1 = new javax.swing.JMenuItem();
         menuReportes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -470,19 +510,15 @@ public class Administration extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)
-                        .addComponent(labelEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelNameCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNameCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -750,14 +786,13 @@ public class Administration extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -888,6 +923,19 @@ public class Administration extends javax.swing.JFrame {
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
+        myData.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        menuItemProduct2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemProduct2.setText("Cambiar contraseña");
+        menuItemProduct2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemProduct2ActionPerformed(evt);
+            }
+        });
+        myData.add(menuItemProduct2);
+
+        jMenuBar1.add(myData);
+
         menuMantenimiento.setText("Mantenimientos");
         menuMantenimiento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -909,15 +957,16 @@ public class Administration extends javax.swing.JFrame {
         });
         menuMantenimiento.add(menuItemCategory);
 
+        menuItemCategory1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        menuItemCategory1.setText("Usuarios");
+        menuItemCategory1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCategory1ActionPerformed(evt);
+            }
+        });
+        menuMantenimiento.add(menuItemCategory1);
+
         jMenuBar1.add(menuMantenimiento);
-
-        menuOperaciones.setText("Operaciones");
-        menuOperaciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuBar1.add(menuOperaciones);
-
-        menuUsuarios.setText("Usuarios");
-        menuUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuBar1.add(menuUsuarios);
 
         menuReportes.setText("Reportes");
         menuReportes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -958,14 +1007,15 @@ public class Administration extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(PANELIMAGE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(PANELIMAGE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1018,12 +1068,20 @@ public class Administration extends javax.swing.JFrame {
         Optional<Product> productFind = modulePorduct.findById_Products(id);
         
         Integer q = Commons.StringToInteger(spnCant1.getValue().toString());
-        Boolean verifyQuantity = Commons.IntegerIsEmpty(q); 
-                
-        if (productFind.isPresent() && !verifyQuantity) {  
+        Boolean verifyQuantity = (q != -1) && (modelproduct.getStock() > q); 
+                    
+        if (productFind.isPresent() && verifyQuantity) {  
             this.moduleSale.AddProductToCart(id, q); 
             this.recharge_dataCart();
+            this.setStockTable(q, Boolean.TRUE);
+            modelproduct.setStock(modelproduct.getStock() - q);
+            
+            this.moduleSale.viewDetails().getCart().forEach(System.out::println);
+        } else {
+            AlertSuccessMessage.alertSetMessage("Cantidad insuficiente.");
         }
+        
+        System.err.println(modelproduct);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
@@ -1035,7 +1093,7 @@ public class Administration extends javax.swing.JFrame {
         Double price = Double.parseDouble(tblProduct.getValueAt(row, 3).toString());
         
         int stock = Integer.parseInt(tblProduct.getValueAt(row, 4).toString());
-        String category = tblProduct.getValueAt(row, 5).toString();
+        String cat = tblProduct.getValueAt(row, 5).toString();
         
         Boolean state = Commons.StringStateToBoolean(tblProduct.getValueAt(row, 6).toString());
 
@@ -1045,9 +1103,10 @@ public class Administration extends javax.swing.JFrame {
                 .brand(brand)
                 .price(price)
                 .stock(stock)
-                .category(category)
+                .category(cat)
                 .state(state)
                 .build();
+        
         this.SetValueProductSelected(modelproduct);
     }//GEN-LAST:event_tblProductMouseClicked
 
@@ -1094,6 +1153,15 @@ public class Administration extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Integer id = modelproduct.getId();
+        Integer q = this.moduleSale.viewDetails().getCart().stream()
+                .filter(predicate -> predicate.getProduct().getId().equals(id))
+                .findFirst()
+                .get()
+                .getQuantity();
+        
+        this.setStockTable(q, Boolean.FALSE);
+        
+        modelproduct.setStock(modelproduct.getStock() + q);
         this.moduleSale.viewDetails().removeProduct(id);
         this.recharge_dataCart(); 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1102,24 +1170,27 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
         Integer id = modelcustomer.getId();
         
-        if (!Objects.equals(id,0)) {
-            String message = this.moduleSale.confirmSale(Commons.StringToInteger(UserId.getText()),id); 
-            AlertSuccessMessage.alertSetMessage(message);
-        }
+        String message = this.moduleSale.confirmSale(Commons.StringToInteger(UserId.getText()), id); 
+        AlertSuccessMessage.alertSetMessage(message);
+        
+        this.clearSale();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        this.moduleSale.viewDetails().clearCart();
-        this.recharge_dataCart();  
+        this.clearSale();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tblCarritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCarritoMouseClicked
         // TODO add your handling code here: 
-        int row = tblCarrito.getSelectedRow();
-        int id = Integer.parseInt(tblCarrito.getValueAt(row, 0).toString());
-        modelproduct = new ModelProduct();
-        modelproduct.setId(id); 
+        try {
+            int row = tblCarrito.getSelectedRow();
+            int id = Integer.parseInt(tblCarrito.getValueAt(row, 0).toString());
+            modelproduct.setId(id); 
+            
+        } catch (NumberFormatException e) {
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_tblCarritoMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1131,6 +1202,16 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
         reportProducts.setVisible(Boolean.TRUE);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuItemCategory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCategory1ActionPerformed
+        // TODO add your handling code here:
+        user.setVisible(Boolean.TRUE);
+    }//GEN-LAST:event_menuItemCategory1ActionPerformed
+
+    private void menuItemProduct2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProduct2ActionPerformed
+        // TODO add your handling code here:
+        changePassword.setVisible(Boolean.TRUE);
+    }//GEN-LAST:event_menuItemProduct2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1231,11 +1312,12 @@ public class Administration extends javax.swing.JFrame {
     private javax.swing.JLabel labelSubTotal;
     private javax.swing.JLabel labelTotal;
     public static javax.swing.JMenuItem menuItemCategory;
+    public static javax.swing.JMenuItem menuItemCategory1;
     public static javax.swing.JMenuItem menuItemProduct;
+    public static javax.swing.JMenuItem menuItemProduct2;
     public static javax.swing.JMenu menuMantenimiento;
-    public static javax.swing.JMenu menuOperaciones;
     public static javax.swing.JMenu menuReportes;
-    public static javax.swing.JMenu menuUsuarios;
+    public static javax.swing.JMenu myData;
     private javax.swing.JSpinner spnCant1;
     private javax.swing.JTable tblCarrito;
     public static javax.swing.JTable tblProduct;

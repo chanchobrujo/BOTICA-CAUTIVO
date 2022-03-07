@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Rol;
 import entities.User;
 import java.util.List;
 import java.util.Objects;
@@ -50,11 +51,29 @@ public class userService {
                 .findFirst();
     }
     
+    public String updateState(Integer id){
+        boolean state = this.findById(id).get().getState();
+        return this.userRepository.updateState(User.builder().id(id).state(!state).build());
+    }
+    
     public String setPasswordUser(String email, String newpassword){
         this.findByEmail(email).ifPresent(consumer -> {
             consumer.setPassword(MyFuntions.encryptInSHA1(newpassword)); 
             this.userRepository.update(consumer);
         });
         return Constans.Constan.empty;
+    }
+    
+    public String save(String firtsname, String lastname, String email, String password, Rol role){
+        User user = User.builder()
+                .firtsname(firtsname)
+                .lastname(lastname)
+                .email(email)
+                .role(role)
+                .state(Boolean.TRUE)
+                .password(MyFuntions.encryptInSHA1(password))
+                .build();
+        this.userRepository.insert(user);
+        return "Usuario registrado.";
     }
 }

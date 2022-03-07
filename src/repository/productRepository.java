@@ -53,6 +53,14 @@ public class productRepository {
         
         return GestorBd.execute(sql);
     }
+
+    public String updateStock(Integer idproduct, Integer quantity) {
+        String sql = "UPDATE product SET "  
+                + "stock = (stock - "+ quantity +")"
+                + " WHERE id = "+idproduct;
+        
+        return GestorBd.execute(sql);
+    }
     
     public String changeState(int id, Boolean state) {
         String sql = "UPDATE product SET "

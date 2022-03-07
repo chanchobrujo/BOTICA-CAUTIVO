@@ -76,6 +76,9 @@ public class saleRepository {
     }
 
     public String grabarVentasParaUsuarioCliente(Sale sale) {
+        String cus = Objects.isNull(sale.getCustomer()) ? Constan.empty 
+                : Constan.space.concat(",") + sale.getCustomer().getId();
+        
         String sql = "INSERT INTO sale "
                 + "(id,date,time,subtotal,discount,total,state,id_user,id_customer) "
                 + "VALUES('" + sale.getId() + "',"
@@ -85,8 +88,8 @@ public class saleRepository {
                 + " " + sale.getDesc() + ","
                 + " " + sale.getTotal() + ","
                 + " " + Commons.BooleanToInteger(sale.getState()) + ","
-                + " " + sale.getUser().getId() + ","
-                + " " + sale.getCustomer().getId() + ")";
+                + " " + sale.getUser().getId()
+                + cus + ")";
         GestorBd.execute(sql);
         this.detailsRepository.grabarDetalles(sale.getCart());
 

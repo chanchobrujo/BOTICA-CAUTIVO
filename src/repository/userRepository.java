@@ -5,7 +5,6 @@
  */
 package repository;
 
-import entities.Rol;
 import entities.User;
 import Constans.Constan; 
 import java.util.ArrayList;
@@ -32,10 +31,21 @@ public class userRepository {
     public userRepository() {
         rolRepository = new rolRepository();
     }
-    
+
+    public String insert(User user) { 
+        String sql = "INSERT INTO user (firtsname, lastname, email, password, id_role, state) VALUES "
+                + "('"+user.getFirtsname()+"', '"+user.getLastname()+"', '"+user.getEmail()+"', '"+user.getPassword()+"', "
+                + user.getRole().getId() +", "+ Commons.BooleanToInteger(user.getState()) +")";
+        return GestorBd.execute(sql);
+    } 
 
     public String update(User user) {
         String sql = "UPDATE user SET password = '"+user.getPassword()+"' WHERE id = "+user.getId();
+        return GestorBd.execute(sql);
+    } 
+
+    public String updateState(User user) {
+        String sql = "UPDATE user SET state = "+Commons.BooleanToInteger(user.getState())+" WHERE id = "+user.getId();
         return GestorBd.execute(sql);
     }
     

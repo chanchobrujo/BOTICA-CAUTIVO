@@ -7,8 +7,8 @@ package views.maintenance;
 
 import entities.Category;  
 import Constans.Constan;
-import modules.modelProduct; 
-import render.ComboBox.ComboBoxCategories;
+import modules.ModuleProduct; 
+import render.ComboBox.Entity.ComboBoxCategories;
 import render.table.Entity.TableModelCategory;
 import util.Commons;
 
@@ -17,7 +17,7 @@ import util.Commons;
  * @author kpalmall
  */
 public class category_views extends javax.swing.JFrame {
-    private modelProduct modulePorduct;
+    private ModuleProduct modulePorduct;
     private Category modelcategory = new Category();
     
     private TableModelCategory tableModelCategory;
@@ -25,7 +25,7 @@ public class category_views extends javax.swing.JFrame {
     private ComboBoxCategories comboBoxCategories;
     
     public category_views() {
-        modulePorduct = new modelProduct();
+        modulePorduct = new ModuleProduct();
         tableModelCategory = new TableModelCategory();
         comboBoxCategories = new ComboBoxCategories(); 
         initComponents();

@@ -24,7 +24,8 @@ import util.Commons;
 public class saleService {
     
     private final productService productService; 
-    private final Sale sale = new Sale();
+    
+    private Sale sale = new Sale();
 
     private saleRepository saleRepository;
     private detailsRepository detailsRepository;
@@ -43,6 +44,7 @@ public class saleService {
     }
 
     public void newSale(Double porDes) {
+        sale = new Sale();
         this.sale.setPordes(porDes);
     }
 

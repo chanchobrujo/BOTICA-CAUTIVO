@@ -10,8 +10,7 @@ package Constans.Headers;
  * @author kpalmall
  */
 public class HeadersTableSwing { 
-    public static final String headres_category[] = new String[] {"ID", "NOMBRE"
-            , "ESTADO"};
+    public static final String headres_category[] = new String[] {"ID", "NOMBRE", "ESTADO"};
     
     public static final String headres_product[] = 
             new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA"
@@ -29,4 +28,7 @@ public class HeadersTableSwing {
     public static final String headres_sale[] = 
             new String[] {"ID", "USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
                     , "SUBTOTAL", "TOTAL"};
+    
+    public static final String headres_users[] = 
+            new String[] {"ID", "NOMBRES Y APELLIDOS", "EMAIL", "ROL", "ESTADO"};
 }

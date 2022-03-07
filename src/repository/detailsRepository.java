@@ -51,6 +51,8 @@ public class detailsRepository {
                 .concat("VALUES("+details.getId_sale()+", "
                         +details.getProduct().getId()+", "
                         +details.getQuantity()+");"); 
+        
+        this.productRepository.updateStock(details.getProduct().getId(), details.getQuantity());
         return GestorBd.execute(sql);
     }
     

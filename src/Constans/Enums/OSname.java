@@ -19,12 +19,12 @@ import util.Commons;
 @Getter 
 @AllArgsConstructor
 public enum OSname {
-    WINDOWS("WINDOWS 10", "\\bd\\db.db", "C:\\Docs\\"),
+    WINDOWS("WINDOWS", "\\bd\\db.db", "C:\\Docs\\"),
     LINUX("LINUX", "/bd/db.db", "/home/chanchobrujo/Documentos");
     
-    private String name; 
-    private String src;   
-    private String srcByPdf;   
+    private final String name; 
+    private final String src;   
+    private final String srcByPdf;   
         
     public static Optional<OSname> findUrlByOsName(String osname){ 
         return Stream.of(values())

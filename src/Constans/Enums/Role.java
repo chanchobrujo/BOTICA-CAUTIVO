@@ -22,7 +22,7 @@ import util.Commons;
 public enum Role {  
     
     ROLE_ADMIN("ADMINISTRADOR", true, true, true, true),
-    ROLE_USER("USER", false, false, false, false);   
+    ROLE_USER("CAJERO", false, false, false, false);   
 
     private String value;
     private boolean menuMantenimiento;

@@ -14,9 +14,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import Constans.Enums.Role; 
+import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.GregorianCalendar;
 import util.Commons;
 
 /**
@@ -32,14 +32,24 @@ public class Authorization extends javax.swing.JFrame {
         moduleAuth = new moduleAuth();
         
         initComponents();
+        System.err.println( Commons.generatedIdNumber() );
     }
     
-    private void AssingRule(Role Role){
-        Administration.menuMantenimiento.setVisible(Role.isMenuMantenimiento());
-        Administration.menuOperaciones.setVisible(Role.isMenuOperaciones());
-        Administration.menuReportes.setVisible(Role.isMenuReportes());
-        Administration.menuUsuarios.setVisible(Role.isMenuUsuarios());
+    private void AssingRule(Role role){
+        Administration.menuMantenimiento.setVisible(role.isMenuMantenimiento());
+        Administration.menuReportes.setVisible(role.isMenuReportes());
     }
+    
+    private void setData(User user) {
+        String id = Commons.IntegerToString(user.getId());
+        String name = user.getFirtsname()
+                .concat(Constans.Constan.space)
+                .concat(user.getLastname());
+        
+        Administration.UserId.setText(id);
+        Administration.myData.setText(name);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +65,7 @@ public class Authorization extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jTextField2 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -71,7 +81,7 @@ public class Authorization extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,11 +95,11 @@ public class Authorization extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Contraseña");
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -102,10 +112,10 @@ public class Authorization extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,10 +126,14 @@ public class Authorization extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jTextField2)))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -175,7 +189,7 @@ public class Authorization extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -188,10 +202,10 @@ public class Authorization extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,17 +216,13 @@ public class Authorization extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:  
-        Optional<User> user = moduleAuth.login(jTextField1.getText(), jPasswordField1.getText());
+        Optional<User> user = moduleAuth.login(jTextField1.getText(), jTextField2.getText());
+        
 
         if (user.isPresent()) {
-            String id = Commons.IntegerToString(user.get().getId());
-            Administration.UserId.setText(id);
+            this.setData(user.get());
 
             String role = user.get().getRole().getName();
             Optional<Role> roleFind = Role.findRole(role);
@@ -227,13 +237,19 @@ public class Authorization extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:   
-        String email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
+        String msg, email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
+        
         try {
-            lblMessage.setText(moduleAuth.restoredPassword(email));
+            msg = moduleAuth.restoredPassword("umb.kevsidorov@gmail.com");
         } catch (Exception ex) {
-            Logger.getLogger(Authorization.class.getName()).log(Level.SEVERE, null, ex);
+            msg = ex.getMessage();
         }
+        lblMessage.setText(msg);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,8 +277,9 @@ public class Authorization extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Authorization.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        try {  
-            if ((new Date()).getHours()>=18) {
+        try {   
+            Calendar c = new GregorianCalendar();  
+            if (c.get(Calendar.HOUR_OF_DAY) >=18) {
                 UIManager.setLookAndFeel(
                         new FlatMaterialDarkerIJTheme());
             } else {
@@ -289,8 +306,8 @@ public class Authorization extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblMessage;
     // End of variables declaration//GEN-END:variables
 }
