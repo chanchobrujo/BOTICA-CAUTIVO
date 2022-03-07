@@ -51,6 +51,11 @@ public class userService {
                 .findFirst();
     }
     
+    public String updateState(Integer id){
+        boolean state = this.findById(id).get().getState();
+        return this.userRepository.updateState(User.builder().id(id).state(!state).build());
+    }
+    
     public String setPasswordUser(String email, String newpassword){
         this.findByEmail(email).ifPresent(consumer -> {
             consumer.setPassword(MyFuntions.encryptInSHA1(newpassword)); 

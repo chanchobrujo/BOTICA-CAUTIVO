@@ -37,11 +37,15 @@ public class userRepository {
                 + "('"+user.getFirtsname()+"', '"+user.getLastname()+"', '"+user.getEmail()+"', '"+user.getPassword()+"', "
                 + user.getRole().getId() +", "+ Commons.BooleanToInteger(user.getState()) +")";
         return GestorBd.execute(sql);
-    }
-    
+    } 
 
     public String update(User user) {
         String sql = "UPDATE user SET password = '"+user.getPassword()+"' WHERE id = "+user.getId();
+        return GestorBd.execute(sql);
+    } 
+
+    public String updateState(User user) {
+        String sql = "UPDATE user SET state = "+Commons.BooleanToInteger(user.getState())+" WHERE id = "+user.getId();
         return GestorBd.execute(sql);
     }
     
