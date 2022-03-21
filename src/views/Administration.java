@@ -8,7 +8,6 @@ package views;
 import entities.Customer;
 import entities.Product; 
 import Constans.Constan; 
-import entities.Details;
 import java.awt.Image; 
 import java.util.Objects;
 import java.util.Optional; 
@@ -43,7 +42,7 @@ public class Administration extends javax.swing.JFrame {
     private final category_views category; 
     private final user_views user; 
     
-     private final ChangePassword changePassword;
+    private final ChangePassword changePassword;
     
     private final ReportSales reportSales; 
     private final SalesProductsTop reportProducts; 

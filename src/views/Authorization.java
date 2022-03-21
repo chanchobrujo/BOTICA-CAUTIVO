@@ -15,7 +15,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import Constans.Enums.Role; 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import util.Commons;
 
@@ -31,8 +30,7 @@ public class Authorization extends javax.swing.JFrame {
         administration = new Administration();
         moduleAuth = new moduleAuth();
         
-        initComponents();
-        System.err.println( Commons.generatedIdNumber() );
+        initComponents(); 
     }
     
     private void AssingRule(Role role){
@@ -220,7 +218,6 @@ public class Authorization extends javax.swing.JFrame {
         // TODO add your handling code here:  
         Optional<User> user = moduleAuth.login(jTextField1.getText(), jTextField2.getText());
         
-
         if (user.isPresent()) {
             this.setData(user.get());
 
@@ -230,9 +227,7 @@ public class Authorization extends javax.swing.JFrame {
 
             administration.setVisible(true);
             this.dispose();
-        } else {
-            lblMessage.setText(Constans.Enums.AlertMessage.FORBIDENN.getValue());
-        }
+        } else lblMessage.setText(Constans.Enums.AlertMessage.FORBIDENN.getValue());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -240,7 +235,7 @@ public class Authorization extends javax.swing.JFrame {
         String msg, email = JOptionPane.showInputDialog(Constans.Enums.AlertMessage.RECOVERY_PASSWORD.getValue());
         
         try {
-            msg = moduleAuth.restoredPassword("umb.kevsidorov@gmail.com");
+            msg = moduleAuth.restoredPassword(email);
         } catch (Exception ex) {
             msg = ex.getMessage();
         }

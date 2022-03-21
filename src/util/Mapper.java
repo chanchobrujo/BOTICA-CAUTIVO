@@ -58,10 +58,10 @@ public class Mapper {
     }
 
     public static User mapperUser(Object obj) {
-        Object[] row = (Object[]) obj;
+        Object[] row = (Object[]) obj; 
         Integer id = Integer.parseInt(row[0].toString());
         boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
-
+        
         return User.builder()
                 .id(id)
                 .firtsname(row[1].toString())

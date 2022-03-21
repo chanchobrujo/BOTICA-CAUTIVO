@@ -101,8 +101,7 @@ public class ReportPdfSale {
             
             doc.open();
             
-            doc.add(this.PDFInit.addHeaderImage(Constan.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
-            
+            //doc.add(this.PDFInit.addHeaderImage(Constan.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
             doc.add(this.addParagraph(11, Font.BOLD, BaseColor.BLACK, "Console", "INFORMACIÓN DE LA VENTA."));   
             doc.add(this.TableRenderSale(modelSale));  
             

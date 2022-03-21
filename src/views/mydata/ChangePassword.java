@@ -8,6 +8,8 @@ package views.mydata;
 import modules.moduleAuth;
 import util.Commons;
 import Constans.Constan;
+import modules.ModuleUser;
+import views.Administration;
 import views.alerts.AlertErrors;
 import views.alerts.AlertSuccessMessage;
 
@@ -16,15 +18,30 @@ import views.alerts.AlertSuccessMessage;
  * @author kpalmall
  */
 public class ChangePassword extends javax.swing.JFrame {
+
     private String TOKEN = Constan.empty;
-    private moduleAuth moduleAuth; 
+    private moduleAuth moduleAuth;
+    private ModuleUser moduleUser;
 
     /**
      * Creates new form ChangePassword
      */
     public ChangePassword() {
+        moduleUser = new ModuleUser();
         moduleAuth = new moduleAuth();
+
         initComponents();
+    }
+
+    public void enabledControlToken() {
+        txtToken.setEnabled(Boolean.TRUE);
+        btnValidate.setEnabled(Boolean.TRUE);
+    }
+
+    public String enabledControlNewPassword() {
+        txtNewPassword.setEnabled(Boolean.TRUE);
+        btnChange.setEnabled(Boolean.TRUE);
+        return "Token validado correctamente.";
     }
 
     /**
@@ -50,6 +67,7 @@ public class ChangePassword extends javax.swing.JFrame {
         txtNewPassword = new javax.swing.JTextField();
         btnChange = new javax.swing.JButton();
         lblMessage1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -110,6 +128,11 @@ public class ChangePassword extends javax.swing.JFrame {
 
         txtNewPassword.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtNewPassword.setEnabled(false);
+        txtNewPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPasswordActionPerformed(evt);
+            }
+        });
 
         btnChange.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnChange.setText("Cambiar");
@@ -197,6 +220,11 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText(" Recuerde que debe ingresar SU correo");
+        jLabel3.setToolTipText("");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,14 +233,19 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -224,19 +257,20 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue()
-                , email = txtEmail.getText();
-        
+        Integer id = Integer.parseInt(Administration.UserId.getText());
+        String msg = Constans.Enums.ErrorMessage.USER_NOTFOUND.getValue(), email = txtEmail.getText();
+
         if (!Commons.StringsIsEmpty(email)) {
-            try {
-                String[] response = this.moduleAuth.sendToken(email).split(Constan.pipe_separate);
-                msg = response[0];
-                TOKEN = response[1];
-                
-                txtToken.setEnabled(Boolean.TRUE);
-                btnValidate.setEnabled(Boolean.TRUE);
-            } catch (Exception ex) {
-                msg = ex.getMessage();
+            if (this.moduleUser.findByIdAndEmailVerify(id, email)) {
+                try {
+                    String[] response = this.moduleAuth.sendToken(email).split(Constan.pipe_separate);
+                    msg = response[0];
+                    TOKEN = response[1];
+                    
+                    this.enabledControlToken();
+                } catch (Exception e) {
+                    msg = e.getMessage();
+                }
             }
         }
         lblMessage.setText(msg);
@@ -244,16 +278,8 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void btnValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidateActionPerformed
         // TODO add your handling code here:
-        String msg;
-        if (this.TOKEN.equals(txtToken.getText())) {
-            msg = "Token validado correctamente.";
-            
-            txtNewPassword.setEnabled(Boolean.TRUE);
-            btnChange.setEnabled(Boolean.TRUE);
-        } else {
-            msg = "El token no es válido.";
-        }
-        lblMessage.setText(msg);
+        boolean verifyToken = this.TOKEN.equals(txtToken.getText());
+        lblMessage.setText(verifyToken ? this.enabledControlNewPassword() : "El token no es válido.");
     }//GEN-LAST:event_btnValidateActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
@@ -275,6 +301,10 @@ public class ChangePassword extends javax.swing.JFrame {
     private void txtTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTokenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTokenActionPerformed
+
+    private void txtNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,6 +346,7 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JButton btnValidate;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

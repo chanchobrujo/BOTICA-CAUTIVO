@@ -8,6 +8,7 @@ package modules;
 import Constans.Enums.ErrorMessage;
 import entities.User;
 import java.util.List;
+import java.util.Optional;
 import services.rolService;
 import services.userService;
 import util.Commons;
@@ -48,6 +49,7 @@ public class ModuleUser {
         } 
         return msg;
     }
+    
     public String stateUser(Integer id){
         String msg = ErrorMessage.NOTFOUND.getValue();
         boolean verifyUser = userService.findById(id).isPresent();
@@ -55,5 +57,14 @@ public class ModuleUser {
         if (verifyUser) return this.userService.updateState(id);
         return msg;
     }
+    
+    public boolean findByIdAndEmailVerify(Integer id, String email){
+        return this.userService.findById(id)
+                    .map(mapper -> mapper.getEmail())
+                    .orElse(Constans.Constan.empty)
+                    .equals(email);
+    }
+    
+    
     
 }
