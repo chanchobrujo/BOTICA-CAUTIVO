@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="Librerias/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="Librerias/flatlaf-demo-1.6.5.jar"/>
+	<classpathentry kind="lib" path="Librerias/GSON-2.8.5.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext5-itextpdf-5.5.12.jar"/>
+	<classpathentry kind="lib" path="Librerias/javax.mail-1.6.2.jar"/>
+	<classpathentry kind="lib" path="Librerias/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="Librerias/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="Librerias/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="Librerias/lombok.jar"/>
+	<classpathentry kind="lib" path="Librerias/sqlLite.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

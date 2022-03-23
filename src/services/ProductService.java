@@ -7,25 +7,28 @@ package services;
 
 import entities.Category; 
 import entities.Product; 
+
 import java.util.List;   
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import repository.categoryRepository;
-import repository.productRepository;
+import repository.ProductRepository;
+
 import util.Commons;
 
 /**
  *
  * @author kpalmall
  */
-public class productService {
+public class ProductService {
     
-    private productRepository productRepository;
+    private ProductRepository productRepository;
     private categoryRepository categoryRepository;
     
-    public productService(){
-        productRepository = new productRepository();
+    public ProductService(){
+        productRepository = new ProductRepository();
         categoryRepository = new categoryRepository();
     }
     
@@ -37,7 +40,6 @@ public class productService {
     
     public String save(int id, String name, String brand, Double price, 
             Integer Stock, String category){
-        
         String message = Constans.Enums.ErrorMessage.REPETED_VALUES.getValue();
         Optional<Category> _category = this.findByName_Categories(category);
         
@@ -68,13 +70,26 @@ public class productService {
     
     public String changeState(int id){
         String message = Constans.Enums.ErrorMessage.NOTFOUND.getValue();
+        Optional<Product> findP = this.findById(id);
         
-        if (this.findById(id).isPresent()) {
-            Boolean state = !this.findById(id).get().getState();
+        if (findP.isPresent()) {
+            Boolean state = !findP.get().getState();
             message = productRepository.changeState(id, state);
-        } 
+        }
         return message;
     } 
+    
+    public String addStock(Integer id, Integer quantity){
+        String message = Constans.Enums.ErrorMessage.NOTFOUND.getValue();
+        Optional<Product> findP = this.findById(id);
+        
+        if (findP.isPresent()) {
+            Integer stock = findP.get().getStock() + quantity;
+            message = productRepository.addStock(id, stock);
+            if (stock >= 10) message = productRepository.changeState(id, Boolean.TRUE);
+        }
+        return message;
+    }
     
     public Optional<Product> verifyByNameOrBrand(String name, String brand){
         return this.findAll().stream()
@@ -107,6 +122,16 @@ public class productService {
                             || Commons.StringEqualString(pr.getBrand(), brand)
                             || Commons.StringEqualString(pr.getCategory().getName(), category) 
                             || pr.getPrice() <= price || pr.getStock() <= stock ; 
+                })
+                .collect(Collectors.toList());
+    }
+    
+    public List<Product> findAllByStockMin(){
+        return this.productRepository.findAll().stream()
+                .filter(predicate -> predicate.getStock() <= 10)
+                .map(mapper -> {
+                    this.productRepository.changeState(mapper.getId(), Boolean.FALSE);
+                    return mapper;
                 })
                 .collect(Collectors.toList());
     }
