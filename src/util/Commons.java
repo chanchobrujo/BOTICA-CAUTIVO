@@ -127,8 +127,7 @@ public class Commons {
      * @return Boolean
      */
     public static Boolean DoublesIsEmpty(Double ...value){
-        for (Double val : value) return val <= 0 
-                || Objects.isNull(val);
+        for (Double val : value) return val <= 0 || Objects.isNull(val);
         return false;
     }
     
@@ -140,8 +139,7 @@ public class Commons {
      * @return Boolean
      */
     public static Boolean IntegerIsEmpty(Integer ...value){
-        for (Integer val : value) return Objects.isNull(val) 
-                || val <= 0;
+        for (Integer val : value) return Objects.isNull(val) || val <= 0;
         return false;
     }
     

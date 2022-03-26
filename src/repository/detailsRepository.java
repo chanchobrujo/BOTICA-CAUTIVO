@@ -21,10 +21,10 @@ import util.GestorBd;
  * @author kpalmall
  */
 public class detailsRepository {
-    private productRepository productRepository;
+    private ProductRepository productRepository;
     
     public detailsRepository(){
-        productRepository = new productRepository();
+        productRepository = new ProductRepository();
     }
     
     private String findNameProduct(Integer id){

@@ -23,7 +23,7 @@ import util.Commons;
  */
 public class saleService {
     
-    private final productService productService; 
+    private final ProductService productService; 
     
     private Sale sale = new Sale();
 
@@ -31,7 +31,7 @@ public class saleService {
     private detailsRepository detailsRepository;
 
     public saleService() { 
-        productService = new productService();
+        productService = new ProductService();
 
         saleRepository = new saleRepository();
         detailsRepository = new detailsRepository();

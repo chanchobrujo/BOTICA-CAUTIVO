@@ -72,8 +72,8 @@ public class products_views extends javax.swing.JFrame {
         modelproduct.setId(0);
         modelproduct.setStock(0);
 
-        modelproduct.setName(null);
-        modelproduct.setBrand(null);
+        modelproduct.setName(Constan.empty);
+        modelproduct.setBrand(Constan.empty);
         modelproduct.setPrice(null);
         modelproduct.setCategory(null);
         modelproduct.setState(null);
@@ -389,14 +389,13 @@ public class products_views extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:  
-        String message = modulePorduct.saveProduct(modelproduct.getId(), txtName.getText(), 
+        String message = this.modulePorduct.saveProduct(modelproduct.getId(), txtName.getText(), 
                     txtBrand.getText(), Double.parseDouble(spnPrecio.getValue().toString()),
                     Integer.parseInt(spnStock.getValue().toString()), 
                     cmbCategories.getSelectedItem().toString());
         
         lblMessage.setText(message);  
         
-        this.tableModelProduct.setProductListUpdate(Administration.tblProduct);  
         this.clear(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 

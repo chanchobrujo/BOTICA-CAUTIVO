@@ -13,6 +13,8 @@ import entities.User;
 import model.ModelProductsTop;
 import model.ModelSale;
 
+import Constans.Constan;
+
 /**
  *
  * @author kpalmall
@@ -58,10 +60,10 @@ public class Mapper {
     }
 
     public static User mapperUser(Object obj) {
-        Object[] row = (Object[]) obj; 
+        Object[] row = (Object[]) obj;
         Integer id = Integer.parseInt(row[0].toString());
         boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
-        
+
         return User.builder()
                 .id(id)
                 .firtsname(row[1].toString())
@@ -88,7 +90,7 @@ public class Mapper {
                 .name(name)
                 .brand(brand)
                 .price(price)
-                .stock(stock) 
+                .stock(stock)
                 .state(state)
                 .build();
 
@@ -96,14 +98,14 @@ public class Mapper {
 
     public static ModelSale mapperSale(Object object) {
         Object[] row = (Object[]) object;
-        return  ModelSale.builder()
-                        .id(row[0].toString())
-                        .date(row[1].toString())
-                        .time(row[2].toString())
-                        .subtotal(Commons.StringToDouble(row[3].toString()))
-                        .desc(Commons.StringToDouble(row[4].toString()))
-                        .total(Commons.StringToDouble(row[5].toString()))
-                        .build();
+        return ModelSale.builder()
+                .id(row[0].toString())
+                .date(row[1].toString())
+                .time(row[2].toString())
+                .subtotal(Commons.StringToDouble(row[3].toString()))
+                .desc(Commons.StringToDouble(row[4].toString()))
+                .total(Commons.StringToDouble(row[5].toString()))
+                .build();
     }
 
     public static ModelProductsTop mapperModelProductsTop(Object object) {
@@ -120,4 +122,14 @@ public class Mapper {
                 .count(count)
                 .build();
     }
-} 
+
+    public static String mapperProductString(Product mapper) {
+        StringBuilder message = new StringBuilder();
+        return message.append(mapper.getName())
+                .append(Constan.space)
+                .append(mapper.getBrand())
+                .append(Constan.space)
+                .append(String.valueOf(mapper.getStock()))
+                .toString();
+    }
+}

@@ -15,6 +15,7 @@ import render.table.TableModel;
 import util.Commons;
 import Constans.Headers.HeadersTableSwing;
 import java.util.stream.Stream;
+import Constans.Constan;
 
 /**
  *
@@ -28,6 +29,26 @@ public class TableModelProduct {
         tableModel = new TableModel();
         modulePorduct = new ModuleProduct();
     } 
+    
+    private void renderTableStock(JTable table, List<Product> array){
+        this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_productstock);
+        array.stream().map(product -> {
+            StringBuilder productn = new StringBuilder();
+            Vector row = new Vector();
+            productn.append(product.getName())
+                    .append(Constan.empty)
+                    .append(product.getBrand());
+            
+            row.add(product.getId());
+            row.add(productn.toString());
+            row.add(product.getStock());
+            row.add(product.getCategory().getName());
+            return row;
+        }).forEachOrdered(row -> {
+            ((DefaultTableModel) table.getModel()).addRow(row);
+        });
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+    }
     
     private void renderTable(JTable table, List<Product> array){
         this.tableModel.tableNoEditable(table, HeadersTableSwing.headres_product);
@@ -57,6 +78,10 @@ public class TableModelProduct {
     
     public void tableProductDataSearch(JTable table, String value){
         this.renderTable(table, modulePorduct.searchProduct(value));
+    }
+    
+    public void findAllByStockMin(JTable table){
+        this.renderTableStock(table, modulePorduct.findAllByStockMin());
     }
     
     public void setProductListUpdate(JTable ...tables){

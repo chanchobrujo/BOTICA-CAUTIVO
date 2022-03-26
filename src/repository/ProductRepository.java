@@ -20,7 +20,7 @@ import util.Mapper;
  *
  * @author kpalmall
  */
-public class productRepository {
+public class ProductRepository {
     private static final String SCRIPT_SELECT = "SELECT * FROM product";
     private static final String SCRIPT_FINDALL = SCRIPT_SELECT.concat(Constan.semicolon);
     private static String SCRIPT_FINDBYID (Integer id){
@@ -29,7 +29,7 @@ public class productRepository {
     
     private categoryRepository categoryRepository;
     
-    public productRepository(){
+    public ProductRepository(){
         categoryRepository = new categoryRepository();
     }
 
@@ -54,6 +54,14 @@ public class productRepository {
         return GestorBd.execute(sql);
     }
 
+    public String addStock(Integer idproduct, Integer quantity) {
+        String sql = "UPDATE product SET "  
+                + "stock = "+quantity
+                + " WHERE id = "+idproduct;
+        
+        return GestorBd.execute(sql);
+    }
+
     public String updateStock(Integer idproduct, Integer quantity) {
         String sql = "UPDATE product SET "  
                 + "stock = (stock - "+ quantity +")"
@@ -70,7 +78,7 @@ public class productRepository {
     }
     
     public List<Product> findAll() {
-        List list = GestorBd.findAll(SCRIPT_SELECT);
+        List list = GestorBd.findAll(SCRIPT_FINDALL);
         List<Product> findAll = new ArrayList<>(); 
         
         if (Commons.collectionNonEmptyOrNull(list))
