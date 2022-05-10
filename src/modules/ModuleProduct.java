@@ -82,7 +82,7 @@ public class ModuleProduct {
     }
     
     public String addStock(Integer id, Integer quantity) {
-        boolean verify = Commons.IntegerIsEmpty(id, quantity);
+        boolean verify = Commons.IntegerIsEmpty(id, quantity); 
         return verify ? messageError : productService.addStock(id, quantity);
     }
 

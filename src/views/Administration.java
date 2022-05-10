@@ -10,6 +10,7 @@ import entities.Product;
 import Constans.Constan; 
 import java.util.Objects;
 import java.util.Optional; 
+import javax.swing.JOptionPane;
 import model.ModelCustomer;
 import model.ModelProduct;
 import modules.moduleCustomer;
@@ -48,6 +49,8 @@ public class Administration extends javax.swing.JFrame {
     
     private ModelProduct modelproduct = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
+    
+    private Integer idStock = 0;
     
     private TableModelProduct tableModelProduct;
     private TableModelCart tableModelCart;
@@ -1251,11 +1254,23 @@ public class Administration extends javax.swing.JFrame {
 
     private void tblStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStockMouseClicked
         // TODO add your handling code here:
+        int row = tblStock.getSelectedRow();
+        this.idStock = Integer.parseInt(tblStock.getValueAt(row, 0).toString());
     }//GEN-LAST:event_tblStockMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        System.err.println(this.modulePorduct.addStock(9, 15));
+        String msg;
+        try {
+            Integer quantity = Integer
+                .parseInt(JOptionPane.showInputDialog("Ingrese al cantidad:"));
+        
+            msg = this.modulePorduct.addStock(this.idStock, quantity);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+        
+        JOptionPane.showMessageDialog(null, msg);
         this.recharge_data();
     }//GEN-LAST:event_jButton10ActionPerformed
 
