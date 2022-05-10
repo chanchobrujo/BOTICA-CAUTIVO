@@ -19,7 +19,7 @@ import util.Commons;
 @Getter 
 @AllArgsConstructor
 public enum OSname {
-    WINDOWS("WINDOWS", "\\bd\\db.db", "C:\\Docs\\"),
+    WINDOWS("WINDOWS", "\\bd\\db.db", "C:\\reportes\\"),
     LINUX("LINUX", "/bd/db.db", "/home/chanchobrujo/Documentos");
     
     private final String name; 
