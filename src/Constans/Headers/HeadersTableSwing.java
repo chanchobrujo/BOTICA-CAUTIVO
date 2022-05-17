@@ -16,7 +16,7 @@ public class HeadersTableSwing {
             new String[] {"ID", "NOMBRE", "MARCA", "PRECIO", "STOCK", "CATEGORIA"
                     , "ESTADO"};
     
-    public static final String headres_productstock[] = new String[] {"ID", "PRODUCTO", "STOCK", "CATEGORIA"};
+    public static final String headres_productstock[] = new String[] {"ID", "PRODUCTO", "PRECIO", "STOCK", "CATEGORIA"};
     
     public static final String headres_cart[] = 
             new String[] {"ID", "PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};

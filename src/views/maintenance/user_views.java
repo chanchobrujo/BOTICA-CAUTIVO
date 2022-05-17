@@ -84,7 +84,7 @@ public class user_views extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("  MANETNIMIENTO DE USUARIOS");
+        jLabel2.setText("  MANTENIMIENTO DE USUARIOS");
         jLabel2.setToolTipText("");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

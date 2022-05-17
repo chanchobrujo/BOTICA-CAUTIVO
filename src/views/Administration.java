@@ -48,6 +48,7 @@ public class Administration extends javax.swing.JFrame {
     private moduleSale moduleSale;
     
     private ModelProduct modelproduct = new ModelProduct(); 
+    private ModelProduct modelproductstock = new ModelProduct(); 
     private ModelCustomer modelcustomer = new ModelCustomer();
     
     private Integer idStock = 0;
@@ -252,6 +253,7 @@ public class Administration extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblStock = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         myData = new javax.swing.JMenu();
         menuItemProduct2 = new javax.swing.JMenuItem();
@@ -945,6 +947,15 @@ public class Administration extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton11.setText("AGREGAR DE TODAS FORMAS");
+        jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
 
         myData.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1044,7 +1055,9 @@ public class Administration extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1070,7 +1083,10 @@ public class Administration extends javax.swing.JFrame {
                                             .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1117,9 +1133,7 @@ public class Administration extends javax.swing.JFrame {
             this.moduleSale.viewDetails().getCart().forEach(System.out::println);
         } else {
             AlertSuccessMessage.alertSetMessage("Cantidad insuficiente.");
-        }
-        
-        System.err.println(modelproduct);
+        } 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
@@ -1256,6 +1270,18 @@ public class Administration extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = tblStock.getSelectedRow();
         this.idStock = Integer.parseInt(tblStock.getValueAt(row, 0).toString());
+        String name = tblStock.getValueAt(row, 1).toString();
+        Double price = Double.parseDouble(tblStock.getValueAt(row, 2).toString());
+        Integer stock = Integer.parseInt(tblStock.getValueAt(row, 3).toString());
+        String cat = tblStock.getValueAt(row, 4).toString();
+        
+        modelproductstock.setId(this.idStock);
+        modelproductstock.setName(name);
+        modelproductstock.setPrice(price);
+        modelproductstock.setStock(stock);
+        modelproductstock.setCategory(cat);
+        
+        this.SetValueProductSelected(modelproductstock);
     }//GEN-LAST:event_tblStockMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -1273,6 +1299,26 @@ public class Administration extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, msg);
         this.recharge_data();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here: 
+        Integer id = modelproductstock.getId();
+        Optional<Product> productFind = modulePorduct.findById_Products(id);
+        
+        Integer q = Commons.StringToInteger(spnCant1.getValue().toString());
+        Boolean verifyQuantity = (q > 0) && (modelproductstock.getStock() >= q); 
+                    
+        if (productFind.isPresent() && verifyQuantity) {  
+            this.moduleSale.AddProductToCart(id, q); 
+            this.recharge_dataCart();
+            this.setStockTable(q, Boolean.TRUE);
+            modelproductstock.setStock(modelproductstock.getStock() - q);
+            
+            this.moduleSale.viewDetails().getCart().forEach(System.out::println);
+        } else {
+            AlertSuccessMessage.alertSetMessage("Cantidad insuficiente.");
+        } 
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1312,6 +1358,7 @@ public class Administration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel UserId;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

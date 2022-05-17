@@ -41,6 +41,7 @@ public class TableModelProduct {
             
             row.add(product.getId());
             row.add(productn.toString());
+            row.add(product.getPrice());
             row.add(product.getStock());
             row.add(product.getCategory().getName());
             return row;
@@ -73,7 +74,7 @@ public class TableModelProduct {
     }
     
     public void tableProductData(JTable table){ 
-        this.renderTable(table, modulePorduct.findAll_Products_Active());
+        this.renderTable(table, modulePorduct.findAll_Products());
     }
     
     public void tableProductDataSearch(JTable table, String value){

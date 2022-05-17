@@ -340,7 +340,7 @@ public class products_views extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("  MANETNIMIENTO DE PRODUCTOS");
+        jLabel2.setText("  MANTENIMIENTO DE PRODUCTOS");
         jLabel2.setToolTipText("");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

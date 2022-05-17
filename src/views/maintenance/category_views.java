@@ -74,7 +74,7 @@ public class category_views extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("  MANETNIMIENTO DE CATEGORIAS");
+        jLabel2.setText("  MANTENIMIENTO DE CATEGORIAS");
         jLabel2.setToolTipText("");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
