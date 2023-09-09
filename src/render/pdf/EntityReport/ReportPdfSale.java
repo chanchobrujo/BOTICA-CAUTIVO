@@ -46,21 +46,18 @@ public class ReportPdfSale {
         tbl.addCell(modelSale.getUser());
         
         tbl.addCell(HeadersTableSwing.headres_sale[2].intern());
-        tbl.addCell(modelSale.getCustomer());
-        
-        tbl.addCell(HeadersTableSwing.headres_sale[3].intern());
         tbl.addCell(modelSale.getDate());
         
-        tbl.addCell(HeadersTableSwing.headres_sale[4].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[3].intern());
         tbl.addCell(modelSale.getTime());
         
-        tbl.addCell(HeadersTableSwing.headres_sale[6].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[4].intern());
         tbl.addCell(modelSale.getSubtotal().toString());
         
         tbl.addCell(HeadersTableSwing.headres_sale[5].intern());
         tbl.addCell(modelSale.getDesc().toString());
         
-        tbl.addCell(HeadersTableSwing.headres_sale[7].intern());
+        tbl.addCell(HeadersTableSwing.headres_sale[6].intern());
         tbl.addCell(modelSale.getTotal().toString());
         return tbl;
     }

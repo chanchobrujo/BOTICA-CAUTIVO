@@ -57,7 +57,7 @@ public class detailsRepository {
     }
     
     public String grabarDetalles(List<Details> cart){
-        cart.stream().forEach(this::grabarDetalle);
+        cart.stream().forEach(d -> System.err.println(this.grabarDetalle(d)));
         return AlertMessage.EXECUTE_SUCCESS.getValue();
     }
     

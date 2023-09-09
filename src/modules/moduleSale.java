@@ -5,7 +5,6 @@
  */
 package modules;
 
-import entities.Customer;
 import entities.Details; 
 import entities.Sale;
 import entities.User;
@@ -16,7 +15,6 @@ import java.util.Optional;
 import java.util.stream.Collectors; 
 import model.ModelDetail;
 import model.ModelSale;
-import services.customerService;
 import services.saleService;
 import services.userService;
 import util.Commons;
@@ -29,12 +27,10 @@ public class moduleSale {
     private final saleService saleService;
     
     private final userService userService;
-    private final customerService customerService;  
     
     public moduleSale(Double pordesc){ 
         saleService = new saleService();
         userService = new userService();
-        customerService = new customerService();
         this.saleService.newSale(pordesc); 
     }
     
@@ -46,19 +42,14 @@ public class moduleSale {
         return this.saleService.viewDetails();
     }
     
-    public String confirmSale(Integer iduser, Integer idCustomer){
+    public String confirmSale(Integer iduser){
         String message = ErrorMessage.NOTFOUND.getValue();
         
         List<Details> cart = this.viewDetails().getCart();
         
         Optional<User> findUser = userService.findById(iduser);
-        Optional<Customer> findCustomer = customerService.findById(idCustomer);
-                
         if (Commons.collectionNonEmptyOrNull(cart) && findUser.isPresent()) {
-            
             this.viewDetails().setUser(findUser.get());
-            this.viewDetails().setCustomer(findCustomer.orElse(null));
-            
             message = this.saleService.saveOrder(this.viewDetails()); 
         }
         
@@ -67,12 +58,6 @@ public class moduleSale {
     
     public List<ModelSale> findAll() {
         return this.saleService.findAll();
-    }
-    
-    public List<ModelSale> findAllByCustomer(String customer) {
-        return this.saleService.findAll().stream()
-                .filter(sale -> Commons.StringEqualString(sale.getCustomer(), customer))
-                .collect(Collectors.toList());
     }
     
     public List<ModelSale> findAllByUser(String user) {

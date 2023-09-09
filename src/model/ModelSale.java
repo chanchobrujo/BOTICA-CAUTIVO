@@ -33,6 +33,5 @@ public class ModelSale {
     private Double total; 
     
     private String user;
-    private String customer;
     
 }

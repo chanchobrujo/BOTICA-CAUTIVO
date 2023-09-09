@@ -6,7 +6,6 @@
 package util;
 
 import entities.Category;
-import entities.Customer;
 import entities.Product;
 import entities.Rol;
 import entities.User;
@@ -20,21 +19,6 @@ import Constans.Constan;
  * @author kpalmall
  */
 public class Mapper {
-
-    public static Customer mapperCustomer(Object object) {
-        Object[] row = (Object[]) object;
-        Integer id = Commons.StringToInteger(row[0].toString());
-        Integer dni = Commons.StringToInteger(row[3].toString());
-
-        return Customer.builder()
-                .id(id)
-                .firtsname(row[1].toString())
-                .lastname(row[2].toString())
-                .dni(dni)
-                .email(row[4].toString())
-                .phone(row[5].toString())
-                .build();
-    }
 
     public static Rol mapperRol(Object object) {
         Object[] row = (Object[]) object;

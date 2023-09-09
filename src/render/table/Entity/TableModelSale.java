@@ -38,8 +38,6 @@ public class TableModelSale {
             row.add(sale.getId());
             
             row.add(Commons.StringSeparate(sale.getUser(), Constan.double_point)[0]);
-            row.add(Commons.StringSeparate(sale.getCustomer(), Constan.double_point)[0]);
-            
             row.add(sale.getDate());
             row.add(sale.getTime());
             
@@ -53,13 +51,11 @@ public class TableModelSale {
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         
         table.getColumnModel().getColumn(1).setMaxWidth(200);
-        table.getColumnModel().getColumn(2).setMaxWidth(200);
-        
+        table.getColumnModel().getColumn(2).setMaxWidth(90);
         table.getColumnModel().getColumn(3).setMaxWidth(90);
-        table.getColumnModel().getColumn(4).setMaxWidth(90);
+        table.getColumnModel().getColumn(4).setMaxWidth(90); 
         table.getColumnModel().getColumn(5).setMaxWidth(90); 
-        table.getColumnModel().getColumn(6).setMaxWidth(90); 
-        table.getColumnModel().getColumn(7).setMaxWidth(70); 
+        table.getColumnModel().getColumn(6).setMaxWidth(70); 
         
     }
     
@@ -69,10 +65,6 @@ public class TableModelSale {
     
     public void tableSaleByDateData(JTable table, String date){ 
         this.renderTable(table, this.moduleSale.findAllByDate(date));
-    }
-    
-    public void tableSaleByCustomerData(JTable table, String customer){ 
-        this.renderTable(table, this.moduleSale.findAllByCustomer(customer));
     }
     
     public void tableSaleByUserData(JTable table, String user){ 

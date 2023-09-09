@@ -25,11 +25,8 @@ public class HeadersTableSwing {
             new String[] {"PRODUCTO", "PRECIO", "CANTIDAD", "IMPORTE"};
     
     public static final String headres_sale[] = 
-            new String[] {"ID", "USUARIO", "CLIENTE", "FECHA", "HORA", "DESCUENTO"
+            new String[] {"ID", "USUARIO", "FECHA", "HORA", "DESCUENTO"
                     , "SUBTOTAL", "TOTAL"};
-    
-    public static final String headres_customer[] = 
-            new String[] {"ID", "CLIENTE", "DNI", "EMAIL", "PHONE"};
     
     public static final String headres_users[] = 
             new String[] {"ID", "NOMBRES Y APELLIDOS", "EMAIL", "ROL", "ESTADO"};

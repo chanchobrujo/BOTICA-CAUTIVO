@@ -36,7 +36,6 @@ public class Sale {
     private Double pordes;
     
     private User user;
-    private Customer Customer;
     
     private List<Details> cart;  
     
@@ -48,17 +47,15 @@ public class Sale {
         this.state = true;
     }
     
-    public Sale(Double subtotal, Double desc, Double total, User user, 
-            Customer Customer) { 
+    public Sale(Double subtotal, Double desc, Double total, User user) { 
         this.subtotal = subtotal;
         this.desc = desc;
         this.total = total;
         this.user = user;
-        this.Customer = Customer; 
     }
 
     public Sale(String id, String date, String time, Double subtotal, Double desc, 
-            Double total, Boolean state, User user, Customer Customer) {
+            Double total, Boolean state, User user) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -67,7 +64,6 @@ public class Sale {
         this.total = total;
         this.state = state;
         this.user = user;
-        this.Customer = Customer;
     }
     
     public void addProduct(Product Product, Integer quantity){     
