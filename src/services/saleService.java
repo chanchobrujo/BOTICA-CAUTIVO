@@ -83,12 +83,6 @@ public class saleService {
                 .filter(filter -> Objects.equals(this.separateStringID(filter.getUser()), id))
                 .collect(Collectors.toList());
     }
-
-    public List<ModelSale> findAllSalesByCustomer(Integer id) {
-        return this.saleRepository.findAll().stream()
-                .filter(filter -> Objects.equals(this.separateStringID(filter.getCustomer()), id))
-                .collect(Collectors.toList());
-    } 
     
     public List<ModelDetail> findAllDetails(String id) {
         return this.detailsRepository.findAll(id);

@@ -8,7 +8,6 @@ package repository;
 import entities.Sale;
 import Constans.Enums.AlertMessage;
 import Constans.Constan;
-import entities.Customer;
 import entities.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +39,13 @@ public class saleRepository {
             + FILTER_DATE(dateS, dateE)
             + "GROUP BY p.id LIMIT "+ top;
     }
-
-    private customerRepository customerRepository;
+    
     private detailsRepository detailsRepository;
     private userRepository userRepository;
 
     public saleRepository() {
         userRepository = new userRepository();
         detailsRepository = new detailsRepository();
-        customerRepository = new customerRepository();
     }
     
     private String builderName(String first, String last, String id){
@@ -67,20 +64,9 @@ public class saleRepository {
                 : Constan.empty;
     }
 
-    private String CustomerNameById(String id) {
-        Customer customer = this.customerRepository.findById(Integer.parseInt(id));  
-        
-        return Objects.nonNull(customer) 
-                ? this.builderName(customer.getFirtsname(), customer.getLastname(), id)
-                : Constan.empty;
-    }
-
     public String grabarVentasParaUsuarioCliente(Sale sale) {
-        String cus = Objects.isNull(sale.getCustomer()) ? Constan.empty 
-                : Constan.space.concat(",") + sale.getCustomer().getId();
-        
         String sql = "INSERT INTO sale "
-                + "(id,date,time,subtotal,discount,total,state,id_user,id_customer) "
+                + "(id,date,time,subtotal,discount,total,state,id_user) "
                 + "VALUES('" + sale.getId() + "',"
                 + " '" + sale.getDate() + "',"
                 + " '" + sale.getTime() + "',"
@@ -88,12 +74,10 @@ public class saleRepository {
                 + " " + sale.getDesc() + ","
                 + " " + sale.getTotal() + ","
                 + " " + Commons.BooleanToInteger(sale.getState()) + ","
-                + " " + sale.getUser().getId()
-                + cus + ")";
-        GestorBd.execute(sql);
+                + " " + sale.getUser().getId() + ")";
+        System.err.println(GestorBd.execute(sql));
         this.detailsRepository.grabarDetalles(sale.getCart());
-
-        return AlertMessage.EXECUTE_SUCCESS.getValue();
+        return AlertMessage.EXECUTE_SUCCESS.getValue().concat("-".concat(sale.getId()));
     }
 
     public List<ModelSale> findAll() {
@@ -107,8 +91,6 @@ public class saleRepository {
                         Object[] row = (Object[]) mapper;
 
                         modelSale.setUser(this.UserNameById(row[7].toString()));
-                        modelSale.setCustomer(this.CustomerNameById(row[8].toString()));
-
                         findAll.add(modelSale);
                         return mapper;
                     })

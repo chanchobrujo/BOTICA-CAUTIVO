@@ -36,7 +36,7 @@ public class products_views extends javax.swing.JFrame {
         comboBoxCategories = new ComboBoxCategories(); 
         
         initComponents();
-
+        this.clear();
         this.recharge_data();
         this.SetModelSpinner(this.spnPrecio);
     }
