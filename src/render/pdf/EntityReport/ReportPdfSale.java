@@ -24,6 +24,8 @@ import util.Commons;
 
 import Constans.Headers.HeadersTableSwing;
 import Constans.Headers.HeadersWidthSizePdf;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -62,12 +64,40 @@ public class ReportPdfSale {
         return tbl;
     }
     
+    private PdfPTable TableRenderSalesTotal(List<ModelSale> modelSale) throws DocumentException {
+        PdfPTable tbl = new PdfPTable(2);
+        tbl.setWidths(new int[]{160, 150});
+        
+        tbl.addCell("Cantidad de ventas evaluadas");
+        tbl.addCell(modelSale.size() + "");
+        
+        tbl.addCell("Total");
+        tbl.addCell(modelSale.stream().mapToDouble(ModelSale::getTotal).sum() + " Nuevo soles.");
+        return tbl;
+    }
+    
+    private PdfPTable TableRenderSales(List<ModelSale> modelSale) throws DocumentException {
+        PdfPTable tbl = new PdfPTable(5);
+        tbl.setWidths(HeadersWidthSizePdf.headres_with_report_sales);
+        tbl.addCell("#");
+        tbl.addCell("USUARIO QUE GENERÓ VENTA");
+        tbl.addCell("FECHA");
+        tbl.addCell("SUB TOTAL");
+        tbl.addCell("TOTAL");
+        modelSale.forEach(m -> {
+            tbl.addCell(m.getId());
+            tbl.addCell(m.getUser());
+            tbl.addCell(m.getDate().concat(" ").concat(m.getTime()));
+            tbl.addCell(m.getSubtotal().toString());
+            tbl.addCell(m.getTotal().toString());
+        });
+        return tbl;
+    }
+    
     private PdfPTable TableRenderCart(String codsale) throws DocumentException {
         PdfPTable tbl = new PdfPTable(4);
         tbl.setWidths(HeadersWidthSizePdf.headres_with_report_detail);
-        
         for (String element : HeadersTableSwing.headres_detail) tbl.addCell(element); 
-        
         this.modulesale.findAllDetails(codsale).stream()
                 .forEach(element -> {
                     tbl.addCell(Commons.setPropertiesProduct(element.getProduct()));
@@ -75,7 +105,6 @@ public class ReportPdfSale {
                     tbl.addCell(Constan.empty + element.getQuantity());
                     tbl.addCell(Constan.empty + element.get_import());
                 });
-
         return tbl;
     }
     
@@ -85,7 +114,6 @@ public class ReportPdfSale {
                     .fontf(font)
                     .fontcolor(fontcolor)
                     .fontname(fontname).build();
-        
         return this.PDFInit.addParagraph(value, paramsFont, Paragraph.ALIGN_CENTER);
     }
     
@@ -94,17 +122,35 @@ public class ReportPdfSale {
         Boolean iserror = false;
         
         try { 
-            Document doc = PDFInit.initializeDocument(modelSale.getId());   
-            
+            Document doc = PDFInit.initializeDocument(modelSale.getId());
             doc.open();
-            
-            //doc.add(this.PDFInit.addHeaderImage(Constan.src_image_logo, 650, 1000, Chunk.ALIGN_CENTER));
             doc.add(this.addParagraph(11, Font.BOLD, BaseColor.BLACK, "Console", "INFORMACIÓN DE LA VENTA."));   
             doc.add(this.TableRenderSale(modelSale));  
             
             doc.add(this.addParagraph(10, Font.NORMAL, BaseColor.DARK_GRAY, "Console", "DETALLE DE LA VENTA."));   
             doc.add(this.TableRenderCart(modelSale.getId()));  
             
+            doc.close(); 
+        } catch (DocumentException | IOException e) { 
+            iserror = true;
+            msg = e.getMessage();
+        }
+        
+        return new Message(msg, iserror);
+    }
+    
+    public Message generatedPdfSales(List<ModelSale> modelSale){
+        String msg = AlertMessage.PDF_SUCCESS.getValue();
+        Boolean iserror = false;
+        
+        try { 
+            Document doc = PDFInit.initializeDocument("REPORTES-".concat(UUID.randomUUID().toString().toUpperCase()));
+            doc.open();
+            doc.add(this.addParagraph(11, Font.BOLD, BaseColor.BLACK, "Console", "INFORMACIÓN DE LAS VENTAS."));
+            doc.add(this.TableRenderSales(modelSale));
+            
+            doc.add(this.addParagraph(10, Font.BOLD, BaseColor.BLACK, "Console", "TOTAL DE VENTAS."));
+            doc.add(this.TableRenderSalesTotal(modelSale));  
             doc.close(); 
         } catch (DocumentException | IOException e) { 
             iserror = true;
