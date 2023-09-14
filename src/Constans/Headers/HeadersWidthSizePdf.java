@@ -13,4 +13,5 @@ public class HeadersWidthSizePdf {
     
     public static final int headres_with_report_detail[] = new int[]{600, 150, 195, 175};
     public static final int headres_with_report_sale[] = new int[]{175, 300};
+    public static final int headres_with_report_sales[] = new int[]{160, 150, 120, 80, 80};
 }
