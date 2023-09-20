@@ -70,11 +70,11 @@ public class ModuleProduct {
     }
 
     public String saveProduct(Integer id, String name, String brand,
-            Double price, Integer Stock, String category) {
+            Double price, Integer Stock, String category, String date) {
         boolean verify = Commons.StringsIsEmpty(name, brand, category)
                 || Commons.IntegerIsEmpty(Stock) || Commons.DoublesIsEmpty(price);
         
-        return verify ? messageError : this.productService.save(id, name, brand, price, Stock, category);
+        return verify ? messageError : this.productService.save(id, name, brand, price, Stock, category, date);
     }
 
     public String changeStateProduct(Integer id) {

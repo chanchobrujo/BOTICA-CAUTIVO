@@ -63,10 +63,9 @@ public class TableModelProduct {
             row.add(product.getStock());
             row.add(product.getCategory().getName());
             row.add(Commons.BooleanToString(product.getState()));
+            row.add(product.getDate());
             return row;
-        }).forEachOrdered(row -> {
-            ((DefaultTableModel) table.getModel()).addRow(row);
-        });
+        }).forEachOrdered(row -> ((DefaultTableModel) table.getModel()).addRow(row));
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(3).setMaxWidth(50);
         table.getColumnModel().getColumn(4).setMaxWidth(50);

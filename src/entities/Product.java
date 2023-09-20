@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities; 
+package entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +31,7 @@ public class Product {
     private Integer stock; 
     private Category category;
     private Boolean state; 
+    private String date; 
     
     public Product(String name, String brand, Double price, Integer stock, 
             Category category) { 

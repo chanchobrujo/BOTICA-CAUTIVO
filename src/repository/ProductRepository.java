@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import util.Commons;
 import util.GestorBd;
 import util.Mapper;
@@ -34,12 +35,12 @@ public class ProductRepository {
     }
 
     public String insert(Product product) {
-        String sql = "INSERT INTO product (name, brand, price, stock, id_category, state) VALUES('"
+        String sql = "INSERT INTO product (name, brand, price, stock, id_category, state, expired) VALUES('"
                 +product.getName()+"','"+product.getBrand()+"',"
                 +product.getPrice()+","+product.getStock()+","
                 +product.getCategory().getId()+","
-                +Commons.BooleanToInteger(product.getState()) +");";
-        
+                +Commons.BooleanToInteger(product.getState()) +",'"
+                +product.getDate() + "');";
         return GestorBd.execute(sql);
     }
 
@@ -48,9 +49,9 @@ public class ProductRepository {
                 + "brand = '"+product.getBrand()+"', "
                 + "price = "+product.getPrice()+", "
                 + "stock = "+product.getStock()+", "
+                + "expired = '"+product.getDate()+"', "
                 + "id_category = "+product.getCategory().getId() 
                 + " WHERE id = "+product.getId();
-        
         return GestorBd.execute(sql);
     }
 
@@ -79,8 +80,7 @@ public class ProductRepository {
     
     public List<Product> findAll() {
         List list = GestorBd.findAll(SCRIPT_FINDALL);
-        List<Product> findAll = new ArrayList<>(); 
-        
+        List<Product> findAll = new ArrayList<>();
         if (Commons.collectionNonEmptyOrNull(list))
             list.stream()
                     .map(mapper -> {
