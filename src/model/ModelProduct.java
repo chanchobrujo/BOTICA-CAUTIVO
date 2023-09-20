@@ -5,6 +5,7 @@
  */
 package model; 
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class ModelProduct {
     private Double price;
     private Integer stock; 
     private String category;
+    private Date date;
     private Boolean state; 
     
 }

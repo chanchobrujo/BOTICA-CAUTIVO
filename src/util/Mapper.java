@@ -13,6 +13,7 @@ import model.ModelProductsTop;
 import model.ModelSale;
 
 import Constans.Constan;
+import java.util.Objects;
 
 /**
  *
@@ -28,7 +29,6 @@ public class Mapper {
                 .id(id)
                 .name(row[1].toString())
                 .build();
-
     }
 
     public static Category mapperCategory(Object obj) {
@@ -60,7 +60,6 @@ public class Mapper {
 
     public static Product mapperProduct(Object obj) {
         Object[] row = (Object[]) obj;
-
         Integer id = Integer.parseInt(row[0].toString());
         String name = row[1].toString();
         String brand = row[2].toString();
@@ -68,8 +67,7 @@ public class Mapper {
         Integer stock = Integer.parseInt(row[4].toString());
 
         Boolean state = Commons.IntegerToBoolean(Integer.parseInt(row[6].toString()));
-
-        return Product.builder()
+        Product prod = Product.builder()
                 .id(id)
                 .name(name)
                 .brand(brand)
@@ -77,7 +75,10 @@ public class Mapper {
                 .stock(stock)
                 .state(state)
                 .build();
-
+        if (Objects.nonNull(row[7])) {
+            prod.setDate(row[7].toString());
+        }
+        return prod;
     }
 
     public static ModelSale mapperSale(Object object) {

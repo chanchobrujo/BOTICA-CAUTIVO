@@ -6,7 +6,7 @@
 package services;
 
 import entities.Category; 
-import entities.Product; 
+import entities.Product;
 
 import java.util.List;   
 import java.util.Objects;
@@ -38,15 +38,10 @@ public class ProductService {
                 .findFirst();
     } 
     
-    public String save(int id, String name, String brand, Double price, 
-            Integer Stock, String category){
+    public String save(Integer id, String name, String brand, Double price, 
+            Integer Stock, String category, String date){
         String message = Constans.Enums.ErrorMessage.REPETED_VALUES.getValue();
         Optional<Category> _category = this.findByName_Categories(category);
-        
-        Boolean verify = this.verifyByNameOrBrand(name, brand).isPresent(); 
-        
-        if (verify) return message;
-        
         Product product = Product.builder()
                 .name(name)
                 .brand(brand)
@@ -54,16 +49,16 @@ public class ProductService {
                 .stock(Stock)
                 .category(_category.get())
                 .state(Boolean.TRUE)
+                .date(date)
                 .build();
-        
-        switch(id){
-            case 0: 
-                message = this.productRepository.insert(product);
-                break;
-            default: 
-                product.setId(id);
-                message = this.productRepository.update(product);
-                break;
+        if (id == null || id == 0) {
+            Boolean verify = this.verifyByNameOrBrand(name, brand).isPresent(); 
+            if (verify) return message;
+            message = this.productRepository.insert(product);
+        } else {
+            product.setId(id);
+            product.setDate(date);
+            message = this.productRepository.update(product);
         }
         return message;
     }
@@ -128,11 +123,8 @@ public class ProductService {
     
     public List<Product> findAllByStockMin(){
         return this.productRepository.findAll().stream()
-                .filter(predicate -> predicate.getStock() <= 10)
-                .map(mapper -> {
-                    this.productRepository.changeState(mapper.getId(), Boolean.FALSE);
-                    return mapper;
-                })
+                .filter(predicate -> predicate.getStock() == 0)
+                .peek(mapper -> this.productRepository.changeState(mapper.getId(), false))
                 .collect(Collectors.toList());
     }
 }
