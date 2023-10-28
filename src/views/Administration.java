@@ -729,22 +729,25 @@ public class Administration extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        Integer q = Commons.StringToInteger(spnCant1.getValue().toString());
+        if (q <= 0) {
+            AlertSuccessMessage.alertSetMessage("La cantidad a llevar debe ser mayor a cero.");
+            return;
+        }
         Integer id = modelproduct.getId();
         Optional<Product> productFind = modulePorduct.findById_Products(id);
-        
-        Integer q = Commons.StringToInteger(spnCant1.getValue().toString());
-        Boolean verifyQuantity = (q != -1) && (modelproduct.getStock() > q); 
+        Boolean verifyQuantity = (modelproduct.getStock() >= q);
                     
         if (productFind.isPresent() && verifyQuantity) {  
             this.moduleSale.AddProductToCart(id, q); 
             this.recharge_dataCart();
             this.setStockTable(q, Boolean.TRUE);
             modelproduct.setStock(modelproduct.getStock() - q);
-            
-            this.moduleSale.viewDetails().getCart().forEach(System.out::println);
         } else {
             AlertSuccessMessage.alertSetMessage("Cantidad insuficiente.");
-        } 
+        }
+        this.tableModelProduct.findAllByStockMin(tblStock);
+        this.tableModelProduct.tableProductData(tblProduct);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked

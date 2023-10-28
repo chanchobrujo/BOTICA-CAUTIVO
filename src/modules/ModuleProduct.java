@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 import services.categoryService;
 import services.ProductService;
 import util.Commons;
@@ -88,7 +89,7 @@ public class ModuleProduct {
     }
 
     public List<Product> searchProduct(String value) {
-        return productService.searchProduct(value);
+        return productService.searchProduct(value).stream().filter(p -> p.getState()).collect(toList());
     }
 
     public Optional<Product> findById_Products(Integer id) {
