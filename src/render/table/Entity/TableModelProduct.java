@@ -16,6 +16,7 @@ import util.Commons;
 import Constans.Headers.HeadersTableSwing;
 import java.util.stream.Stream;
 import Constans.Constan;
+import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -73,7 +74,7 @@ public class TableModelProduct {
     }
     
     public void tableProductData(JTable table){ 
-        this.renderTable(table, modulePorduct.findAll_Products());
+        this.renderTable(table, modulePorduct.findAll_Products().stream().filter(p -> p.getState()).collect(toList()));
     }
     
     public void tableProductDataSearch(JTable table, String value){
